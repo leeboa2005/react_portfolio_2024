@@ -3,6 +3,7 @@ import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Nerko+One&family=New+Amsterdam&display=swap');
   
   /* font */
   @font-face {
@@ -23,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 500;
     margin: 0;
     padding: 0;
+    background: #f2f2f2;
   }
 
   a {
@@ -40,12 +42,12 @@ const GlobalStyle = createGlobalStyle`
   :root {
     --default-width: 1220px;
     --grey-color: #f5f5f7;
-    --main-color: #8ec8f3;
-    --main-hover-color: #79b8e8; 
-    --font-color: #222;
-    --font-gray-color: #a2a2a2;
-    --font-white-color: #fff;
-    --font-footer-color: #eeeeee;
+    --main-color: #;
+    --main-hover-color: #; 
+    --font-color: #;
+    --font-gray-color: #;
+    --font-white-color: #;
+    --font-footer-color: #;
     --border-style: 1px solid #ccc;
     --font-default: 'SUIT-Regular';
     --font-text-size: 16px;
@@ -77,6 +79,20 @@ const GlobalStyle = createGlobalStyle`
     :root {
       --default-width: 320px;
     }
+  }
+
+  *::before {
+    content: "";
+    z-index: 9000;
+    opacity: 0.01;
+    pointer-events: none;
+    mix-blend-mode: exclusion;
+    background-image: url('/texture_background.png');
+    background-position: 0 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0% auto auto 0%;
   }
 `;
 
