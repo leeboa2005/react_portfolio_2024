@@ -38,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    --default-width: 920px;
+    --default-width: 1220px;
     --grey-color: #f5f5f7;
     --main-color: #8ec8f3;
     --main-hover-color: #79b8e8; 
