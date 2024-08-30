@@ -1,11 +1,14 @@
-import './assets/styles/GlobalStyle';
+import React from 'react';
+import Router from './routes/Router';
+import GlobalStyle from './assets/styles/GlobalStyle';
 
-function App() {
+const App: React.FC = () => {
     return (
         <>
-            <h1>리엑트 포트폴리오</h1>
+            <GlobalStyle />
+            <Router />
         </>
     );
-}
+};
 
 export default App;
