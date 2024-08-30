@@ -81,8 +81,8 @@ const HamburgerButton = styled.button<{ open: boolean }>`
 
 const AnimatedSvg = styled.img`
     position: absolute;
-    width: 290px;
-    height: 290px;
+    width: 270px;
+    height: 270px;
     top: 50%;
     left: -15px;
     transform: translateY(-50%);
@@ -263,7 +263,7 @@ const Navigation: React.FC = () => {
                                 <NavLink to="/" className="nav-link">
                                     Home
                                     <AnimatedSvg
-                                        src="/src/assets/svg/white_straight.svg"
+                                        src="/src/assets/svg/straight.svg"
                                         className="draw"
                                         alt="밑줄 호버효과"
                                     />
@@ -271,7 +271,7 @@ const Navigation: React.FC = () => {
                                 <NavLink to="/project" className="nav-link">
                                     Project
                                     <AnimatedSvg
-                                        src="/src/assets/svg/white_circle.svg"
+                                        src="/src/assets/svg/circle.svg"
                                         className="draw"
                                         alt="동그라미 호버효과"
                                     />
@@ -279,7 +279,7 @@ const Navigation: React.FC = () => {
                                 <NavLink to="/work" className="nav-link">
                                     Work
                                     <AnimatedSvg
-                                        src="/src/assets/svg/white_wave.svg"
+                                        src="/src/assets/svg/wave.svg"
                                         className="draw"
                                         alt="웨이브 호버효과"
                                     />
