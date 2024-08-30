@@ -3,7 +3,6 @@ import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
-  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Nerko+One&family=New+Amsterdam&display=swap');
   
   /* font */
   @font-face {
@@ -83,7 +82,7 @@ const GlobalStyle = createGlobalStyle`
 
   *::before {
     content: "";
-    z-index: 9000;
+    z-index: 102;
     opacity: 0.01;
     pointer-events: none;
     mix-blend-mode: exclusion;
