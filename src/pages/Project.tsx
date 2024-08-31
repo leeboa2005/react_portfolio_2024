@@ -3,7 +3,7 @@ import React from 'react';
 const Project: React.FC = () => {
     return (
         <div>
-            <h1>Project Page</h1>
+            <h1>Project</h1>
         </div>
     );
 };

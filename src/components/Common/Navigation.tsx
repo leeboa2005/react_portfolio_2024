@@ -182,9 +182,9 @@ const ContactInfo = styled.div`
     span {
         position: absolute;
         bottom: 20px;
-        left: 15px;
-        width: 40px;
-        height: 40px;
+        left: 20px;
+        width: 30px;
+        height: 30px;
 
         img {
             width: 100%;
