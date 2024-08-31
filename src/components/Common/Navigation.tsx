@@ -48,7 +48,7 @@ const NavigationContainer = styled.div`
 const HamburgerButton = styled.button<{ open: boolean }>`
     position: fixed;
     top: 20px;
-    left: 20px;
+    left: 70px;
     z-index: 105;
     width: 30px;
     height: 30px;
