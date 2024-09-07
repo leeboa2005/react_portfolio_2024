@@ -59,10 +59,12 @@ const AboutMe: React.FC = () => {
                             ease: 'power2.in',
                         });
                     },
+                    markers: true,
                 });
             }
         });
 
+        // 컴포넌트가 언마운트될 때 ScrollTrigger 제거
         return () => {
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };

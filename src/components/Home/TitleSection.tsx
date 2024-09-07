@@ -94,7 +94,7 @@ const TitleSection: React.FC<TitleSectionProps> = ({ startAnimation }) => {
                 '<'
             );
 
-            // 스크롤 애니메이션
+            // 스크롤 시 타이틀과 서브타이틀이 사라지는 애니메이션
             ScrollTrigger.create({
                 trigger: titleRef.current,
                 start: 'top 20%',
@@ -104,6 +104,7 @@ const TitleSection: React.FC<TitleSectionProps> = ({ startAnimation }) => {
                     opacity: 0,
                     y: -100,
                 }),
+                markers: true,
             });
         }
     }, [startAnimation]);

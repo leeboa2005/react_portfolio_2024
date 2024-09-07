@@ -26,7 +26,7 @@ const Shapes: React.FC<ShapeProps> = ({ shapes, shapesRef, onShapesComplete }) =
             onComplete: onShapesComplete,
         });
 
-        // 이미지 애니메이션 설정
+        // 이미지가 천천히 나타나는 애니메이션 설정
         tl.to(shapesRef.current, {
             opacity: 1,
             duration: 0.5,
@@ -34,7 +34,7 @@ const Shapes: React.FC<ShapeProps> = ({ shapes, shapesRef, onShapesComplete }) =
             ease: 'power2.out',
         });
 
-        // 부유 애니메이션
+        // 이미지들이 위아래로 부드럽게 움직이는 애니메이션
         shapesRef.current.forEach((shape) => {
             gsap.to(shape, {
                 y: '-=10',
