@@ -1,67 +1,30 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import GithubBtn from '../components/Common/GithubBtn';
 import GlobalStyle from '../assets/styles/GlobalStyle';
+import GithubBtn from '../components/Common/GithubBtn';
+import AboutMe from '../components/Home/AboutMe';
+import Shapes from '../components/Home/Shapes';
+import TitleSection from '../components/Home/TitleSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HomeWrap = styled.section`
     width: 100%;
-    height: 100vh;
+    height: auto;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
 `;
 
-const LogoImage = styled.img`
-    width: 91px;
-    height: 91px;
-`;
-
-const TitleSection = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-`;
-
-const SubTitle = styled.p`
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 400;
-    line-height: 1.4;
-    font-size: 18px;
-    text-align: center;
-    margin-bottom: 20px;
-    opacity: 0;
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 20px;
-    border: 1px solid black;
-    border-radius: 30px;
-    gap: 10px;
-`;
-
-const SubIcon = styled.img`
-    width: 23px;
-    height: 23px;
-`;
-const Title = styled.h1`
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 700;
-    font-size: 136px;
+const ContentWrap = styled.section`
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transform: scale(1);
-`;
-
-const ShapeImage = styled.img`
-    position: absolute;
-    opacity: 0;
-    object-fit: cover;
+    flex-direction: column;
 `;
 
 const shapes = [
@@ -79,107 +42,23 @@ const shapes = [
 ];
 
 const Home: React.FC = () => {
-    const titleRef = useRef<HTMLDivElement>(null);
-    const logoRef = useRef<HTMLImageElement>(null);
-    const subTitleRef = useRef<HTMLParagraphElement>(null);
     const shapesRef = useRef<(HTMLImageElement | null)[]>([]);
+    const [startTitleAnimation, setStartTitleAnimation] = useState(false);
 
-    useEffect(() => {
-        const tl = gsap.timeline();
-
-        // 1. 모든 이미지 요소에 페이드 인 효과 적용
-        tl.to(shapesRef.current, {
-            opacity: 1,
-            duration: 1.5,
-            stagger: 0.2,
-            ease: 'power2.out',
-            onComplete: () => {
-                shapesRef.current.forEach((shape) => {
-                    gsap.to(shape, {
-                        y: '-=10',
-                        repeat: -1,
-                        yoyo: true,
-                        duration: 2,
-                        ease: 'power1.inOut',
-                    });
-                });
-            },
-        });
-
-        // 2. Front-end Developer가 나타나는 애니메이션
-        tl.to(
-            subTitleRef.current,
-            {
-                opacity: 1,
-                duration: 1,
-                y: 0,
-                ease: 'power2.out',
-            },
-            '+=0.5'
-        );
-
-        // 3. BOA LEE가 마지막에 나타나면서 로고가 회전하는 애니메이션
-        tl.to(
-            titleRef.current,
-            {
-                opacity: 1,
-                duration: 1.5,
-                ease: 'power3.out',
-                onStart: () => {
-                    gsap.to(logoRef.current, {
-                        rotation: 360,
-                        duration: 3,
-                        ease: 'power2.out',
-                    });
-                },
-            },
-            '+=0.5'
-        );
-
-        // 4. 타이틀을 숨기는 스크롤 애니메이션
-        gsap.to(titleRef.current, {
-            opacity: 0,
-            y: -100,
-            scrollTrigger: {
-                trigger: titleRef.current,
-                start: 'top 20%',
-                end: 'top -30%',
-                scrub: 1,
-            },
-        });
-    }, []);
+    const handleShapesComplete = () => {
+        setStartTitleAnimation(true);
+    };
 
     return (
         <>
             <GlobalStyle />
             <HomeWrap>
                 <GithubBtn />
-                {shapes.map((shape, index) => (
-                    <ShapeImage
-                        key={index}
-                        ref={(el) => (shapesRef.current[index] = el)}
-                        src={shape.src}
-                        style={{
-                            top: shape.top,
-                            left: shape.left,
-                            width: shape.width,
-                            height: shape.height,
-                        }}
-                        alt={`Shape ${index + 1}`}
-                    />
-                ))}
-                <TitleSection>
-                    <SubTitle ref={subTitleRef}>
-                        <SubIcon src="/main/main_sub.png" alt="앞 아이콘" />
-                        Front-end Developer PortFolio
-                        <SubIcon src="/main/main_sub.png" alt="뒤 아이콘" />
-                    </SubTitle>
-                    <Title ref={titleRef}>
-                        <span>BOA</span>
-                        <LogoImage ref={logoRef} src="/title_logo.png" alt="타이틀 로고" />
-                        <span>LEE</span>
-                    </Title>
-                </TitleSection>
+                <ContentWrap>
+                    <Shapes shapes={shapes} shapesRef={shapesRef} onShapesComplete={handleShapesComplete} />
+                    <TitleSection startAnimation={startTitleAnimation} />
+                </ContentWrap>
+                <AboutMe />
             </HomeWrap>
         </>
     );
