@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     box-sizing: border-box !important;
+    position: relative;
   }
 
   body {
@@ -83,7 +84,7 @@ const GlobalStyle = createGlobalStyle`
   *::before {
     content: "";
     z-index: 102;
-    opacity: 0.01;
+    opacity: 0.02;
     pointer-events: none;
     mix-blend-mode: exclusion;
     background-image: url('/texture_background.png');
