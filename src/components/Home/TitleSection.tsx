@@ -47,8 +47,9 @@ const TitleSectionContainer = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) !important;
     text-align: center;
+    z-index: 10;
 `;
 
 interface TitleSectionProps {
@@ -59,6 +60,7 @@ const TitleSection: React.FC<TitleSectionProps> = ({ startAnimation }) => {
     const subTitleRef = useRef<HTMLParagraphElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const logoRef = useRef<HTMLImageElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (startAnimation) {
@@ -94,26 +96,31 @@ const TitleSection: React.FC<TitleSectionProps> = ({ startAnimation }) => {
                 '<'
             );
 
-            // 스크롤 애니메이션
+            // 스크롤 시 타이틀 섹션의 투명도와 위치를 조절하는 애니메이션
             ScrollTrigger.create({
-                trigger: titleRef.current,
-                start: 'top 20%',
-                end: 'top -30%',
-                scrub: 1,
-                animation: gsap.to([subTitleRef.current, titleRef.current], {
-                    opacity: 0,
-                    y: -100,
-                }),
+                trigger: containerRef.current,
+                start: 'top top',
+                end: '+=50%',
+                scrub: true,
+                onUpdate: (self) => {
+                    const progress = self.progress;
+                    gsap.to(containerRef.current, {
+                        opacity: 1 - progress * 2,
+                        y: `-${progress * 50}%`,
+                        duration: 0.1,
+                        ease: 'none',
+                    });
+                },
             });
         }
     }, [startAnimation]);
 
     return (
-        <TitleSectionContainer>
+        <TitleSectionContainer ref={containerRef}>
             <SubTitle ref={subTitleRef}>
-                <SubIcon src="/main/main_sub.png" alt="서브 타이틀 앞 아이콘" />
+                <SubIcon src="/home/main_sub.png" alt="서브 타이틀 앞 아이콘" />
                 Front-end Developer PortFolio
-                <SubIcon src="/main/main_sub.png" alt="서브 타이틀 뒤 아이콘" />
+                <SubIcon src="/home/main_sub.png" alt="서브 타이틀 뒤 아이콘" />
             </SubTitle>
             <Title ref={titleRef}>
                 <span>BOA</span>
