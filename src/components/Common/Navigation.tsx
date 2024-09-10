@@ -11,7 +11,7 @@ const NavigationLayer = styled.div<{ open: boolean }>`
     display: ${({ open }) => (open ? 'flex' : 'none')};
     flex-direction: row;
     justify-content: space-between;
-    z-index: 102;
+    z-index: 200;
     background-color: #56dfb4;
     transition: all 0.5s ease-in-out;
 `;
@@ -49,7 +49,7 @@ const HamburgerButton = styled.button<{ open: boolean }>`
     position: fixed;
     top: 20px;
     left: 70px;
-    z-index: 105;
+    z-index: 202;
     width: 30px;
     height: 30px;
     background: none;
