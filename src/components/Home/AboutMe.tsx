@@ -23,6 +23,31 @@ const AnimatedText = styled.h2`
     opacity: 0;
     margin: 20px 0;
     transform: translateX(100px);
+    position: relative;
+    display: flex;
+    align-items: center;
+`;
+
+const Icon = styled.img`
+    width: 22px;
+    height: 22px;
+    margin-right: 5px;
+`;
+
+const OverlayCircle = styled.div<{ position: string; bgColor: string }>`
+    padding: 6px 15px;
+    background-color: ${({ bgColor }) => bgColor};
+    opacity: 0.98;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    position: absolute;
+    top: 60%;
+    left: ${({ position }) => position};
+    transform: translateX(-50%);
+    pointer-events: none;
 `;
 
 const AboutMe: React.FC = () => {
@@ -70,10 +95,23 @@ const AboutMe: React.FC = () => {
         };
     }, []);
 
+    const positions = ['75%', '25%', '75%'];
+    const colors = ['#67ACEB', '#ffcf0b', '#aa87ea'];
+    const icons = [
+        '/public/home/about_icon_01.png',
+        '/public/home/about_icon_02.png',
+        '/public/home/about_icon_03.png',
+    ];
+    const circleTexts = ['끝없는 아이디어', '유연한 사고', '신뢰성 가득 팀워크'];
+
     return (
         <TextWrapper ref={wrapperRef}>
             {['Creativity', 'Composure', 'Responsible'].map((text, index) => (
                 <AnimatedText key={text} ref={(el) => (textRefs.current[index] = el)}>
+                    <OverlayCircle position={positions[index]} bgColor={colors[index]}>
+                        <Icon src={icons[index]} alt={`Icon ${index + 1}`} />
+                        {circleTexts[index]}
+                    </OverlayCircle>
                     {text}
                 </AnimatedText>
             ))}

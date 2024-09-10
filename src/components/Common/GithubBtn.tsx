@@ -15,7 +15,22 @@ const GitHubButton = styled.a`
     font-size: 14px;
     border-radius: 20px;
     display: inline-flex;
+    z-index: 102;
     gap: 2px;
+
+    &::before {
+        content: '';
+        z-index: 1;
+        opacity: 0.1;
+        pointer-events: none;
+        mix-blend-mode: exclusion;
+        background-image: url('/texture_background.png');
+        background-position: 0 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0;
+    }
 
     &:hover {
         background-color: #f76a9c;
