@@ -125,9 +125,9 @@ const Project: React.FC = () => {
     };
 
     useEffect(() => {
-        gsap.fromTo(contentRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
+        gsap.fromTo(contentRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 });
 
-        gsap.fromTo(itemsRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.2 });
+        gsap.fromTo(itemsRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.2 });
     }, [activeTab]);
 
     return (
