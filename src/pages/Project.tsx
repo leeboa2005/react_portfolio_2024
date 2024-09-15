@@ -18,7 +18,7 @@ const TabList = styled.div`
     display: flex;
     justify-content: center;
     gap: 30px;
-    padding: 10px 0;
+    padding: 100px 0 30px 0;
 `;
 
 const TabButton = styled.button`
