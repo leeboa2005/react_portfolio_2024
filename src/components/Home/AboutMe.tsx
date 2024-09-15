@@ -35,7 +35,7 @@ const Icon = styled.img`
 `;
 
 const OverlayCircle = styled.div<{ position: string; bgColor: string }>`
-    padding: 6px 15px;
+    padding: 5px 15px;
     background-color: ${({ bgColor }) => bgColor};
     opacity: 0.98;
     font-size: 12px;
