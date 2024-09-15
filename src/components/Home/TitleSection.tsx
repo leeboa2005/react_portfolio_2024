@@ -79,8 +79,8 @@ const TitleSection: React.FC<TitleSectionProps> = ({ startAnimation }) => {
                 titleRef.current,
                 {
                     opacity: 1,
-                    duration: 1.5,
-                    ease: 'power3.out',
+                    duration: 2.4,
+                    ease: 'power1.out',
                 },
                 '+=0.5'
             );
