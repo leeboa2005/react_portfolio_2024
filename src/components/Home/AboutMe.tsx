@@ -102,7 +102,6 @@ const AboutMe: React.FC = () => {
         '/public/home/about_icon_02.png',
         '/public/home/about_icon_03.png',
     ];
-    const circleTexts = ['끝없는 아이디어', '유연한 사고', '신뢰성 가득 팀워크'];
 
     return (
         <TextWrapper ref={wrapperRef}>
@@ -110,7 +109,6 @@ const AboutMe: React.FC = () => {
                 <AnimatedText key={text} ref={(el) => (textRefs.current[index] = el)}>
                     <OverlayCircle position={positions[index]} bgColor={colors[index]}>
                         <Icon src={icons[index]} alt={`Icon ${index + 1}`} />
-                        {circleTexts[index]}
                     </OverlayCircle>
                     {text}
                 </AnimatedText>
