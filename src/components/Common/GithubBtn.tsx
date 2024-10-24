@@ -4,8 +4,8 @@ import { gsap } from 'gsap';
 
 const GitHubButton = styled.a`
     position: absolute;
-    top: 20px;
-    right: 70px;
+    top: 2vw;
+    right: 3vw;
     padding: 10px 20px;
     background-color: #f989b3;
     color: #000;

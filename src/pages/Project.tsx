@@ -33,6 +33,7 @@ const TabButton = styled.button`
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: 'Exo 2', sans-serif;
+    font-size: 1.3vw;
 
     &:hover,
     &:focus {
@@ -40,29 +41,15 @@ const TabButton = styled.button`
     }
 `;
 
-const TabIcon = styled.img`
-    width: 50px;
-    height: auto;
-`;
-
 const TabLabel = styled.span<{ isActive: boolean }>`
     padding: 8px 16px;
     border-radius: 12px;
     border: 1px solid ${(props) => (props.isActive ? '#111' : 'transparent')};
-    background-color: ${(props) =>
-        props.isActive
-            ? props.children === 'Personal'
-                ? '#FF6969'
-                : props.children === 'Team'
-                ? '#A887E7'
-                : '#FCD547'
-            : 'transparent'};
+    background-color: transparent;
     color: #000;
 
     ${TabButton}:hover & {
         border: 1px solid #111;
-        background-color: ${(props) =>
-            props.children === 'Personal' ? '#FF6969' : props.children === 'Team' ? '#A887E7' : '#FCD547'};
     }
 `;
 
@@ -74,14 +61,14 @@ const TabContent = styled.div`
 
 const GridContainer = styled.div`
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 `;
 
 const GridItem = styled.div`
     height: 400px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 12px;
 `;
 
 const ProjectImage = styled.img`
@@ -136,10 +123,6 @@ const Project: React.FC = () => {
                 <TabList>
                     {tabData.map((tab) => (
                         <TabButton key={tab.id} onClick={() => setActiveTab(tab.id)}>
-                            <TabIcon
-                                src={`/home/main_${tab.id === 'personal' ? '03' : tab.id === 'team' ? '07' : '01'}.png`}
-                                alt={`${tab.label} icon`}
-                            />
                             <TabLabel isActive={activeTab === tab.id}>{tab.label}</TabLabel>
                         </TabButton>
                     ))}

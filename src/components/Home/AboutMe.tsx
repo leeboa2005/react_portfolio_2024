@@ -13,7 +13,7 @@ const TextWrapper = styled.div`
 `;
 
 const AboutMe: React.FC = () => {
-    return <TextWrapper>{/* 기본 텍스트 또는 내용을 여기 추가할 수 있습니다 */}</TextWrapper>;
+    return <TextWrapper></TextWrapper>;
 };
 
 export default AboutMe;
