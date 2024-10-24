@@ -1,36 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { gsap } from 'gsap';
 
-// 애니메이션 정의
-const rotateAnimation = keyframes`
-  0% {
-    transform: translate(0, 0) rotate(0deg);
+// 이미지 애니메이션 정의
+const rotateAndShake = keyframes`
+  0%, 100% {
+    transform: rotate(0deg);
   }
-  20% {
-    transform: translate(5px, -5px) rotate(5deg);
+  25% {
+    transform: rotate(3deg);
   }
-  40% {
-    transform: translate(-5px, 5px) rotate(-5deg);
+  50% {
+    transform: rotate(-3deg);
   }
-  60% {
-    transform: translate(5px, 5px) rotate(5deg);
-  }
-  80% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  100% {
-    transform: translate(0, 0) rotate(0deg);
+  75% {
+    transform: rotate(1deg);
   }
 `;
 
-const fadeInUp = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
+const floatUpAndDown = keyframes`
+  0%, 100% {
     transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 `;
 
@@ -47,25 +40,39 @@ const TitleContainer = styled.div`
 
 const Line = styled.div<{ alignment: 'flex-start' | 'center' | 'flex-end' }>`
     opacity: 0;
-    animation: ${fadeInUp} 0.5s ease-out forwards;
+    transform: translateY(30px); // 초기 위치를 아래로 설정
     margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: ${({ alignment }) => alignment};
 
-    &.visible {
-        opacity: 1;
-        animation: none;
+    .word {
+        opacity: 0;
+        transform: translateY(20px);
+        display: inline-block;
     }
 `;
 
-const AnimatedImage = styled.img`
+const AnimatedImage1 = styled.img`
     width: 8.2vw;
     height: auto;
-    animation: ${rotateAnimation} 2s ease-in-out infinite;
+    animation: ${rotateAndShake} 2.5s ease-in-out infinite;
     margin-left: 20px;
     position: relative;
     top: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+`;
+
+const AnimatedImage2 = styled.img`
+    width: 8.2vw;
+    height: auto;
+    animation: ${floatUpAndDown} 3s ease-in-out infinite;
+    margin-left: 20px;
+    position: relative;
+    top: 10px;
+    opacity: 0;
+    transform: translateY(20px);
 `;
 
 const shake = keyframes`
@@ -97,6 +104,7 @@ const Circle = styled.div`
     position: relative;
     animation: ${shake} 2s infinite alternate;
     margin: 0 7px;
+    opacity: 0;
 `;
 
 const Tooltip = styled.div<{ position: 'right' | 'left' }>`
@@ -128,48 +136,119 @@ const Tooltip = styled.div<{ position: 'right' | 'left' }>`
 `;
 
 const TitleSection = () => {
-    const [isVisible, setIsVisible] = useState(false);
     const [hoveredCircle1, setHoveredCircle1] = useState(false);
     const [hoveredCircle2, setHoveredCircle2] = useState(false);
+    const containerRef = useRef(null);
 
     useEffect(() => {
-        setIsVisible(true);
+        // GSAP 타임라인 생성
+        const tl = gsap.timeline({
+            defaults: {
+                ease: 'power3.out',
+                duration: 0.8,
+            },
+        });
+
+        // 각 라인과 단어들에 대한 애니메이션
+        tl.fromTo(
+            '.line',
+            {
+                opacity: 0,
+                y: 30,
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.2,
+            }
+        )
+            .fromTo(
+                '.word',
+                {
+                    opacity: 0,
+                    y: 20,
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                },
+                '-=0.5' // 이전 애니메이션과 겹치게 실행
+            )
+            .fromTo(
+                ['.animated-image-1', '.animated-image-2'],
+                {
+                    opacity: 0,
+                    y: 20,
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.2,
+                },
+                '-=0.3'
+            )
+            .fromTo(
+                '.circle',
+                {
+                    opacity: 0,
+                    scale: 0,
+                },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    stagger: 0.1,
+                },
+                '-=0.2'
+            );
+
+        return () => {
+            tl.kill(); // 컴포넌트 언마운트 시 애니메이션 정리
+        };
     }, []);
 
     return (
-        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10">
+        <div ref={containerRef} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10">
             <TitleContainer>
-                <Line alignment="flex-start" className={isVisible ? 'visible' : ''}>
+                <Line alignment="flex-start" className="line">
                     <div className="word">INTUITIVE UI</div>
                     <div
                         style={{ position: 'relative' }}
                         onMouseEnter={() => setHoveredCircle1(true)}
                         onMouseLeave={() => setHoveredCircle1(false)}
                     >
-                        <AnimatedImage src="/home/main_notebook.png" alt="노트북 이미지" />
-                        <Circle style={{ position: 'absolute', top: '10px', right: '-25px' }} />
+                        <AnimatedImage1
+                            src="/home/main_notebook.png"
+                            alt="노트북 이미지"
+                            className="animated-image-1"
+                        />
+                        <Circle className="circle" style={{ position: 'absolute', top: '10px', right: '-25px' }} />
                         <Tooltip className={hoveredCircle1 ? 'visible' : ''} position="right">
                             <p>안녕하세요 프론트엔드 개발자 이보아입니다. 반가워요!</p>
                         </Tooltip>
                     </div>
                 </Line>
 
-                <Line alignment="center" className={isVisible ? 'visible' : ''}>
+                <Line alignment="center" className="line">
                     <div className="word">USER ENGAGEMENT</div>
                 </Line>
 
-                <Line alignment="flex-end" className={isVisible ? 'visible' : ''}>
+                <Line alignment="flex-end" className="line">
                     <div
                         style={{ position: 'relative' }}
                         onMouseEnter={() => setHoveredCircle2(true)}
                         onMouseLeave={() => setHoveredCircle2(false)}
                     >
-                        <AnimatedImage
+                        <AnimatedImage2
                             src="/home/main_dumbbells.png"
                             alt="덤벨 이미지"
+                            className="animated-image-2"
                             style={{ marginRight: '20px' }}
                         />
-                        <Circle style={{ position: 'absolute', top: '10px', left: '25px' }} />
+                        <Circle className="circle" style={{ position: 'absolute', top: '10px', left: '35px' }} />
                         <Tooltip className={hoveredCircle2 ? 'visible' : ''} position="left">
                             <p>개발은 체력이죠 꾸준히 운동도 하려고 노력합니다.</p>
                         </Tooltip>
@@ -177,7 +256,7 @@ const TitleSection = () => {
                     <div className="word">PERFORMANCE</div>
                 </Line>
 
-                <Line alignment="flex-start" className={isVisible ? 'visible' : ''}>
+                <Line alignment="flex-start" className="line">
                     <div className="word">IMPROVEMENT</div>
                 </Line>
             </TitleContainer>

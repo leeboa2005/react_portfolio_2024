@@ -2,6 +2,23 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 
+const LogoLink = styled(Link)`
+    position: fixed;
+    top: 2vw;
+    left: calc(3vw + 60px);
+    z-index: 100;
+    width: 40px;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    &:hover img {
+        animation: rotateLogo 3s linear infinite;
+    }
+`;
+
 const NavigationLayer = styled.div<{ open: boolean }>`
     width: 100%;
     height: 100vh;
@@ -21,7 +38,7 @@ const ContentContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 130px 150px 60px 150px;
+    padding: 6vw 3vw 3vw 3vw;
     width: 100%;
     height: 100%;
 `;
@@ -36,9 +53,9 @@ const NavigationSection = styled.div`
 const ContactSection = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: flex-end;
-    width: 35%;
+    height: 100%;
 `;
 
 const NavigationContainer = styled.div`
@@ -47,11 +64,11 @@ const NavigationContainer = styled.div`
 
 const HamburgerButton = styled.button<{ open: boolean }>`
     position: fixed;
-    top: 20px;
-    left: 70px;
+    top: 2vw;
+    left: 3vw;
     z-index: 202;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background: none;
     border: none;
     cursor: pointer;
@@ -81,8 +98,7 @@ const HamburgerButton = styled.button<{ open: boolean }>`
 
 const AnimatedSvg = styled.img`
     position: absolute;
-    width: 270px;
-    height: 270px;
+    width: 18vw;
     top: 50%;
     left: -15px;
     transform: translateY(-50%);
@@ -113,10 +129,10 @@ const NavLinks = styled.div`
 
 const NavLink = styled(Link)`
     color: #0d0f0f;
-    font-size: 120px;
-    font-weight: 600;
+    font-size: 7.2vw;
+    font-weight: 400;
     text-decoration: none;
-    margin: 20px 0;
+    margin: 1.5vw 0;
     position: relative;
     transition: all 0.2s cubic-bezier(0.7, 0, 0.3, 1);
 
@@ -125,6 +141,7 @@ const NavLink = styled(Link)`
         animation: drawCircle 0.8s ease-in-out forwards;
     }
 `;
+
 const ContactContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -176,15 +193,15 @@ const ContactInfo = styled.div`
     position: relative;
 
     &:hover span {
-        animation: rotateLogo 5s linear infinite;
+        animation: rotateLogo 3s linear infinite;
     }
 
     span {
         position: absolute;
         bottom: 20px;
-        left: 20px;
-        width: 30px;
-        height: 30px;
+        left: 14px;
+        width: 40px;
+        height: 40px;
 
         img {
             width: 100%;
@@ -255,13 +272,16 @@ const Navigation: React.FC = () => {
                 <div />
                 <div />
             </HamburgerButton>
+            <LogoLink to="/">
+                <img src="/title_logo.png" alt="사이트 로고" />
+            </LogoLink>
             <NavigationLayer open={isOpen}>
                 <ContentContainer>
                     <NavigationSection>
                         <NavigationContainer>
                             <NavLinks>
                                 <NavLink to="/" className="nav-link">
-                                    Home
+                                    HOME
                                     <AnimatedSvg
                                         src="/src/assets/svg/straight.svg"
                                         className="draw"
@@ -269,7 +289,7 @@ const Navigation: React.FC = () => {
                                     />
                                 </NavLink>
                                 <NavLink to="/project" className="nav-link">
-                                    Project
+                                    PROJECT
                                     <AnimatedSvg
                                         src="/src/assets/svg/circle.svg"
                                         className="draw"
@@ -277,7 +297,7 @@ const Navigation: React.FC = () => {
                                     />
                                 </NavLink>
                                 <NavLink to="/about" className="nav-link">
-                                    About
+                                    ABOUT
                                     <AnimatedSvg
                                         src="/src/assets/svg/wave.svg"
                                         className="draw"
