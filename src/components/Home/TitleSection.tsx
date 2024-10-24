@@ -37,7 +37,7 @@ const fadeInUp = keyframes`
 const TitleContainer = styled.div`
     font-family: 'Exo 2', sans-serif;
     font-weight: 400;
-    font-size: 7.5vw;
+    font-size: 7.8vw;
     line-height: 1.1;
     display: flex;
     padding: 0 3vw;
@@ -149,7 +149,7 @@ const TitleSection = () => {
                         <AnimatedImage src="/home/main_notebook.png" alt="노트북 이미지" />
                         <Circle style={{ position: 'absolute', top: '10px', right: '-25px' }} />
                         <Tooltip className={hoveredCircle1 ? 'visible' : ''} position="right">
-                            <p>안녕하세요 프론트엔드 이보아입니다. 반가워요!</p>
+                            <p>안녕하세요 프론트엔드 개발자 이보아입니다. 반가워요!</p>
                         </Tooltip>
                     </div>
                 </Line>
@@ -169,7 +169,7 @@ const TitleSection = () => {
                             alt="덤벨 이미지"
                             style={{ marginRight: '20px' }}
                         />
-                        <Circle />
+                        <Circle style={{ position: 'absolute', top: '10px', left: '25px' }} />
                         <Tooltip className={hoveredCircle2 ? 'visible' : ''} position="left">
                             <p>개발은 체력이죠 꾸준히 운동도 하려고 노력합니다.</p>
                         </Tooltip>
