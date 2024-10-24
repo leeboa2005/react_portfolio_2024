@@ -276,8 +276,8 @@ const Navigation: React.FC = () => {
                                         alt="동그라미 호버효과"
                                     />
                                 </NavLink>
-                                <NavLink to="/work" className="nav-link">
-                                    Work
+                                <NavLink to="/about" className="nav-link">
+                                    About
                                     <AnimatedSvg
                                         src="/src/assets/svg/wave.svg"
                                         className="draw"
