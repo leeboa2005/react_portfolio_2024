@@ -13,9 +13,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
+    font-family: 'IM_Hyemin-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+    font-weight: normal;
     font-style: normal;
 }
 
@@ -91,7 +91,7 @@ const GlobalStyle = createGlobalStyle`
   *::before {
     content: "";
     z-index: 102;
-    opacity: 0.02;
+    opacity: 0.01;
     pointer-events: none;
     mix-blend-mode: exclusion;
     background-image: url('/texture_background.png');
