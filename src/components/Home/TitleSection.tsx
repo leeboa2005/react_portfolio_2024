@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { gsap } from 'gsap';
 
-// 이미지 애니메이션 정의
 const rotateAndShake = keyframes`
   0%, 100% {
     transform: rotate(0deg);
@@ -40,7 +39,7 @@ const TitleContainer = styled.div`
 
 const Line = styled.div<{ alignment: 'flex-start' | 'center' | 'flex-end' }>`
     opacity: 0;
-    transform: translateY(30px); // 초기 위치를 아래로 설정
+    transform: translateY(30px);
     margin-top: 20px;
     display: flex;
     align-items: center;
@@ -54,7 +53,7 @@ const Line = styled.div<{ alignment: 'flex-start' | 'center' | 'flex-end' }>`
 `;
 
 const AnimatedImage1 = styled.img`
-    width: 8.2vw;
+    width: 8.6vw;
     height: auto;
     animation: ${rotateAndShake} 2.5s ease-in-out infinite;
     margin-left: 20px;
@@ -65,7 +64,7 @@ const AnimatedImage1 = styled.img`
 `;
 
 const AnimatedImage2 = styled.img`
-    width: 8.2vw;
+    width: 7.2vw;
     height: auto;
     animation: ${floatUpAndDown} 3s ease-in-out infinite;
     margin-left: 20px;
@@ -105,6 +104,11 @@ const Circle = styled.div`
     animation: ${shake} 2s infinite alternate;
     margin: 0 7px;
     opacity: 0;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: translateY(-10px);
+    }
 `;
 
 const Tooltip = styled.div<{ position: 'right' | 'left' }>`
@@ -112,13 +116,14 @@ const Tooltip = styled.div<{ position: 'right' | 'left' }>`
     background: #57ddb2;
     border-radius: 8px;
     padding: 15px 8px;
-    min-width: 13vw;
+    min-width: 150px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
     z-index: 1;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s;
     top: -10px;
+    line-height: 1.2;
 
     ${({ position }) => (position === 'right' ? `left: 120%;` : `right: 85%;`)}
 
@@ -129,9 +134,10 @@ const Tooltip = styled.div<{ position: 'right' | 'left' }>`
 
     p {
         font-family: 'SUIT-Regular';
-        font-size: 1rem;
-        line-height: 1.2;
+        font-size: 14px;
         word-break: keep-all;
+        letter-spacing: -0.02em;
+        margin: 0;
     }
 `;
 
@@ -141,7 +147,6 @@ const TitleSection = () => {
     const containerRef = useRef(null);
 
     useEffect(() => {
-        // GSAP 타임라인 생성
         const tl = gsap.timeline({
             defaults: {
                 ease: 'power3.out',
@@ -149,7 +154,6 @@ const TitleSection = () => {
             },
         });
 
-        // 각 라인과 단어들에 대한 애니메이션
         tl.fromTo(
             '.line',
             {
@@ -175,7 +179,7 @@ const TitleSection = () => {
                     duration: 0.8,
                     stagger: 0.1,
                 },
-                '-=0.5' // 이전 애니메이션과 겹치게 실행
+                '-=0.5'
             )
             .fromTo(
                 ['.animated-image-1', '.animated-image-2'],
@@ -206,7 +210,7 @@ const TitleSection = () => {
             );
 
         return () => {
-            tl.kill(); // 컴포넌트 언마운트 시 애니메이션 정리
+            tl.kill();
         };
     }, []);
 

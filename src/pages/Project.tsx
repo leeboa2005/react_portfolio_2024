@@ -1,6 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { gsap } from 'gsap';
+
+const rotateAndShake = keyframes`
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(3deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+  75% {
+    transform: rotate(1deg);
+  }
+`;
 
 const Wrap = styled.div`
     width: 100%;
@@ -8,22 +23,38 @@ const Wrap = styled.div`
     min-height: 100vh;
 `;
 
+const IntroContainer = styled.h1`
+    padding: 9vw 0 3.5vw 0;
+    display: flex;
+    font-size: 7.6vw;
+`;
+
+const ImageWrapper = styled.div`
+    width: 8vw;
+    position: relative;
+`;
+
+const AnimatedImage = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    animation: ${rotateAndShake} 2.5s ease-in-out infinite;
+    position: absolute;
+`;
+
 const TabContainer = styled.div`
     width: 100%;
-    max-width: 1200px;
+    max-width: 93vw;
     margin: 0 auto;
 `;
 
 const TabList = styled.div`
     display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 100px 0 30px 0;
+    gap: 1.5vw;
+    padding-bottom: 3.5vw;
 `;
 
 const TabButton = styled.button`
-    width: 100px;
-    height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,17 +72,19 @@ const TabButton = styled.button`
     }
 `;
 
-const TabLabel = styled.span<{ isActive: boolean }>`
+const TabLabel = styled.span<{ isActive: boolean }>(
+    ({ isActive }) => `
     padding: 8px 16px;
     border-radius: 12px;
-    border: 1px solid ${(props) => (props.isActive ? '#111' : 'transparent')};
+    border: 1px solid ${isActive ? '#111' : 'transparent'};
     background-color: transparent;
     color: #000;
 
-    ${TabButton}:hover & {
+    &:hover {
         border: 1px solid #111;
     }
-`;
+`
+);
 
 const TabContent = styled.div`
     margin-top: 10px;
@@ -120,6 +153,12 @@ const Project: React.FC = () => {
     return (
         <Wrap>
             <TabContainer>
+                <IntroContainer>
+                    MY PROJECT
+                    <ImageWrapper>
+                        <AnimatedImage src="/home/main_hat.png" alt="노트 이미지" />
+                    </ImageWrapper>
+                </IntroContainer>
                 <TabList>
                     {tabData.map((tab) => (
                         <TabButton key={tab.id} onClick={() => setActiveTab(tab.id)}>
