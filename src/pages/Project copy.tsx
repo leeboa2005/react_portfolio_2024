@@ -235,6 +235,7 @@ const Project: React.FC = () => {
         ],
     };
 
+    // 수정된 toggleTech 함수
     const toggleTech = (tech: string) => {
         setSelectedTechs((prev) => {
             const techIndex = prev.indexOf(tech);
@@ -247,6 +248,7 @@ const Project: React.FC = () => {
         });
     };
 
+    // 수정된 필터링 로직
     const filteredContent =
         contentData[activeTab]?.filter((item) => {
             if (selectedTechs.length === 0) return true;
@@ -262,6 +264,7 @@ const Project: React.FC = () => {
         }
     }, [activeTab, filteredContent.length]);
 
+    // 탭 변경 시 선택된 기술 필터 초기화
     const handleTabChange = (tabId: string) => {
         setActiveTab(tabId);
         setSelectedTechs([]);
