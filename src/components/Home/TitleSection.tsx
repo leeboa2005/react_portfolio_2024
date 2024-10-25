@@ -28,8 +28,8 @@ const floatUpAndDown = keyframes`
 
 const TitleContainer = styled.div`
     font-family: 'Exo 2', sans-serif;
-    font-weight: 400;
-    font-size: 7.8vw;
+    font-weight: 500;
+    font-size: 8vw;
     line-height: 1.1;
     display: flex;
     padding: 0 3vw;
