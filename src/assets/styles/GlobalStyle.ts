@@ -4,7 +4,6 @@ import reset from 'styled-reset';
 const GlobalStyle = createGlobalStyle`
   ${reset}
   
-  /* font */
   @font-face {
     font-family: 'SUIT-Regular';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
@@ -12,20 +11,20 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
   }
 
-
   * {
-    box-sizing: border-box !important;
     position: relative;
+  }
+
+  html {
+    font-size: 1rem;
   }
 
   body {
     font-family: var(--font-default);
     font-size: var(--font-text-size);
     color: var(--font-color);
-    font-weight: 500;
-    margin: 0;
-    padding: 0;
-    background: #f2f2f2;
+    font-weight: var(--font-weight-default);
+    background: var(--background-color);
   }
 
   a {
@@ -35,27 +34,36 @@ const GlobalStyle = createGlobalStyle`
 
   button {
     border: none;
-    border-radius: var(--default-radius-2);
-    font-weight: 600;
+    border-radius: var(--default-radius-small);
+    font-weight: var(--font-weight-bold);
     cursor: pointer;
   }
 
   :root {
-    --default-width: 1220px;
-    --grey-color: #f5f5f7;
-    --main-color: #;
-    --main-hover-color: #; 
-    --font-color: #;
-    --font-gray-color: #;
-    --font-white-color: #;
-    --font-footer-color: #;
-    --border-style: 1px solid #ccc;
     --font-default: 'SUIT-Regular';
-    --font-text-size: 16px;
-    --font-bold: 600;
-    --layout-center: 0 auto;
-    --default-radius: 16px;
-    --default-radius-2: 6px;
+    --font-default-eng: 'Exo 2', sans-serif;
+    --font-title: 8rem;
+    --font-sub-title: 4rem;
+    --font-text-large: 1.28rem;
+    --font-text: 1rem;
+    --font-text-small: 0.75rem;
+    --font-weight-thin: 400;
+    --font-weight-default: 500;
+    --font-weight-bold: 600;
+    --background-color: #f2f2f2;
+    --grey-color: #f5f5f7;
+    --main-color-pink: #f989b3;
+    --main-color-pink-hover: #f76a9c;
+    --main-color-green: #56dfb4;
+    --font-color: #000000;
+    --font-gray-color: #757575;
+    --default-width: 92rem;
+    --default-radius: 0.75rem;
+    --default-radius-small: 0.37rem;
+    --border-style: 1px solid #ccc;
+    --noise-background: url('/texture_background.png');
+    --noise-opacity : 0.01;
+    
   }
 
   section {
@@ -63,32 +71,32 @@ const GlobalStyle = createGlobalStyle`
     border-radius: var(--default-radius);
   }
 
-  @media only screen and (max-width: 1068px) {
+  /* @media only screen and (max-width: 1068px) {
     :root {
-      --default-width: 720px;
+      --default-width: 45rem;
     }
   }
 
   @media only screen and (max-width: 734px) {
     :root {
-      --default-width: 420px;
-      --font-text-size: 14px;
+      --default-width: 26.25rem;
+      --font-text-size: 0.875rem;
     }
   }
 
   @media only screen and (max-width: 420px) {
     :root {
-      --default-width: 320px;
+      --default-width: 20rem;
     }
-  }
+  } */
 
   *::before {
     content: "";
     z-index: 102;
-    opacity: 0.01;
     pointer-events: none;
     mix-blend-mode: exclusion;
-    background-image: url('/texture_background.png');
+    background-image: var(--noise-background);
+    opacity:  var(--noise-opacity);
     background-position: 0 0;
     width: 100%;
     height: 100%;

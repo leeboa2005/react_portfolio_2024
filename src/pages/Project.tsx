@@ -16,13 +16,14 @@ const Wrap = styled.div`
 `;
 
 const IntroContainer = styled.h1`
-    padding: 9vw 0 3.5vw 0;
+    padding: 7rem 0 2.8rem 0;
     display: flex;
-    font-size: 7vw;
+    font-size: var(--font-title);
+    font-family: var(--font-default-eng);
 `;
 
 const ImageWrapper = styled.div`
-    width: 8vw;
+    width: 6.4rem;
     position: relative;
 `;
 
@@ -35,35 +36,35 @@ const AnimatedImage = styled.img`
 `;
 
 const IntroSubContainer = styled.p`
-    font-family: 'SUIT-Regular';
-    width: 50vw;
-    font-size: 1.6vw;
+    font-family: var(--font-default);
+    width: 40rem;
+    font-size: var(--font-text-large);
     color: #333;
     line-height: 1.3;
-    margin-bottom: 2vw;
+    margin-bottom: 1.6rem;
 `;
 
 const TabContainer = styled.div`
     width: 100%;
-    max-width: 93vw;
+    max-width: var(--default-width);
     margin: 0 auto;
 `;
 
 const TabList = styled.div`
     display: flex;
-    gap: 2vw;
-    padding-bottom: 2vw;
+    gap: 1.6rem;
+    padding-bottom: 1.6rem;
 `;
 
 const TabButton = styled.label<{ $isChecked: boolean }>`
     display: flex;
     align-items: center;
-    gap: 0.5vw;
+    gap: 0.4rem;
     cursor: pointer;
-    font-family: 'Exo 2', sans-serif;
-    font-size: 1.4vw;
-    font-weight: 400;
-    color: ${(props) => (props.$isChecked ? '#111' : '#a1a1a1')};
+    font-family: var(--font-default-eng);
+    font-size: var(--font-text);
+    font-weight: var(--font-weight-default);
+    color: ${(props) => (props.$isChecked ? '#111' : 'var(--font-gray-color)')};
 `;
 
 const CheckboxInput = styled.input`
@@ -71,29 +72,29 @@ const CheckboxInput = styled.input`
 `;
 
 const CustomCheckbox = styled.div<{ $isChecked: boolean }>`
-    width: 1.2vw;
-    height: 1.2vw;
-    border-radius: 4px;
-    border: 1px solid ${(props) => (props.$isChecked ? '#111' : '#a1a1a1')};
+    width: 1rem;
+    height: 1rem;
+    border-radius: var(--default-radius-small);
+    border: 1px solid ${(props) => (props.$isChecked ? '#111' : 'var(--font-gray-color)')};
     background-color: ${(props) => (props.$isChecked ? '#111' : 'transparent')};
     transition: all 0.2s ease;
 `;
 
 const FilterList = styled.div`
     display: flex;
-    gap: 1vw;
-    padding-bottom: 3.5vw;
+    gap: 0.8rem;
+    padding-bottom: 2.8rem;
 `;
 
 const FilterButton = styled.button<{ $isSelected: boolean }>`
-    padding: 8px 16px;
-    border-radius: 12px;
-    border: 1px solid ${(props) => (props.$isSelected ? '#111' : '#a1a1a1')};
+    padding: 0.5rem 1rem;
+    border-radius: var(--default-radius);
+    border: 1px solid ${(props) => (props.$isSelected ? '#111' : 'var(--font-gray-color)')};
     background-color: ${(props) => (props.$isSelected ? '#f5f5f5' : 'transparent')};
-    color: ${(props) => (props.$isSelected ? '#111' : '#a1a1a1')};
+    color: ${(props) => (props.$isSelected ? '#111' : 'var(--font-gray-color)')};
     cursor: pointer;
-    font-size: 1vw;
-    font-weight: 400;
+    font-size: var(--font-text-small);
+    font-weight: var(--font-weight-default);
     transition: all 0.3s ease;
 
     &:hover {
@@ -103,22 +104,20 @@ const FilterButton = styled.button<{ $isSelected: boolean }>`
 
 const EmptyState = styled.div`
     text-align: center;
-    padding: 5vw 0;
-    color: #a1a1a1;
-    font-size: 1.2vw;
+    padding: 4rem 0;
+    color: var(--font-gray-color);
 `;
 
 const TabContent = styled.div`
-    margin-top: 10px;
-    padding: 0;
+    margin-top: 0.625rem;
     border-radius: 5px;
 `;
 
 const GridContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2vw;
-    margin-bottom: 4vw;
+    gap: 3.6rem 1.6rem;
+    margin-bottom: 3.2rem;
 `;
 
 const GridItem = styled.div`
@@ -126,18 +125,17 @@ const GridItem = styled.div`
     height: 100%;
 
     h3 {
-        font-size: 1.3vw;
-        padding: 1vw 0;
+        padding: 1rem 0;
     }
 
     p {
-        color: #a1a1a1;
-        font-size: 0.9vw;
+        color: var(--font-gray-color);
+        font-size: var(--font-text-small);
     }
 `;
 
 const ProjectImageContainer = styled.div`
-    border-radius: 12px;
+    border-radius: var(--default-radius);
     overflow: hidden;
     width: 100%;
 `;
@@ -184,7 +182,7 @@ const Project: React.FC = () => {
                 title: 'FAVORITE COUNTRIES',
                 description: '좋아하는 국가 리스트 만들기 웹사이트',
                 image: '/project/personal_02.gif',
-                techs: ['Next.js', 'TypeScript'],
+                techs: ['React', 'TypeScript'],
             },
             {
                 title: 'POKEDEX',
@@ -210,7 +208,7 @@ const Project: React.FC = () => {
                 title: 'ITFIT',
                 description: 'IT 직종 테스트 플랫폼',
                 image: '/project/team_03.png',
-                techs: ['Next.js', 'TypeScript'],
+                techs: ['React', 'TypeScript'],
             },
         ],
         work: [
