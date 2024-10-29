@@ -57,7 +57,7 @@ const GlobalStyle = createGlobalStyle`
     --main-color-green: #56dfb4;
     --font-color: #000000;
     --font-gray-color: #757575;
-    --default-width: 92rem;
+    --default-width: 88.5rem;
     --default-radius: 0.75rem;
     --default-radius-small: 0.37rem;
     --border-style: 1px solid #ccc;
