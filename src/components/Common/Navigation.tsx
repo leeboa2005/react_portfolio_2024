@@ -4,10 +4,10 @@ import { Link, useLocation } from 'react-router-dom';
 
 const LogoLink = styled(Link)`
     position: fixed;
-    top: 2vw;
-    left: calc(3vw + 60px);
+    top: 2rem;
+    left: calc(3rem + 3.75rem);
     z-index: 100;
-    width: 40px;
+    width: 2.5rem;
 
     img {
         width: 100%;
@@ -38,7 +38,7 @@ const ContentContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 6vw 3vw 3vw 3vw;
+    padding: 6rem 3rem 3rem 3rem;
     width: 100%;
     height: 100%;
 `;
@@ -55,7 +55,6 @@ const ContactSection = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
-    height: 100%;
 `;
 
 const NavigationContainer = styled.div`
@@ -64,11 +63,11 @@ const NavigationContainer = styled.div`
 
 const HamburgerButton = styled.button<{ open: boolean }>`
     position: fixed;
-    top: 2vw;
-    left: 3vw;
+    top: 2rem;
+    left: 3rem;
     z-index: 202;
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     background: none;
     border: none;
     cursor: pointer;
@@ -81,17 +80,17 @@ const HamburgerButton = styled.button<{ open: boolean }>`
     div {
         position: absolute;
         width: 100%;
-        height: 2px;
+        height: 0.125rem;
         background-color: #000;
         transition: all 0.3s ease;
         &:nth-child(1) {
-            transform: ${({ open }) => (open ? 'rotate(45deg)' : 'translateY(-10px)')};
+            transform: ${({ open }) => (open ? 'rotate(45deg)' : 'translateY(-0.625rem)')};
         }
         &:nth-child(2) {
             opacity: ${({ open }) => (open ? 0 : 1)};
         }
         &:nth-child(3) {
-            transform: ${({ open }) => (open ? 'rotate(-45deg)' : 'translateY(10px)')};
+            transform: ${({ open }) => (open ? 'rotate(-45deg)' : 'translateY(0.625rem)')};
         }
     }
 `;
@@ -129,10 +128,10 @@ const NavLinks = styled.div`
 
 const NavLink = styled(Link)`
     color: #0d0f0f;
-    font-size: 7.2vw;
-    font-weight: 400;
+    font-family: var(--font-default-eng);
+    font-size: var(--font-title);
     text-decoration: none;
-    margin: 1.5vw 0;
+    margin: 1.5rem 0;
     position: relative;
     transition: all 0.2s cubic-bezier(0.7, 0, 0.3, 1);
 
@@ -147,8 +146,9 @@ const ContactContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     background-color: #0d0f0f;
-    padding: 16px 20px;
-    border-radius: 19px;
+    padding: 1rem 1.25rem;
+    border-radius: 1.1875rem;
+    margin-top: 1rem;
 
     &:hover img {
         filter: grayscale(0%);
@@ -159,23 +159,23 @@ const ContactLink = styled(Link)`
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: #000;
-    margin-bottom: 10px;
+    color: var(--font-color);
+    margin-bottom: 0.625rem;
 
     p {
-        margin-right: 25px;
+        margin-right: 1.5625rem;
         writing-mode: vertical-rl;
         transform: rotate(180deg);
-        font-size: 23px;
-        font-weight: bold;
-        color: #f2f2f2;
+        font-size: var(--font-text-large);
+        font-weight: var(--font-weight-bold);
+        color: var(--background-color);
     }
 
     img {
-        width: 280px;
+        width: 17.5rem;
         height: auto;
         object-fit: cover;
-        border-radius: 10px;
+        border-radius: 0.625rem;
         filter: grayscale(100%);
         transition: filter 0.3s ease;
     }
@@ -184,12 +184,12 @@ const ContactLink = styled(Link)`
 const ContactInfo = styled.div`
     text-align: right;
     color: #0d0f0f;
-    width: 370px;
-    height: 200px;
-    border: 1px solid #0d0f0f;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
+    width: 20.12rem;
+    height: 12.5rem;
+    border: 0.0625rem solid #0d0f0f;
+    padding: 1.25rem;
+    border-radius: 0.625rem;
+    margin-top: 1.25rem;
     position: relative;
 
     &:hover span {
@@ -198,10 +198,10 @@ const ContactInfo = styled.div`
 
     span {
         position: absolute;
-        bottom: 20px;
-        left: 14px;
-        width: 40px;
-        height: 40px;
+        bottom: 1.25rem;
+        left: 0.875rem;
+        width: 2.5rem;
+        height: 2.5rem;
 
         img {
             width: 100%;
@@ -219,15 +219,15 @@ const ContactInfo = styled.div`
 
     div {
         position: absolute;
-        top: 20px;
-        left: 20px;
-        margin-right: 10px;
+        top: 1.25rem;
+        left: 1.25rem;
+        margin-right: 0.625rem;
         width: fit-content;
 
         p {
             writing-mode: vertical-rl;
             transform: rotate(180deg);
-            font-size: 23px;
+            font-size: 1.4375rem;
             font-weight: 600;
             color: #0d0f0f;
         }
@@ -241,13 +241,10 @@ const ContactInfo = styled.div`
 
         li {
             strong {
-                font-size: 20px;
+                font-size: 1.25rem;
                 font-weight: 600;
                 display: block;
-                margin-bottom: 8px;
-            }
-            p {
-                font-size: 18px;
+                margin-bottom: 0.5rem;
             }
         }
     }
@@ -316,7 +313,7 @@ const Navigation: React.FC = () => {
                         </ContactContainer>
                         <ContactInfo>
                             <span>
-                                <img src="/black_logo.png" alt="네비게이션 작은 로고"></img>
+                                <img src="/black_logo.png" alt="네비게이션 작은 로고" />
                             </span>
                             <div>
                                 <p>CONTACT</p>
