@@ -42,7 +42,7 @@ const GlobalStyle = createGlobalStyle`
   :root {
     --font-default: 'SUIT-Regular';
     --font-default-eng: 'Exo 2', sans-serif;
-    --font-title: 8rem;
+    --font-title: 8.6rem;
     --font-sub-title: 4rem;
     --font-text-large: 1.28rem;
     --font-text: 1rem;
