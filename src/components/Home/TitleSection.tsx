@@ -22,56 +22,56 @@ const floatUpAndDown = keyframes`
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-0.625rem);
   }
 `;
 
 const TitleContainer = styled.div`
     font-family: 'Exo 2', sans-serif;
     font-weight: 500;
-    font-size: 8vw;
+    font-size: var(--font-title);
     line-height: 1.1;
     display: flex;
-    padding: 0 3vw;
+    padding: 0 4.5rem;
     flex-direction: column;
     justify-content: center;
 `;
 
 const Line = styled.div<{ alignment: 'flex-start' | 'center' | 'flex-end' }>`
     opacity: 0;
-    transform: translateY(30px);
-    margin-top: 20px;
+    transform: translateY(2rem);
+    margin-top: 1.25rem;
     display: flex;
     align-items: center;
     justify-content: ${({ alignment }) => alignment};
 
     .word {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(1.5rem);
         display: inline-block;
     }
 `;
 
 const AnimatedImage1 = styled.img`
-    width: 8.6vw;
+    width: 10.37rem;
     height: auto;
     animation: ${rotateAndShake} 2.5s ease-in-out infinite;
-    margin-left: 20px;
+    margin-left: 1.25rem;
     position: relative;
-    top: 10px;
+    top: 0.625rem;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(1.25rem);
 `;
 
 const AnimatedImage2 = styled.img`
-    width: 7.2vw;
+    width: 8.37rem;
     height: auto;
     animation: ${floatUpAndDown} 3s ease-in-out infinite;
-    margin-left: 20px;
+    margin-left: 1.25rem;
     position: relative;
-    top: 10px;
+    top: 0.625rem;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(1.25rem);
 `;
 
 const shake = keyframes`
@@ -79,13 +79,13 @@ const shake = keyframes`
         transform: scale(1) translateY(0);
     }
     10% {
-        transform: scale(.8, 1.2) translateY(-70%);
+        transform: scale(0.8, 1.2) translateY(-0.875rem);
     }
     20% {
-        transform: scale(1.2, .8) translateY(0);
+        transform: scale(1.2, 0.8) translateY(0);
     }
     30% {
-        transform: scale(.95, 1.05) translateY(-30%);
+        transform: scale(0.95, 1.05) translateY(-0.375rem);
     }
     40% {
         transform: scale(1) translateY(0);
@@ -96,36 +96,36 @@ const shake = keyframes`
 `;
 
 const Circle = styled.div`
-    width: 12px;
-    height: 12px;
+    width: 0.75rem;
+    height: 0.75rem;
     background-color: #57ddb2;
     border-radius: 50%;
     position: relative;
     animation: ${shake} 2s infinite alternate;
-    margin: 0 7px;
+    margin: 0 0.438rem;
     opacity: 0;
     transition: transform 0.3s ease;
 
     &:hover {
-        transform: translateY(-10px);
+        transform: translateY(-0.625rem);
     }
 `;
 
 const Tooltip = styled.div<{ position: 'right' | 'left' }>`
     position: absolute;
     background: #57ddb2;
-    border-radius: 8px;
-    padding: 15px 8px;
-    min-width: 150px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 0.938rem 0.5rem;
+    min-width: 9.375rem;
+    box-shadow: 0 0.063rem 0.313rem rgba(0, 0, 0, 0.1);
     z-index: 1;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s;
-    top: -10px;
+    top: -0.625rem;
     line-height: 1.2;
 
-    ${({ position }) => (position === 'right' ? `left: 120%;` : `right: 85%;`)}
+    ${({ position }) => (position === 'right' ? `left: 7.5rem;` : `right: 5.313rem;`)}
 
     &.visible {
         visibility: visible;
@@ -134,7 +134,7 @@ const Tooltip = styled.div<{ position: 'right' | 'left' }>`
 
     p {
         font-family: 'SUIT-Regular';
-        font-size: 14px;
+        font-size: 0.875rem;
         word-break: keep-all;
         letter-spacing: -0.02em;
         margin: 0;
@@ -229,7 +229,10 @@ const TitleSection = () => {
                             alt="노트북 이미지"
                             className="animated-image-1"
                         />
-                        <Circle className="circle" style={{ position: 'absolute', top: '10px', right: '-25px' }} />
+                        <Circle
+                            className="circle"
+                            style={{ position: 'absolute', top: '0.625rem', right: '-1.563rem' }}
+                        />
                         <Tooltip className={hoveredCircle1 ? 'visible' : ''} position="right">
                             <p>안녕하세요 프론트엔드 개발자 이보아입니다. 반가워요!</p>
                         </Tooltip>
@@ -250,9 +253,12 @@ const TitleSection = () => {
                             src="/home/main_dumbbells.png"
                             alt="덤벨 이미지"
                             className="animated-image-2"
-                            style={{ marginRight: '20px' }}
+                            style={{ marginRight: '1.25rem' }}
                         />
-                        <Circle className="circle" style={{ position: 'absolute', top: '10px', left: '35px' }} />
+                        <Circle
+                            className="circle"
+                            style={{ position: 'absolute', top: '0.625rem', left: '2.188rem' }}
+                        />
                         <Tooltip className={hoveredCircle2 ? 'visible' : ''} position="left">
                             <p>개발은 체력이죠 꾸준히 운동도 하려고 노력합니다.</p>
                         </Tooltip>
