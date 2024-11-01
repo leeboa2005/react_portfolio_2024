@@ -38,7 +38,7 @@ const TitleContainer = styled.div`
 
     @media only screen and (max-width: 1348px) {
         font-size: 5.2rem;
-        padding: 0 5%;
+        padding: 0 4%;
     }
 
     @media only screen and (max-width: 734px) {

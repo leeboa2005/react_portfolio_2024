@@ -65,7 +65,7 @@ const GlobalStyle = createGlobalStyle`
     --noise-opacity : 0.01;
 
     @media only screen and (max-width: 1348px) {
-        --default-width: 90%;
+        --default-width: 92%;
       
     }
 

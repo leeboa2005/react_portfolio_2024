@@ -6,7 +6,7 @@ const GitHubButton = styled.a`
     position: absolute;
     top: 2rem;
     right: 6%;
-    padding: 0.7rem 1.4rem;
+    padding: 0.7rem 1rem;
     background-color: #f989b3;
     color: #000;
     text-decoration: none;
@@ -19,7 +19,7 @@ const GitHubButton = styled.a`
     gap: 2px;
 
     @media only screen and (max-width: 1348px) {
-        right: 5%;
+        right: 4%;
     }
 
     @media only screen and (max-width: 734px) {
