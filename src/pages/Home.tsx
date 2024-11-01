@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import GlobalStyle from '../assets/styles/GlobalStyle';
 import GithubBtn from '../components/Common/GithubBtn';
-import AboutMe from '../components/Home/AboutMe';
 import TitleSection from '../components/Home/TitleSection';
 
 const HomeWrap = styled.section`
@@ -31,7 +30,6 @@ const Home: React.FC = () => {
                 <ContentWrap>
                     <TitleSection />
                 </ContentWrap>
-                <AboutMe />
             </HomeWrap>
         </>
     );

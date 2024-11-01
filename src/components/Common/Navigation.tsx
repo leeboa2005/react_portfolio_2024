@@ -3,11 +3,19 @@ import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 
 const LogoLink = styled(Link)`
-    position: fixed;
+    position: absolute;
     top: 2rem;
-    left: calc(3rem + 3.75rem);
+    left: calc(6% + 3.75rem);
     z-index: 100;
     width: 2.5rem;
+
+    @media only screen and (max-width: 1348px) {
+        left: calc(5% + 3.75rem);
+    }
+
+    @media only screen and (max-width: 734px) {
+        left: calc(2.5% + 3.75rem);
+    }
 
     img {
         width: 100%;
@@ -38,9 +46,17 @@ const ContentContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 6rem 3rem 3rem 3rem;
+    padding: 6rem 5% 3rem 5%;
     width: 100%;
     height: 100%;
+
+    @media only screen and (max-width: 1348px) {
+        padding: 6rem 1.5rem 3rem 1.5rem;
+    }
+
+    @media only screen and (max-width: 734px) {
+        padding: 6rem 2.5% 3rem 2.5%;
+    }
 `;
 
 const NavigationSection = styled.div`
@@ -62,9 +78,9 @@ const NavigationContainer = styled.div`
 `;
 
 const HamburgerButton = styled.button<{ open: boolean }>`
-    position: fixed;
+    position: absolute;
     top: 2rem;
-    left: 3rem;
+    left: 6%;
     z-index: 202;
     width: 2.5rem;
     height: 2.5rem;
@@ -76,6 +92,14 @@ const HamburgerButton = styled.button<{ open: boolean }>`
     justify-content: center;
     align-items: center;
     padding: 0;
+
+    @media only screen and (max-width: 1348px) {
+        left: 5%;
+    }
+
+    @media only screen and (max-width: 734px) {
+        left: 2.5%;
+    }
 
     div {
         position: absolute;
@@ -147,7 +171,7 @@ const ContactContainer = styled.div`
     align-items: flex-start;
     background-color: #0d0f0f;
     padding: 1rem 1.25rem;
-    border-radius: 1.1875rem;
+    border-radius: var(--default-radius);
     margin-top: 1rem;
 
     &:hover img {
@@ -172,10 +196,10 @@ const ContactLink = styled(Link)`
     }
 
     img {
-        width: 17.5rem;
+        width: 20rem;
         height: auto;
         object-fit: cover;
-        border-radius: 0.625rem;
+        border-radius: var(--default-radius);
         filter: grayscale(100%);
         transition: filter 0.3s ease;
     }
@@ -188,7 +212,7 @@ const ContactInfo = styled.div`
     height: 12.5rem;
     border: 0.0625rem solid #0d0f0f;
     padding: 1.25rem;
-    border-radius: 0.625rem;
+    border-radius: var(--default-radius);
     margin-top: 1.25rem;
     position: relative;
 
