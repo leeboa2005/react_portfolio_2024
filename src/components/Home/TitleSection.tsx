@@ -32,9 +32,19 @@ const TitleContainer = styled.div`
     font-size: var(--font-title);
     line-height: 1.1;
     display: flex;
-    padding: 0 4.5rem;
+    padding: 0 6%;
     flex-direction: column;
     justify-content: center;
+
+    @media only screen and (max-width: 1348px) {
+        font-size: 5.2rem;
+        padding: 0 4%;
+    }
+
+    @media only screen and (max-width: 734px) {
+        font-size: 2rem;
+        padding: 0 2.5%;
+    }
 `;
 
 const Line = styled.div<{ alignment: 'flex-start' | 'center' | 'flex-end' }>`
@@ -61,6 +71,14 @@ const AnimatedImage1 = styled.img`
     top: 0.625rem;
     opacity: 0;
     transform: translateY(1.25rem);
+
+    @media only screen and (max-width: 1348px) {
+        width: 7.37rem;
+    }
+
+    @media only screen and (max-width: 734px) {
+        width: 4.37rem;
+    }
 `;
 
 const AnimatedImage2 = styled.img`
@@ -72,6 +90,14 @@ const AnimatedImage2 = styled.img`
     top: 0.625rem;
     opacity: 0;
     transform: translateY(1.25rem);
+
+    @media only screen and (max-width: 1348px) {
+        width: 6.5rem;
+    }
+
+    @media only screen and (max-width: 734px) {
+        width: 3.57rem;
+    }
 `;
 
 const shake = keyframes`
@@ -109,6 +135,11 @@ const Circle = styled.div`
     &:hover {
         transform: translateY(-0.625rem);
     }
+
+    @media only screen and (max-width: 1348px) {
+        width: 0.55rem;
+        height: 0.55rem;
+    }
 `;
 
 const Tooltip = styled.div<{ position: 'right' | 'left' }>`
@@ -117,15 +148,15 @@ const Tooltip = styled.div<{ position: 'right' | 'left' }>`
     border-radius: 0.5rem;
     padding: 0.938rem 0.5rem;
     min-width: 9.375rem;
-    box-shadow: 0 0.063rem 0.313rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.06rem 0.31rem rgba(0, 0, 0, 0.1);
     z-index: 1;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s;
-    top: -0.625rem;
+    top: -4.5rem;
     line-height: 1.2;
 
-    ${({ position }) => (position === 'right' ? `left: 7.5rem;` : `right: 5.313rem;`)}
+    ${({ position }) => (position === 'right' ? `left: calc(100% + 3.1rem);` : `right: calc(100% - 2.5rem);`)}
 
     &.visible {
         visibility: visible;
@@ -231,7 +262,7 @@ const TitleSection = () => {
                         />
                         <Circle
                             className="circle"
-                            style={{ position: 'absolute', top: '0.625rem', right: '-1.563rem' }}
+                            style={{ position: 'absolute', top: '0.625rem', right: '-2.86rem' }}
                         />
                         <Tooltip className={hoveredCircle1 ? 'visible' : ''} position="right">
                             <p>안녕하세요 프론트엔드 개발자 이보아입니다. 반가워요!</p>
@@ -255,10 +286,7 @@ const TitleSection = () => {
                             className="animated-image-2"
                             style={{ marginRight: '1.25rem' }}
                         />
-                        <Circle
-                            className="circle"
-                            style={{ position: 'absolute', top: '0.625rem', left: '2.188rem' }}
-                        />
+                        <Circle className="circle" style={{ position: 'absolute', top: '0.625rem', left: '2.48rem' }} />
                         <Tooltip className={hoveredCircle2 ? 'visible' : ''} position="left">
                             <p>개발은 체력이죠 꾸준히 운동도 하려고 노력합니다.</p>
                         </Tooltip>

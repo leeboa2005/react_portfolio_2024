@@ -42,7 +42,7 @@ const GlobalStyle = createGlobalStyle`
   :root {
     --font-default: 'SUIT-Regular';
     --font-default-eng: 'Exo 2', sans-serif;
-    --font-title: 8.6rem;
+    --font-title: 8.4rem;
     --font-sub-title: 4rem;
     --font-text-large: 1.28rem;
     --font-text: 1rem;
@@ -57,12 +57,21 @@ const GlobalStyle = createGlobalStyle`
     --main-color-green: #56dfb4;
     --font-color: #000000;
     --font-gray-color: #757575;
-    --default-width: 90rem;
+    --default-width: 88%;
     --default-radius: 0.75rem;
     --default-radius-small: 0.37rem;
     --border-style: 1px solid #ccc;
     --noise-background: url('/texture_background.png');
     --noise-opacity : 0.01;
+
+    @media only screen and (max-width: 1348px) {
+        --default-width: 92%;
+      
+    }
+
+    @media only screen and (max-width: 734px) {
+        --default-width: 95%;
+    }
     
   }
 
@@ -71,24 +80,6 @@ const GlobalStyle = createGlobalStyle`
     border-radius: var(--default-radius);
   }
 
-  /* @media only screen and (max-width: 1068px) {
-    :root {
-      --default-width: 45rem;
-    }
-  }
-
-  @media only screen and (max-width: 734px) {
-    :root {
-      --default-width: 26.25rem;
-      --font-text-size: 0.875rem;
-    }
-  }
-
-  @media only screen and (max-width: 420px) {
-    :root {
-      --default-width: 20rem;
-    }
-  } */
 
   *::before {
     content: "";
