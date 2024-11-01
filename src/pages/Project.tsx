@@ -6,8 +6,9 @@ import FilterButtons from '../components/Project/FilterButtons';
 import GridContent from '../components/Project/GridContent';
 
 const Wrap = styled.div`
-    width: 100%;
+    width: var(--default-width);
     height: 100%;
+    margin:0 auto;
     min-height: 100vh;
 `;
 
@@ -41,8 +42,6 @@ const IntroSubContainer = styled.p`
 `;
 
 const TabContainer = styled.div`
-    width: 100%;
-    max-width: var(--default-width);
     margin: 0 auto;
 `;
 
