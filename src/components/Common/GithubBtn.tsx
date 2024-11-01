@@ -4,9 +4,9 @@ import { gsap } from 'gsap';
 
 const GitHubButton = styled.a`
     position: absolute;
-    top: 2vw;
-    right: 3vw;
-    padding: 10px 20px;
+    top: 2rem;
+    right: 6%;
+    padding: 0.7rem 1.4rem;
     background-color: #f989b3;
     color: #000;
     text-decoration: none;
@@ -17,6 +17,14 @@ const GitHubButton = styled.a`
     display: inline-flex;
     z-index: 102;
     gap: 2px;
+
+    @media only screen and (max-width: 1348px) {
+        right: 5%;
+    }
+
+    @media only screen and (max-width: 734px) {
+        right: 2.5%;
+    }
 
     &::before {
         content: '';
