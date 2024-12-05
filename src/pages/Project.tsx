@@ -8,12 +8,12 @@ import GridContent from '../components/Project/GridContent';
 const Wrap = styled.div`
     width: var(--default-width);
     height: 100%;
-    margin:0 auto;
+    margin: 0 auto;
     min-height: 100vh;
 `;
 
 const IntroContainer = styled.h1`
-    padding: 7rem 0 2.8rem 0;
+    padding: 7rem 0 4.8rem 0;
     display: flex;
     font-size: var(--font-title);
     font-family: var(--font-default-eng);
@@ -34,11 +34,10 @@ const AnimatedImage = styled.img`
 
 const IntroSubContainer = styled.p`
     font-family: var(--font-default);
-    width: 40rem;
     font-size: var(--font-text-large);
     color: #333;
     line-height: 1.3;
-    margin-bottom: 1.6rem;
+    margin-bottom: 3.2rem;
 `;
 
 const TabContainer = styled.div`

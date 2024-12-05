@@ -44,9 +44,9 @@ const GlobalStyle = createGlobalStyle`
     --font-default-eng: 'Exo 2', sans-serif;
     --font-title: 8.4rem;
     --font-sub-title: 4rem;
-    --font-text-large: 1.28rem;
-    --font-text: 1rem;
-    --font-text-small: 0.75rem;
+    --font-text-large: 1.7rem;
+    --font-text: 1.3rem;
+    --font-text-small: 0.9rem;
     --font-weight-thin: 400;
     --font-weight-default: 500;
     --font-weight-bold: 600;
