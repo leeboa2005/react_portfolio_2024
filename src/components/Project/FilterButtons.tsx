@@ -8,13 +8,11 @@ const FilterList = styled.div`
 `;
 
 const FilterButton = styled.button<{ $isSelected: boolean }>`
-    padding: 0.5rem 1rem;
-    border-radius: var(--default-radius);
-    border: 1px solid ${(props) => (props.$isSelected ? '#111' : 'var(--font-gray-color)')};
+    padding: 0.5rem 0.8rem;
     background-color: ${(props) => (props.$isSelected ? '#f5f5f5' : 'transparent')};
     color: ${(props) => (props.$isSelected ? '#111' : 'var(--font-gray-color)')};
     cursor: pointer;
-    font-size: var(--font-text-small);
+    font-size: var(--font-text);
     font-weight: var(--font-weight-default);
     transition: all 0.3s ease;
 
@@ -23,13 +21,35 @@ const FilterButton = styled.button<{ $isSelected: boolean }>`
     }
 `;
 
+interface Project {
+    techs: string[];
+}
+
+interface ContentData {
+    [key: string]: Project[];
+}
+
 interface FilterButtonsProps {
+    activeTab: string;
+    contentData: ContentData;
     techFilters: string[];
     selectedTechs: string[];
     setSelectedTechs: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const FilterButtons: React.FC<FilterButtonsProps> = ({ techFilters, selectedTechs, setSelectedTechs }) => {
+const FilterButtons: React.FC<FilterButtonsProps> = ({
+    activeTab,
+    contentData,
+    techFilters,
+    selectedTechs,
+    setSelectedTechs,
+}) => {
+    // 현재 탭의 사용 가능한 기술 필터 추출
+    const availableTechs =
+        activeTab && contentData[activeTab]
+            ? Array.from(new Set(contentData[activeTab].flatMap((project) => project.techs)))
+            : [];
+
     const toggleTech = (tech: string) => {
         setSelectedTechs((prev) => {
             const techIndex = prev.indexOf(tech);
@@ -42,11 +62,23 @@ const FilterButtons: React.FC<FilterButtonsProps> = ({ techFilters, selectedTech
 
     return (
         <FilterList>
-            {techFilters.map((tech) => (
-                <FilterButton key={tech} $isSelected={selectedTechs.includes(tech)} onClick={() => toggleTech(tech)}>
-                    {tech}
+            {availableTechs.length === 1 ? (
+                <FilterButton $isSelected={true} onClick={() => {}}>
+                    {availableTechs[0]}
                 </FilterButton>
-            ))}
+            ) : (
+                techFilters
+                    .filter((tech) => availableTechs.includes(tech))
+                    .map((tech) => (
+                        <FilterButton
+                            key={tech}
+                            $isSelected={selectedTechs.includes(tech)}
+                            onClick={() => toggleTech(tech)}
+                        >
+                            {tech}
+                        </FilterButton>
+                    ))
+            )}
         </FilterList>
     );
 };

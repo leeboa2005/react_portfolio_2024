@@ -13,7 +13,7 @@ const Wrap = styled.div`
 `;
 
 const IntroContainer = styled.h1`
-    padding: 7rem 0 4.8rem 0;
+    padding: 7rem 0 4.2rem 0;
     display: flex;
     font-size: var(--font-title);
     font-family: var(--font-default-eng);
@@ -142,7 +142,7 @@ const Project: React.FC = () => {
 
     useEffect(() => {
         gsap.fromTo(contentRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 });
-    }, [activeTab]);
+    }, [activeTab, selectedTechs]);
 
     return (
         <Wrap>
@@ -159,6 +159,8 @@ const Project: React.FC = () => {
                 </IntroSubContainer>
                 <TabNavigation activeTab={activeTab} handleTabChange={handleTabChange} />
                 <FilterButtons
+                    activeTab={activeTab}
+                    contentData={contentData}
                     techFilters={['React', 'Next.js', 'TypeScript', 'JavaScript']}
                     selectedTechs={selectedTechs}
                     setSelectedTechs={setSelectedTechs}
