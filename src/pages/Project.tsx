@@ -56,7 +56,7 @@ const contentData = {
             description: '지출관리 및 시각화한 애플리케이션',
             image: '/project/personal_01.gif',
             staticImage: '/project/personal_01.png',
-            techs: ['React', 'TypeScript'],
+            techs: ['React'],
             link: 'https://expenditure-management-phi.vercel.app/',
         },
         {
@@ -98,7 +98,7 @@ const contentData = {
             description: 'IT 직종 테스트 플랫폼',
             image: '/project/team_03.png',
             staticImage: '/project/team_03.png',
-            techs: ['React', 'TypeScript'],
+            techs: ['React'],
             link: 'https://github.com/leeboa2005/ITFIT',
         },
     ],
