@@ -3,18 +3,30 @@ import styled from 'styled-components';
 
 const TabList = styled.div`
     display: flex;
-    gap: 1.6rem;
-    padding-bottom: 1.6rem;
+    justify-content: space-between;
+    margin-bottom: 1.6rem;
+    border-top: 1px solid #111;
+    border-bottom: 1px solid #111;
+
+    & > label:not(:last-child) {
+        border-right: 1px solid #111;
+    }
 `;
 
 const TabButton = styled.label<{ $isChecked: boolean }>`
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.4rem;
+    width: 100%;
+    padding: 1.4rem 0.8rem;
     font-family: var(--font-default-eng);
     font-size: var(--font-text);
     font-weight: var(--font-weight-default);
     color: ${(props) => (props.$isChecked ? '#111' : 'var(--font-gray-color)')};
+
+    & > span {
+        flex-grow: 1;
+    }
 `;
 
 const CheckboxInput = styled.input`
@@ -22,8 +34,9 @@ const CheckboxInput = styled.input`
 `;
 
 const CustomCheckbox = styled.div<{ $isChecked: boolean }>`
-    width: 1rem;
-    height: 1rem;
+    flex-shrink: 0;
+    width: 1.3rem;
+    height: 1.3rem;
     border-radius: var(--default-radius-small);
     border: 1px solid ${(props) => (props.$isChecked ? '#111' : 'var(--font-gray-color)')};
     background-color: ${(props) => (props.$isChecked ? '#111' : 'transparent')};
@@ -46,6 +59,7 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, handleTabChang
         <TabList>
             {tabData.map((tab) => (
                 <TabButton key={tab.id} $isChecked={activeTab === tab.id}>
+                    <span>{tab.label}</span>
                     <CheckboxInput
                         type="radio"
                         name="tab"
@@ -54,7 +68,6 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, handleTabChang
                         onChange={() => handleTabChange(tab.id)}
                     />
                     <CustomCheckbox $isChecked={activeTab === tab.id} />
-                    {tab.label}
                 </TabButton>
             ))}
         </TabList>
