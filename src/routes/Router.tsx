@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
 import Project from '../pages/Project';
+import ProjectDetail from '../pages/detail/Projectdetail';
 import About from '../pages/About';
 import Layout from './Layout';
 
@@ -11,6 +12,7 @@ export default function Router() {
                 <Route element={<Layout />}>
                     <Route path="/" element={<Home />} />
                     <Route path="/project" element={<Project />} />
+                    <Route path="/project/:category/:id" element={<ProjectDetail />} />
                     <Route path="/about" element={<About />} />
                 </Route>
             </Routes>

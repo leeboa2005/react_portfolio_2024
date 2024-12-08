@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -277,6 +277,7 @@ const ContactInfo = styled.div`
 const Navigation: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
     const toggleMenu = () => {
         setIsOpen((prev) => !prev);
@@ -286,6 +287,20 @@ const Navigation: React.FC = () => {
         setIsOpen(false);
     }, [location]);
 
+    const playSound = () => {
+        if (audioRef.current) {
+            audioRef.current.currentTime = 0;
+            audioRef.current.play();
+        }
+    };
+
+    const stopSound = () => {
+        if (audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0;
+        }
+    };
+
     return (
         <>
             <HamburgerButton open={isOpen} onClick={toggleMenu}>
@@ -293,9 +308,10 @@ const Navigation: React.FC = () => {
                 <div />
                 <div />
             </HamburgerButton>
-            <LogoLink to="/">
+            <LogoLink to="/" onMouseOver={playSound} onMouseOut={stopSound}>
                 <img src="/title_logo.png" alt="사이트 로고" />
             </LogoLink>
+            <audio ref={audioRef} src="/src/assets/audio/hover_sound.mp3" preload="auto"></audio>
             <NavigationLayer open={isOpen}>
                 <ContentContainer>
                     <NavigationSection>
