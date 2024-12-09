@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import { fetchProjectDetailById } from '../../supabase/api/detailService';
 import { Portfolio } from '../../types/supabase';
 import ReactMarkdown from 'react-markdown';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
-// Styled Components
 const Wrap = styled.div`
     width: var(--default-width);
     height: 100%;
@@ -68,8 +67,9 @@ const Dates = styled.div`
 const ProjectDetail: React.FC = () => {
     const [project, setProject] = useState<Portfolio | null>(null);
     const [loading, setLoading] = useState(true);
-    const { id } = useParams(); // 프로젝트 ID 파라미터 받아오기
-    const navigate = useNavigate(); // 뒤로가기 사용
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     // '\n' 변환 함수
     const cleanMarkdown = (text: string) => {
@@ -79,30 +79,38 @@ const ProjectDetail: React.FC = () => {
     useEffect(() => {
         const loadProjectDetail = async () => {
             if (id) {
-                const projectData = await fetchProjectDetailById(id); // 비동기 함수 호출
+                const projectData = await fetchProjectDetailById(id);
                 if (projectData) {
-                    setProject(projectData); // 데이터 설정
+                    setProject(projectData);
                 } else {
-                    setProject(null); // 오류가 발생한 경우 null 설정
+                    setProject(null);
                 }
-                setLoading(false); // 로딩 종료
+                setLoading(false);
             }
         };
 
         loadProjectDetail();
-    }, [id]); // id가 변경될 때마다 다시 실행
+    }, [id]);
 
     if (loading) {
-        return <div>loading...</div>; // 로딩 중일 때 표시
+        return <div>loading...</div>;
     }
 
     if (!project) {
-        return <div>프로젝트를 찾을 수 없어요</div>; // 프로젝트가 없을 경우 표시
+        return <div>프로젝트를 찾을 수 없어요</div>;
     }
+
+    const handleBackClick = () => {
+        if (window.history.length > 1 && location.pathname !== '/') {
+            navigate(-1);
+        } else {
+            navigate('/');
+        }
+    };
 
     return (
         <Wrap>
-            <BackButton onClick={() => navigate(-1)}>뒤로가기</BackButton>
+            <BackButton onClick={handleBackClick}>뒤로가기</BackButton>
 
             <section>
                 <MarkdownContainer>
