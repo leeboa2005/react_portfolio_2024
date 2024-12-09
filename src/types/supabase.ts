@@ -1,4 +1,4 @@
-export interface Portfolio {
+export interface MyProject {
     id: string;
     reason_created: string;
     features: string;

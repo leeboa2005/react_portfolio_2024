@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { fetchProjectDetailById } from '../../supabase/api/detailService';
-import { Portfolio } from '../../types/supabase';
+import { MyProject } from '../../types/supabase';
 import ReactMarkdown from 'react-markdown';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
@@ -65,7 +65,7 @@ const Dates = styled.div`
 `;
 
 const ProjectDetail: React.FC = () => {
-    const [project, setProject] = useState<Portfolio | null>(null);
+    const [project, setProject] = useState<MyProject | null>(null);
     const [loading, setLoading] = useState(true);
     const { id } = useParams();
     const navigate = useNavigate();
