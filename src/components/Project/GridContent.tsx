@@ -89,7 +89,7 @@ const GridContent: React.FC<GridContentProps> = ({ activeTab, contentData, selec
                         >
                             <a href={item.link} target="_blank" rel="noopener noreferrer">
                                 <ProjectImageContainer>
-                                    <StaticImage src={item.staticImage} alt={`${item.title} PNG`} />
+                                    <StaticImage src={item.staticImage} alt={`${item.title} 이미지`} />
                                     {activeTab === 'personal' && (
                                         <GifImage
                                             src={item.image}

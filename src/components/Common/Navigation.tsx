@@ -309,7 +309,7 @@ const Navigation: React.FC = () => {
                 <div />
             </HamburgerButton>
             <LogoLink to="/" onMouseOver={playSound} onMouseOut={stopSound}>
-                <img src="/title_logo.png" alt="사이트 로고" />
+                <img src="/title_logo.webp" alt="사이트 로고" />
             </LogoLink>
             <audio ref={audioRef} src="/src/assets/audio/hover_sound.mp3" preload="auto"></audio>
             <NavigationLayer open={isOpen}>
@@ -348,12 +348,12 @@ const Navigation: React.FC = () => {
                         <ContactContainer>
                             <ContactLink to="/about">
                                 <p>ABOUT ME</p>
-                                <img src="/about_nav.png" alt="About 페이지 대표 이미지" />
+                                <img src="/about_nav.webp" alt="About 페이지 대표 이미지" />
                             </ContactLink>
                         </ContactContainer>
                         <ContactInfo>
                             <span>
-                                <img src="/black_logo.png" alt="네비게이션 작은 로고" />
+                                <img src="/black_logo.webp" alt="네비게이션 작은 로고" />
                             </span>
                             <div>
                                 <p>CONTACT</p>
