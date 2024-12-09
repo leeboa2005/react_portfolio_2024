@@ -1,19 +1,12 @@
 import supabase from '../supabaseClient';
-import { Portfolio } from '../../types/supabase';
 
-export const fetchPortfolioDetails = async (): Promise<Portfolio[]> => {
-    try {
-        const { data, error } = await supabase.from('detail').select('*');
+export const fetchProjectDetailById = async (id: string) => {
+    const { data, error } = await supabase.from('detail').select('*').eq('id', id).single();
 
-        if (error) {
-            console.error('Error fetching data:', error);
-            throw error;
-        }
-
-        console.log('Fetched Data:', data);
-        return data as Portfolio[];
-    } catch (error) {
-        console.error('Failed to load portfolio data:', error);
-        return [];
+    if (error) {
+        console.error('프로젝트 데이터 가져오기 실패:', error);
+        return null;
     }
+
+    return data;
 };
