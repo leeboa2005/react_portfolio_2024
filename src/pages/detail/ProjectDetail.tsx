@@ -1,42 +1,132 @@
 import React, { useState, useEffect } from 'react';
-import { fetchPortfolioDetails } from '../../supabase/api/detailService.ts';
+import styled from 'styled-components';
+import { fetchProjectDetailById } from '../../supabase/api/detailService';
 import { Portfolio } from '../../types/supabase';
+import ReactMarkdown from 'react-markdown';
+import { useNavigate, useParams } from 'react-router-dom';
+
+// Styled Components
+const Wrap = styled.div`
+    width: var(--default-width);
+    height: 100%;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 7rem 0 4.2rem 0;
+`;
+
+const BackButton = styled.button`
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    background-color: #007acc;
+    color: white;
+    &:hover {
+        background-color: #005f99;
+    }
+`;
+
+const MarkdownContainer = styled.div`
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+
+    h1,
+    h2,
+    h3 {
+        color: #333;
+    }
+    h1 {
+        font-size: var(--font-text-large);
+    }
+    p {
+        margin: 10px 0;
+    }
+
+    strong {
+        color: #007acc;
+    }
+`;
+
+const InfoText = styled.p`
+    margin: 5px 0;
+    color: #555;
+    font-size: 14px;
+`;
+
+const Dates = styled.div`
+    margin-top: 15px;
+    font-style: italic;
+    color: #888;
+    font-size: 13px;
+`;
 
 const ProjectDetail: React.FC = () => {
-    const [portfolios, setPortfolios] = useState<Portfolio[]>([]);
+    const [project, setProject] = useState<Portfolio | null>(null);
     const [loading, setLoading] = useState(true);
+    const { id } = useParams(); // 프로젝트 ID 파라미터 받아오기
+    const navigate = useNavigate(); // 뒤로가기 사용
+
+    // '\n' 변환 함수
+    const cleanMarkdown = (text: string) => {
+        return text.replace(/\\n/g, '\n');
+    };
 
     useEffect(() => {
-        const loadPortfolios = async () => {
-            const data = await fetchPortfolioDetails();
-            setPortfolios(data);
-            setLoading(false);
+        const loadProjectDetail = async () => {
+            if (id) {
+                const projectData = await fetchProjectDetailById(id); // 비동기 함수 호출
+                if (projectData) {
+                    setProject(projectData); // 데이터 설정
+                } else {
+                    setProject(null); // 오류가 발생한 경우 null 설정
+                }
+                setLoading(false); // 로딩 종료
+            }
         };
 
-        loadPortfolios();
-    }, []);
+        loadProjectDetail();
+    }, [id]); // id가 변경될 때마다 다시 실행
 
     if (loading) {
-        return <div>데이터 로딩 중...</div>;
+        return <div>loading...</div>; // 로딩 중일 때 표시
+    }
+
+    if (!project) {
+        return <div>프로젝트를 찾을 수 없어요</div>; // 프로젝트가 없을 경우 표시
     }
 
     return (
-        <div>
-            {portfolios.map((portfolio) => (
-                <div key={portfolio.id}>
-                    <h2>{portfolio.reason_created}</h2>
-                    <p>{portfolio.features}</p>
-                    <p>{portfolio.technologies}</p>
-                    <p>{portfolio.part}</p>
-                    <p>{portfolio.github}</p>
-                    <p>{portfolio.url}</p>
-                    <div>
-                        <p>{portfolio.start_date}</p>
-                        <p>{portfolio.end_date}</p>
-                    </div>
-                </div>
-            ))}
-        </div>
+        <Wrap>
+            <BackButton onClick={() => navigate(-1)}>뒤로가기</BackButton>
+
+            <section>
+                <MarkdownContainer>
+                    <ReactMarkdown>{cleanMarkdown(project.reason_created || '')}</ReactMarkdown>
+                </MarkdownContainer>
+                <InfoText>{project.features}</InfoText>
+                <InfoText>{project.technologies}</InfoText>
+                <InfoText>{project.part}</InfoText>
+                <InfoText>
+                    <a href={project.github} target="_blank" rel="noopener noreferrer">
+                        {project.github}
+                    </a>
+                </InfoText>
+                <InfoText>
+                    <a href={project.url} target="_blank" rel="noopener noreferrer">
+                        {project.url}
+                    </a>
+                </InfoText>
+
+                <Dates>
+                    {project.start_date} ~ {project.end_date}
+                </Dates>
+            </section>
+        </Wrap>
     );
 };
 
