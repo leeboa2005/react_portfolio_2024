@@ -150,7 +150,9 @@ const Project: React.FC = () => {
     };
 
     useEffect(() => {
-        gsap.fromTo(contentRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 });
+        if (activeTab) {
+            gsap.fromTo(contentRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 });
+        }
     }, [activeTab, selectedTechs]);
 
     return (
@@ -159,7 +161,7 @@ const Project: React.FC = () => {
                 <IntroContainer>
                     MY PROJECT
                     <ImageWrapper>
-                        <AnimatedImage src="/home/main_hat.webp" alt="모자 이미지" />
+                        <AnimatedImage src="/home/main_hat.webp" alt=" 이미지" />
                     </ImageWrapper>
                 </IntroContainer>
                 <IntroSubContainer>

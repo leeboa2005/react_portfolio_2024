@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // useNavigate 훅을 추가
 import styled from 'styled-components';
 
 const TabList = styled.div`
@@ -49,11 +50,17 @@ interface TabNavigationProps {
 }
 
 const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, handleTabChange }) => {
+    const navigate = useNavigate(); // useNavigate 훅을 사용하여 URL을 변경합니다.
+
     const tabData = [
         { id: 'personal', label: 'PERSONAL' },
         { id: 'team', label: 'TEAM' },
         { id: 'work', label: 'WORK' },
     ];
+    const handleTabSelection = (tabId: string) => {
+        handleTabChange(tabId);
+        navigate(`/project/${tabId}`);
+    };
 
     return (
         <TabList>
@@ -65,7 +72,7 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, handleTabChang
                         name="tab"
                         id={tab.id}
                         checked={activeTab === tab.id}
-                        onChange={() => handleTabChange(tab.id)}
+                        onChange={() => handleTabSelection(tab.id)}
                     />
                     <CustomCheckbox $isChecked={activeTab === tab.id} />
                 </TabButton>
