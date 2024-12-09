@@ -32,7 +32,7 @@ const GitHubButton = styled.a`
         opacity: 0.1;
         pointer-events: none;
         mix-blend-mode: exclusion;
-        background-image: url('/texture_background.png');
+        background-image: url('/texture_background.webp');
         background-position: 0 0;
         width: 100%;
         height: 100%;

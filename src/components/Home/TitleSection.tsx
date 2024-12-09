@@ -256,7 +256,7 @@ const TitleSection = () => {
                         onMouseLeave={() => setHoveredCircle1(false)}
                     >
                         <AnimatedImage1
-                            src="/home/main_notebook.png"
+                            src="/home/main_notebook.webp"
                             alt="노트북 이미지"
                             className="animated-image-1"
                         />
@@ -281,7 +281,7 @@ const TitleSection = () => {
                         onMouseLeave={() => setHoveredCircle2(false)}
                     >
                         <AnimatedImage2
-                            src="/home/main_dumbbells.png"
+                            src="/home/main_dumbbells.webp"
                             alt="덤벨 이미지"
                             className="animated-image-2"
                             style={{ marginRight: '1.25rem' }}

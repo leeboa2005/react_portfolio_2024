@@ -61,7 +61,7 @@ const GlobalStyle = createGlobalStyle`
     --default-radius: 0.75rem;
     --default-radius-small: 0.37rem;
     --border-style: 1px solid #ccc;
-    --noise-background: url('/texture_background.png');
+    --noise-background: url('/texture_background.webp');
     --noise-opacity : 0.01;
 
     @media only screen and (max-width: 1348px) {
