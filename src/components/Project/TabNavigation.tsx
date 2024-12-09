@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigate 훅을 추가
+import React, { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 const TabList = styled.div`
@@ -50,13 +50,22 @@ interface TabNavigationProps {
 }
 
 const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, handleTabChange }) => {
-    const navigate = useNavigate(); // useNavigate 훅을 사용하여 URL을 변경합니다.
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const tabData = [
         { id: 'personal', label: 'PERSONAL' },
         { id: 'team', label: 'TEAM' },
         { id: 'work', label: 'WORK' },
     ];
+
+    useEffect(() => {
+        const currentTab = tabData.find((tab) => `/project/${tab.id}` === location.pathname)?.id;
+        if (currentTab) {
+            handleTabChange(currentTab);
+        }
+    }, [location.pathname]);
+
     const handleTabSelection = (tabId: string) => {
         handleTabChange(tabId);
         navigate(`/project/${tabId}`);

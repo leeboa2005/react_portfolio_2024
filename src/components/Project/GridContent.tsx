@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link, useLocation } from 'react-router-dom';
 
 const EmptyState = styled.div`
     text-align: center;
@@ -55,6 +56,7 @@ interface GridContentProps {
     activeTab: string;
     contentData: {
         [key: string]: {
+            id: string;
             title: string;
             description: string;
             image: string;
@@ -68,6 +70,7 @@ interface GridContentProps {
 
 const GridContent: React.FC<GridContentProps> = ({ activeTab, contentData, selectedTechs }) => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const location = useLocation();
 
     const filteredContent =
         contentData[activeTab]?.filter((item) => {
@@ -87,7 +90,7 @@ const GridContent: React.FC<GridContentProps> = ({ activeTab, contentData, selec
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
                         >
-                            <a href={item.link} target="_blank" rel="noopener noreferrer">
+                            <Link to={item.link} state={{ from: location.pathname }}>
                                 <ProjectImageContainer>
                                     <StaticImage src={item.staticImage} alt={`${item.title} 이미지`} />
                                     {activeTab === 'personal' && (
@@ -100,10 +103,10 @@ const GridContent: React.FC<GridContentProps> = ({ activeTab, contentData, selec
                                         />
                                     )}
                                 </ProjectImageContainer>
-                            </a>
-                            <a href={item.link} target="_blank" rel="noopener noreferrer">
+                            </Link>
+                            <Link to={item.link} state={{ from: location.pathname }}>
                                 <h3>{item.title}</h3>
-                            </a>
+                            </Link>
                             <p>{item.description}</p>
                         </GridItem>
                     ))

@@ -79,64 +79,7 @@ const contentData = {
             link: `/project/personal/0103`,
         },
     ],
-    team: [
-        {
-            id: '0201',
-            title: '@GATHER_HERE',
-            description: 'IT 직군 통합 플랫폼',
-            image: '/project/team_01.webp',
-            staticImage: '/project/team_01.webp',
-            techs: ['Next.js', 'TypeScript'],
-            link: `/project/team/0201`,
-        },
-        {
-            id: '0202',
-            title: 'BIGBUN',
-            description: '대전 빵집 추천 웹사이트',
-            image: '/project/team_02.webp',
-            staticImage: '/project/team_02.webp',
-            techs: ['Next.js', 'TypeScript'],
-            link: `/project/team/0202`,
-        },
-        {
-            id: '0203',
-            title: 'ITFIT',
-            description: 'IT 직종 테스트 플랫폼',
-            image: '/project/team_03.webp',
-            staticImage: '/project/team_03.webp',
-            techs: ['React'],
-            link: `/project/team/0203`,
-        },
-    ],
-    work: [
-        {
-            id: '0301',
-            title: 'AMIPHARM',
-            description: '생명과학 회사 웹사이트 제작',
-            image: '/project/work_01.webp',
-            staticImage: '/project/work_01.webp',
-            techs: ['JavaScript'],
-            link: `/project/work/0301`,
-        },
-        {
-            id: '0302',
-            title: 'HANNAH',
-            description: '한나패드 웹사이트 제작',
-            image: '/project/work_02.webp',
-            staticImage: '/project/work_02.webp',
-            techs: ['JavaScript'],
-            link: `/project/work/0302`,
-        },
-        {
-            id: '0303',
-            title: 'GODOIL',
-            description: '고도일 병원 웹사이트 유지보수',
-            image: '/project/work_03.webp',
-            staticImage: '/project/work_03.webp',
-            techs: ['JavaScript'],
-            link: `/project/work/0303`,
-        },
-    ],
+    // ... (다른 데이터 유지)
 };
 
 const Project: React.FC = () => {
