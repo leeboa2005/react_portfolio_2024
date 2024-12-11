@@ -1,8 +1,10 @@
 export interface MyProject {
     id: string;
+    title: string;
     reason_created: string;
+    trouble_shooting: string;
     features: string;
-    part: string;
+    part: number;
     github: string;
     url: string;
     technologies: string;

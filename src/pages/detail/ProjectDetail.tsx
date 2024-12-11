@@ -12,17 +12,26 @@ const Wrap = styled.div`
     min-height: 100vh;
     padding: 7rem 0 4.2rem 0;
 `;
+const TitleBox = styled.h1`
+    font-size: var(--font-text-large);
+    font-weight: var(--font-weight-bold);
+    padding: 1.5rem 0;
+`;
 
 const BackButton = styled.button`
     border: none;
     border-radius: 4px;
-    padding: 5px 10px;
-    font-size: 12px;
+    padding: 0;
+    width: 42px;
+    height: 42px;
+    background-image: url('/public/back.webp');
+    background-size: cover;
+    background-position: center;
     cursor: pointer;
-    background-color: #007acc;
-    color: white;
+    opacity: 0.8;
+
     &:hover {
-        background-color: #005f99;
+        opacity: 1;
     }
 `;
 
@@ -34,34 +43,41 @@ const MarkdownContainer = styled.div`
     font-size: 16px;
     line-height: 1.5;
 
-    h1,
     h2,
     h3 {
         color: #333;
     }
-    h1 {
-        font-size: var(--font-text-large);
-    }
     p {
-        margin: 10px 0;
+        margin: 0.5rem 0;
     }
 
     strong {
-        color: #007acc;
+        color: #10b27e;
+        font-weight: 500;
+    }
+
+    a {
+        border: none;
+        border-radius: var(--default-radius-small);
+        padding: 5px 10px;
+        font-size: var(--font-text-small);
+        cursor: pointer;
+        background-color: #3ec6a0;
+        color: white;
+        &:hover {
+            background-color: #23c38b;
+        }
     }
 `;
 
-const InfoText = styled.p`
-    margin: 5px 0;
-    color: #555;
-    font-size: 14px;
-`;
+const InfoText = styled.dl`
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
 
-const Dates = styled.div`
-    margin-top: 15px;
-    font-style: italic;
-    color: #888;
-    font-size: 13px;
+    dt {
+        font-weight: var(--font-weight-bold);
+    }
 `;
 
 const ProjectDetail: React.FC = () => {
@@ -110,29 +126,80 @@ const ProjectDetail: React.FC = () => {
 
     return (
         <Wrap>
-            <BackButton onClick={handleBackClick}>뒤로가기</BackButton>
+            <BackButton onClick={handleBackClick}></BackButton>
 
             <section>
+                <TitleBox>{project.title}</TitleBox>
                 <MarkdownContainer>
                     <ReactMarkdown>{cleanMarkdown(project.reason_created || '')}</ReactMarkdown>
                 </MarkdownContainer>
-                <InfoText>{project.features}</InfoText>
-                <InfoText>{project.technologies}</InfoText>
-                <InfoText>{project.part}</InfoText>
-                <InfoText>
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                        {project.github}
-                    </a>
-                </InfoText>
-                <InfoText>
-                    <a href={project.url} target="_blank" rel="noopener noreferrer">
-                        {project.url}
-                    </a>
-                </InfoText>
-
-                <Dates>
-                    {project.start_date} ~ {project.end_date}
-                </Dates>
+                <TitleBox>주요 정보 및 링크 정보</TitleBox>
+                <MarkdownContainer>
+                    <InfoText>
+                        <dt>기간</dt>
+                        <dd>
+                            {project.start_date} ~ {project.end_date}
+                        </dd>
+                    </InfoText>
+                    <InfoText>
+                        <dt>주요 기능</dt>
+                        <dd> {project.features}</dd>
+                    </InfoText>
+                    <InfoText>
+                        <dt>주요 기술</dt>
+                        <dd> {project.technologies}</dd>
+                    </InfoText>
+                    <InfoText>
+                        <dt>기여도</dt>
+                        <dd> {project.part}%</dd>
+                    </InfoText>
+                    <InfoText>
+                        <dt>깃허브</dt>
+                        <dd>
+                            <a href={project.github} target="_blank" rel="noopener noreferrer">
+                                깃허브 URL
+                            </a>
+                        </dd>
+                    </InfoText>
+                    <InfoText>
+                        <dt>URL</dt>
+                        <dd>
+                            <a href={project.url} target="_blank" rel="noopener noreferrer">
+                                배포 URL
+                            </a>
+                        </dd>
+                    </InfoText>
+                </MarkdownContainer>
+                <TitleBox>트러블슈팅</TitleBox>
+                <MarkdownContainer>
+                    <ReactMarkdown>{cleanMarkdown(project.trouble_shooting || '')}</ReactMarkdown>
+                </MarkdownContainer>
+                <TitleBox>프로젝트 기록</TitleBox>
+                <MarkdownContainer>
+                    <InfoText>
+                        <a
+                            href="https://velog.io/@leeboa2003/Axios-%EC%82%AC%EC%9A%A9%EB%B2%95"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Axios 사용법
+                        </a>
+                        <a
+                            href="https://velog.io/@leeboa2003/React-%EC%83%88%EB%A1%9C%EA%B3%A0%EC%B9%A8-%EC%8B%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%83%81%ED%83%9C-%EC%9C%A0%EC%A7%80"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            자세한 트러블슈팅
+                        </a>
+                        <a
+                            href="https://velog.io/@leeboa2003/%EA%B0%80%EA%B3%84%EB%B6%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Hello-Money"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            관련 기록
+                        </a>
+                    </InfoText>
+                </MarkdownContainer>
             </section>
         </Wrap>
     );
