@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { fetchProjectDetailById } from '../../supabase/api/detailService';
 import { MyProject } from '../../types/supabase';
 import ReactMarkdown from 'react-markdown';
@@ -64,8 +64,9 @@ const MarkdownContainer = styled.div`
         cursor: pointer;
         background-color: #3ec6a0;
         color: white;
+        margin-right: 0.5rem;
         &:hover {
-            background-color: #23c38b;
+            background-color: #10b27e;
         }
     }
 `;
@@ -78,6 +79,40 @@ const InfoText = styled.dl`
     dt {
         font-weight: var(--font-weight-bold);
     }
+`;
+
+const LoadingContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+
+    div {
+        display: flex;
+        gap: 0.5rem;
+    }
+`;
+
+const NoProjectText = styled.span`
+    font-size: var(--font-text);
+    text-align: center;
+`;
+
+const bounce = keyframes`
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+`;
+
+const AnimatedEmoji = styled.div`
+    font-size: var(--font-text);
+    animation: ${bounce} 1.5s infinite;
+    text-align: center;
 `;
 
 const ProjectDetail: React.FC = () => {
@@ -105,15 +140,26 @@ const ProjectDetail: React.FC = () => {
             }
         };
 
+        window.scrollTo(0, 0);
         loadProjectDetail();
     }, [id]);
 
     if (loading) {
-        return <div>loading...</div>;
+        return (
+            <LoadingContainer>
+                <img src="/src/assets/svg/loading.svg" alt="로딩 중" />
+            </LoadingContainer>
+        );
     }
-
     if (!project) {
-        return <div>프로젝트를 찾을 수 없어요</div>;
+        return (
+            <LoadingContainer>
+                <div>
+                    <NoProjectText>프로젝트를 찾을 수 없어요</NoProjectText>
+                    <AnimatedEmoji>🥹</AnimatedEmoji>
+                </div>
+            </LoadingContainer>
+        );
     }
 
     const handleBackClick = () => {
@@ -176,29 +222,7 @@ const ProjectDetail: React.FC = () => {
                 </MarkdownContainer>
                 <TitleBox>프로젝트 기록</TitleBox>
                 <MarkdownContainer>
-                    <InfoText>
-                        <a
-                            href="https://velog.io/@leeboa2003/Axios-%EC%82%AC%EC%9A%A9%EB%B2%95"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Axios 사용법
-                        </a>
-                        <a
-                            href="https://velog.io/@leeboa2003/React-%EC%83%88%EB%A1%9C%EA%B3%A0%EC%B9%A8-%EC%8B%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%83%81%ED%83%9C-%EC%9C%A0%EC%A7%80"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            자세한 트러블슈팅
-                        </a>
-                        <a
-                            href="https://velog.io/@leeboa2003/%EA%B0%80%EA%B3%84%EB%B6%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Hello-Money"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            관련 기록
-                        </a>
-                    </InfoText>
+                    <ReactMarkdown>{project.more}</ReactMarkdown>
                 </MarkdownContainer>
             </section>
         </Wrap>

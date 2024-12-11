@@ -10,4 +10,5 @@ export interface MyProject {
     technologies: string;
     start_date: string;
     end_date: string;
+    more: string;
 }

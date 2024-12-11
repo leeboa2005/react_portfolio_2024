@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: var(--font-default);
-    font-size: var(--font-text-size);
+    font-size: var( --font-text);
     color: var(--font-color);
     font-weight: var(--font-weight-default);
     background: var(--background-color);
