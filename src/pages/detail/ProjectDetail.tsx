@@ -123,26 +123,25 @@ const ProjectDetail: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const isWorkProject = (projectId?: string | null): boolean => {
-        return projectId === 'work';
-    };
+    const isWorkProject = (projectType?: string | null): boolean => projectType === 'work';
+    const getUrlLabel = (type: string) => (type === 'work' ? '서비스 URL' : '배포 URL');
+    const cleanMarkdown = (text: string) => text.replace(/\\n/g, '\n');
 
-    // '\n' 변환 함수
-    const cleanMarkdown = (text: string) => {
-        return text.replace(/\\n/g, '\n');
+    const handleBackClick = () => {
+        if (window.history.length > 1 && location.pathname !== '/') {
+            navigate(-1);
+        } else {
+            navigate('/');
+        }
     };
 
     useEffect(() => {
         const loadProjectDetail = async () => {
-            if (id) {
-                const projectData = await fetchProjectDetailById(id);
-                if (projectData) {
-                    setProject(projectData);
-                } else {
-                    setProject(null);
-                }
-                setLoading(false);
-            }
+            if (!id) return;
+
+            const projectData = await fetchProjectDetailById(id);
+            setProject(projectData || null);
+            setLoading(false);
         };
 
         window.scrollTo(0, 0);
@@ -156,6 +155,7 @@ const ProjectDetail: React.FC = () => {
             </LoadingContainer>
         );
     }
+
     if (!project) {
         return (
             <LoadingContainer>
@@ -167,18 +167,9 @@ const ProjectDetail: React.FC = () => {
         );
     }
 
-    const handleBackClick = () => {
-        if (window.history.length > 1 && location.pathname !== '/') {
-            navigate(-1);
-        } else {
-            navigate('/');
-        }
-    };
-
     return (
         <Wrap>
-            <BackButton onClick={handleBackClick}></BackButton>
-
+            <BackButton onClick={handleBackClick} />
             <section>
                 <TitleBox>{project.title}</TitleBox>
 
@@ -207,9 +198,7 @@ const ProjectDetail: React.FC = () => {
                         <dt>기여도</dt>
                         <dd>{project.part}%</dd>
                     </InfoText>
-
-                    {/* 깃허브 링크 (Personal, Team) */}
-                    {!isWorkProject(project.id) && project.github && (
+                    {!isWorkProject(project.type) && project.github && (
                         <InfoText>
                             <dt>깃허브</dt>
                             <dd>
@@ -219,20 +208,18 @@ const ProjectDetail: React.FC = () => {
                             </dd>
                         </InfoText>
                     )}
-
                     {project.url && (
                         <InfoText>
                             <dt>URL</dt>
                             <dd>
                                 <a href={project.url} target="_blank" rel="noopener noreferrer">
-                                    배포 URL
+                                    {getUrlLabel(project.type)}
                                 </a>
                             </dd>
                         </InfoText>
                     )}
                 </MarkdownContainer>
-                {/* 트러블슈팅 섹션 (Personal, Team) */}
-                {!isWorkProject(project.id) && project.trouble_shooting && (
+                {!isWorkProject(project.type) && project.trouble_shooting && (
                     <>
                         <TitleBox>트러블슈팅</TitleBox>
                         <MarkdownContainer>
@@ -240,8 +227,7 @@ const ProjectDetail: React.FC = () => {
                         </MarkdownContainer>
                     </>
                 )}
-                {/* 프로젝트 기록 섹션 (Personal, Team) */}
-                {!isWorkProject(project.id) && project.more && (
+                {!isWorkProject(project.type) && project.more && (
                     <>
                         <TitleBox>프로젝트 기록</TitleBox>
                         <MarkdownContainer>

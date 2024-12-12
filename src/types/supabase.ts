@@ -1,5 +1,5 @@
 export interface MyProject {
-    id: string;
+    id: number;
     title: string;
     reason_created: string;
     trouble_shooting: string;
@@ -11,4 +11,5 @@ export interface MyProject {
     start_date: string;
     end_date: string;
     more: string;
+    type: string;
 }
