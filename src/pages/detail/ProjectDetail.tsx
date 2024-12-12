@@ -12,6 +12,7 @@ const Wrap = styled.div`
     min-height: 100vh;
     padding: 7rem 0 4.2rem 0;
 `;
+
 const TitleBox = styled.h1`
     font-size: var(--font-text-large);
     font-weight: var(--font-weight-bold);
@@ -122,6 +123,10 @@ const ProjectDetail: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const isWorkProject = (projectId?: string | null): boolean => {
+        return projectId === 'work';
+    };
+
     // '\n' 변환 함수
     const cleanMarkdown = (text: string) => {
         return text.replace(/\\n/g, '\n');
@@ -176,9 +181,12 @@ const ProjectDetail: React.FC = () => {
 
             <section>
                 <TitleBox>{project.title}</TitleBox>
-                <MarkdownContainer>
-                    <ReactMarkdown>{cleanMarkdown(project.reason_created || '')}</ReactMarkdown>
-                </MarkdownContainer>
+
+                {project.reason_created && (
+                    <MarkdownContainer>
+                        <ReactMarkdown>{cleanMarkdown(project.reason_created)}</ReactMarkdown>
+                    </MarkdownContainer>
+                )}
                 <TitleBox>주요 정보 및 링크 정보</TitleBox>
                 <MarkdownContainer>
                     <InfoText>
@@ -189,41 +197,58 @@ const ProjectDetail: React.FC = () => {
                     </InfoText>
                     <InfoText>
                         <dt>주요 기능</dt>
-                        <dd> {project.features}</dd>
+                        <dd>{project.features}</dd>
                     </InfoText>
                     <InfoText>
                         <dt>주요 기술</dt>
-                        <dd> {project.technologies}</dd>
+                        <dd>{project.technologies}</dd>
                     </InfoText>
                     <InfoText>
                         <dt>기여도</dt>
-                        <dd> {project.part}%</dd>
+                        <dd>{project.part}%</dd>
                     </InfoText>
-                    <InfoText>
-                        <dt>깃허브</dt>
-                        <dd>
-                            <a href={project.github} target="_blank" rel="noopener noreferrer">
-                                깃허브 URL
-                            </a>
-                        </dd>
-                    </InfoText>
-                    <InfoText>
-                        <dt>URL</dt>
-                        <dd>
-                            <a href={project.url} target="_blank" rel="noopener noreferrer">
-                                배포 URL
-                            </a>
-                        </dd>
-                    </InfoText>
+
+                    {/* 깃허브 링크 (Personal, Team) */}
+                    {!isWorkProject(project.id) && project.github && (
+                        <InfoText>
+                            <dt>깃허브</dt>
+                            <dd>
+                                <a href={project.github} target="_blank" rel="noopener noreferrer">
+                                    깃허브 URL
+                                </a>
+                            </dd>
+                        </InfoText>
+                    )}
+
+                    {project.url && (
+                        <InfoText>
+                            <dt>URL</dt>
+                            <dd>
+                                <a href={project.url} target="_blank" rel="noopener noreferrer">
+                                    배포 URL
+                                </a>
+                            </dd>
+                        </InfoText>
+                    )}
                 </MarkdownContainer>
-                <TitleBox>트러블슈팅</TitleBox>
-                <MarkdownContainer>
-                    <ReactMarkdown>{cleanMarkdown(project.trouble_shooting || '')}</ReactMarkdown>
-                </MarkdownContainer>
-                <TitleBox>프로젝트 기록</TitleBox>
-                <MarkdownContainer>
-                    <ReactMarkdown>{project.more}</ReactMarkdown>
-                </MarkdownContainer>
+                {/* 트러블슈팅 섹션 (Personal, Team) */}
+                {!isWorkProject(project.id) && project.trouble_shooting && (
+                    <>
+                        <TitleBox>트러블슈팅</TitleBox>
+                        <MarkdownContainer>
+                            <ReactMarkdown>{cleanMarkdown(project.trouble_shooting)}</ReactMarkdown>
+                        </MarkdownContainer>
+                    </>
+                )}
+                {/* 프로젝트 기록 섹션 (Personal, Team) */}
+                {!isWorkProject(project.id) && project.more && (
+                    <>
+                        <TitleBox>프로젝트 기록</TitleBox>
+                        <MarkdownContainer>
+                            <ReactMarkdown>{cleanMarkdown(project.more)}</ReactMarkdown>
+                        </MarkdownContainer>
+                    </>
+                )}
             </section>
         </Wrap>
     );

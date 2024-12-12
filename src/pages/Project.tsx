@@ -127,15 +127,6 @@ const contentData = {
             techs: ['JavaScript'],
             link: `/project/work/0302`,
         },
-        {
-            id: '0303',
-            title: 'GODOIL',
-            description: '고도일 병원 웹사이트 유지보수',
-            image: '/project/work_03.webp',
-            staticImage: '/project/work_03.webp',
-            techs: ['JavaScript'],
-            link: `/project/work/0303`,
-        },
     ],
 };
 
