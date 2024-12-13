@@ -303,7 +303,7 @@ const Navigation: React.FC = () => {
 
     return (
         <>
-            <HamburgerButton open={isOpen} onClick={toggleMenu}>
+            <HamburgerButton open={isOpen} onClick={toggleMenu} aria-label="메뉴 버튼">
                 <div />
                 <div />
                 <div />
