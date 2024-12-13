@@ -123,8 +123,8 @@ const ProjectDetail: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const isWorkProject = (projectType?: string | null): boolean => projectType === 'work';
-    const getUrlLabel = (type: string) => (type === 'work' ? '서비스 URL' : '배포 URL');
+    const isWorkProject = (projectType?: string | null) => projectType === 'work';
+    const getUrlLabel = (projectType: string) => (projectType === 'work' ? '서비스 URL' : '배포 URL');
     const cleanMarkdown = (text: string) => text.replace(/\\n/g, '\n');
 
     const handleBackClick = () => {
@@ -148,6 +148,8 @@ const ProjectDetail: React.FC = () => {
         loadProjectDetail();
     }, [id]);
 
+    const renderMarkdown = (text: string) => <ReactMarkdown>{cleanMarkdown(text)}</ReactMarkdown>;
+
     if (loading) {
         return (
             <LoadingContainer>
@@ -169,14 +171,12 @@ const ProjectDetail: React.FC = () => {
 
     return (
         <Wrap>
-            <BackButton onClick={handleBackClick} />
+            <BackButton onClick={handleBackClick} aria-label="뒤로 가기 버튼" />
             <section>
                 <TitleBox>{project.title}</TitleBox>
 
                 {project.reason_created && (
-                    <MarkdownContainer>
-                        <ReactMarkdown>{cleanMarkdown(project.reason_created)}</ReactMarkdown>
-                    </MarkdownContainer>
+                    <MarkdownContainer>{renderMarkdown(project.reason_created)}</MarkdownContainer>
                 )}
                 <TitleBox>주요 정보 및 링크 정보</TitleBox>
                 <MarkdownContainer>
@@ -222,17 +222,13 @@ const ProjectDetail: React.FC = () => {
                 {!isWorkProject(project.type) && project.trouble_shooting && (
                     <>
                         <TitleBox>트러블슈팅</TitleBox>
-                        <MarkdownContainer>
-                            <ReactMarkdown>{cleanMarkdown(project.trouble_shooting)}</ReactMarkdown>
-                        </MarkdownContainer>
+                        <MarkdownContainer>{renderMarkdown(project.trouble_shooting)}</MarkdownContainer>
                     </>
                 )}
                 {!isWorkProject(project.type) && project.more && (
                     <>
                         <TitleBox>프로젝트 기록</TitleBox>
-                        <MarkdownContainer>
-                            <ReactMarkdown>{cleanMarkdown(project.more)}</ReactMarkdown>
-                        </MarkdownContainer>
+                        <MarkdownContainer>{renderMarkdown(project.more)}</MarkdownContainer>
                     </>
                 )}
             </section>
