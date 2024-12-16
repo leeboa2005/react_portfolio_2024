@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import GlobalStyle from '../assets/styles/GlobalStyle';
 import GithubBtn from '../components/Common/GithubBtn';
 import TitleSection from '../components/Home/TitleSection';
+import VideoSection from '../components/Home/VideoSection';
+import OverviewSection from '../components/Home/OverviewSection';
 
 const HomeWrap = styled.section`
     width: 100%;
@@ -29,6 +31,8 @@ const Home: React.FC = () => {
                 <GithubBtn />
                 <ContentWrap>
                     <TitleSection />
+                    <VideoSection />
+                    <OverviewSection />
                 </ContentWrap>
             </HomeWrap>
         </>
