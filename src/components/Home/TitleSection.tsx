@@ -35,6 +35,7 @@ const TitleContainer = styled.div`
     padding: 0 6%;
     flex-direction: column;
     justify-content: center;
+    margin: 3rem auto 6.5rem;
 
     @media only screen and (max-width: 1348px) {
         font-size: 5.2rem;
