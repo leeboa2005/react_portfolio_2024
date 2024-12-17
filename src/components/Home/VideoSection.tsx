@@ -9,10 +9,11 @@ const VideoWrapper = styled.div`
     width: 92%;
     height: 45rem;
     margin: 6rem auto 11rem;
-    border-radius: 1rem;
+    border-radius: var(--default-radius);
     overflow: hidden;
     background: #000;
-    transition: width 0.3s ease, height 0.3s ease;
+    transition: width 0.8s ease, height 0.8s ease, border-radius 0.8s ease;
+
     video {
         width: 100%;
         height: 100%;
@@ -41,31 +42,37 @@ const VideoSection: React.FC = () => {
         const trigger = ScrollTrigger.create({
             trigger: wrapperEl,
             start: 'top center',
-            end: 'bottom center+=200',
-            scrub: 2,
+            end: 'bottom center',
+            scrub: 1.3,
             onUpdate: (self) => {
                 if (wrapperEl) {
-                    const width = self.progress < 0.5 ? '92%' : '100%';
-                    wrapperEl.style.width = width;
+                    const isFullSize = self.progress >= 0.5;
 
-                    const videoEl = videoElementRef.current;
-                    if (videoEl) {
-                        const naturalAspectRatio = videoEl.videoWidth / videoEl.videoHeight;
-                        const containerWidth = window.innerWidth * (self.progress < 0.5 ? 0.9 : 1);
-                        const newHeight = containerWidth / naturalAspectRatio;
-                        wrapperEl.style.height = `${newHeight}px`;
+                    if (isFullSize) {
+                        wrapperEl.style.width = '100%';
+                        wrapperEl.style.borderRadius = '0';
+                    } else {
+                        wrapperEl.style.width = '92%';
+                        wrapperEl.style.borderRadius = 'var(--default-radius)';
                     }
+
+                    const naturalAspectRatio = videoEl.videoWidth / videoEl.videoHeight;
+                    const containerWidth = window.innerWidth * (isFullSize ? 1 : 0.9);
+                    const newHeight = containerWidth / naturalAspectRatio;
+
+                    wrapperEl.style.height = `${newHeight}px`;
                 }
             },
             onLeave: () => {
                 if (wrapperEl) {
-                    wrapperEl.style.width = '92%';
-                    adjustVideoSize();
+                    wrapperEl.style.width = '100%';
+                    wrapperEl.style.borderRadius = '0';
                 }
             },
             onEnterBack: () => {
                 if (wrapperEl) {
                     wrapperEl.style.width = '92%';
+                    wrapperEl.style.borderRadius = 'var(--default-radius)';
                     adjustVideoSize();
                 }
             },
@@ -83,14 +90,7 @@ const VideoSection: React.FC = () => {
 
     return (
         <VideoWrapper ref={videoRef}>
-            <video
-                ref={videoElementRef}
-                src="/public/home/main_video_2.mp4
-            "
-                muted
-                autoPlay
-                loop
-            ></video>
+            <video ref={videoElementRef} src="/public/home/main_video_2.mp4" muted autoPlay loop></video>
         </VideoWrapper>
     );
 };
