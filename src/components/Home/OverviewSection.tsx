@@ -144,18 +144,20 @@ const TextWrap = styled.div`
     margin: 4rem auto 0;
     width: 65%;
     display: flex;
+    opacity: 0;
+    transform: translateY(30px);
 
     span {
         word-break: keep-all;
         line-height: 1.4;
     }
 `;
-
 const OverviewSection = () => {
     const lineRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const projectRef = useRef<HTMLLIElement>(null);
     const aboutRef = useRef<HTMLLIElement>(null);
+    const textRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const timeline = gsap.timeline({
@@ -204,6 +206,16 @@ const OverviewSection = () => {
             },
             '-=0.5'
         );
+        timeline.to(
+            textRef.current,
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power2.out',
+            },
+            '+=0.3'
+        );
     }, []);
 
     return (
@@ -231,7 +243,7 @@ const OverviewSection = () => {
                         </StyledLink>
                     </LinkBox>
                 </LinkWrap>
-                <TextWrap>
+                <TextWrap ref={textRef}>
                     <span>
                         Project 섹션에서는 제가 작업한 다양한 프로젝트와 결과물을 확인할 수 있습니다. 개발 과정에서
                         고민했던 점과 해결 방법과 구현된 기능들을 통해 저의 기술 스택과 문제 해결 능력을 살펴보실 수
