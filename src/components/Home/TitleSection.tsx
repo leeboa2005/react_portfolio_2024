@@ -125,7 +125,7 @@ const shake = keyframes`
 const Circle = styled.div`
     width: 0.75rem;
     height: 0.75rem;
-    background-color: #57ddb2;
+    background: var(--main-color-green);
     border-radius: 50%;
     position: relative;
     animation: ${shake} 2s infinite alternate;
@@ -145,8 +145,8 @@ const Circle = styled.div`
 
 const Tooltip = styled.div<{ position: 'right' | 'left' }>`
     position: absolute;
-    background: #57ddb2;
-    border-radius: 0.5rem;
+    background: var(--main-color-green);
+    border-radius: var(--default-radius-small);
     padding: 0.938rem 0.5rem;
     min-width: 9.375rem;
     box-shadow: 0 0.06rem 0.31rem rgba(0, 0, 0, 0.1);
