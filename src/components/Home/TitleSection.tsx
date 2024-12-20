@@ -73,7 +73,6 @@ const TitleContainer = styled.div`
 
     @media only screen and (max-width: 734px) {
         font-size: 2rem;
-        padding: 0 2.5%;
         margin: 6.5rem auto 0;
     }
 `;
@@ -182,7 +181,7 @@ const Tooltip = styled.div<{ $position: 'right' | 'left'; $isVisible: boolean }>
     background: var(--main-color-green);
     border-radius: var(--default-radius-small);
     padding: 0.938rem 0.5rem;
-    width: 9.375rem;
+    width: 11.375rem;
     box-shadow: 0 0.06rem 0.31rem rgba(0, 0, 0, 0.1);
     z-index: 3;
     visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
@@ -203,7 +202,6 @@ const Tooltip = styled.div<{ $position: 'right' | 'left'; $isVisible: boolean }>
     @media only screen and (max-width: 1068px) {
         top: -4rem;
         ${({ $position }) => ($position === 'right' ? `left: -8rem ;` : `right: -4.5rem;`)};
-        width: 12rem;
     }
 
     @media only screen and (max-width: 734px) {
