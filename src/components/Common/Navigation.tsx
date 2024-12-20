@@ -6,8 +6,8 @@ const LogoLink = styled(Link)`
     position: absolute;
     top: 2rem;
     left: calc(6% + 3.75rem);
-    z-index: 100;
     width: 2.5rem;
+    z-index: 2;
 
     @media only screen and (max-width: 1348px) {
         left: calc(5% + 3.75rem);
@@ -36,7 +36,7 @@ const NavigationLayer = styled.div<{ open: boolean }>`
     display: ${({ open }) => (open ? 'flex' : 'none')};
     flex-direction: row;
     justify-content: space-between;
-    z-index: 200;
+    z-index: 3;
     background-color: #56dfb4;
     transition: all 0.5s ease-in-out;
 `;

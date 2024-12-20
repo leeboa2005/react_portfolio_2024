@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     position: relative;
+    box-sizing: border-box;
   }
 
   html {
@@ -66,11 +67,15 @@ const GlobalStyle = createGlobalStyle`
 
     @media only screen and (max-width: 1348px) {
         --default-width: 92%;
+        --font-title: 4.4rem;
+        --font-sub-title: 2.8rem;
       
     }
 
     @media only screen and (max-width: 734px) {
         --default-width: 95%;
+        --font-title: 3.4rem;
+        --font-sub-title: 2rem;
     }
     
   }

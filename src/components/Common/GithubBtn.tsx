@@ -15,7 +15,7 @@ const GitHubButton = styled.a`
     font-size: 14px;
     border-radius: 20px;
     display: inline-flex;
-    z-index: 102;
+    z-index: 3;
     gap: 2px;
 
     @media only screen and (max-width: 1348px) {
