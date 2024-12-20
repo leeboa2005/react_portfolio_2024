@@ -17,7 +17,7 @@ const OverviewContainer = styled.section`
 const TitleContainer = styled.div`
     position: relative;
     display: flex;
-    margin-bottom: 50px;
+    margin-bottom: 5rem;
 `;
 
 const Line = styled.div`
@@ -38,29 +38,34 @@ const Title = styled.h2`
 `;
 
 const ContentWrap = styled.div`
-    width: 100%;
     padding-bottom: 6.5rem;
 `;
 
 const LinkWrap = styled.ul`
+    width: calc(36rem * 2 + 1.6rem);
+    margin: 0 auto;
     position: relative;
-    width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 3.6rem 1.6rem;
 
+    @media only screen and (max-width: 1348px) {
+        width: calc(21.3rem * 2 + 1rem);
+    }
+
     @media only screen and (max-width: 734px) {
+        width: 100%;
         grid-template-columns: repeat(1, 1fr);
-        gap: 1.6rem 1.6rem;
+        gap: 1.6rem 0;
     }
 `;
 
 const RoundButton = styled.div`
     position: absolute;
     bottom: 0;
-    right: -3rem;
-    width: 4rem;
-    height: 4rem;
+    right: -2.5rem;
+    width: 3.3rem;
+    height: 3.3rem;
     background-color: #e6e6e6;
     border: 1px solid #ddd;
     border-radius: 50%;
@@ -72,15 +77,26 @@ const RoundButton = styled.div`
     transition: transform 0.5s ease-out, background-color 0.3s ease;
 
     img {
-        width: 36px;
-        height: 36px;
+        width: 2.7rem;
+        height: 2.7rem;
+    }
+
+    @media only screen and (max-width: 1348px) {
+        right: -2rem;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    img {
+        width: 1.6rem;
+        height: 1.6rem;
     }
 `;
 
 const LinkBox = styled.li`
-    width: 41.94rem;
-    height: 25rem;
-    padding: 3rem 3rem 0;
+    width: 36rem;
+    height: 21.46rem;
+    padding: 2.5rem 2.5rem 0;
     position: relative;
     background: #f2f2f2 url('/home/overview_box_shape.webp') no-repeat center center;
     background-size: cover;
@@ -90,25 +106,43 @@ const LinkBox = styled.li`
     transform: translateY(50px);
     transition: background-color 0.3s ease;
 
-    /* &:hover {
-        background-color: ${(props) => props.color};
-    } */
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+    }
+
+    &:hover:first-child::after {
+        background-image: url('/home/overview_box_shape_hover1.webp');
+        opacity: 1;
+    }
+
+    &:hover:nth-child(2)::after {
+        background-image: url('/home/overview_box_shape_hover2.webp');
+        opacity: 1;
+    }
 
     &:hover ${RoundButton} {
-        /* background-color: ${(props) => props.color}; */
+        background-color: ${(props) => props.color};
         transform: rotate(0deg);
     }
 
     @media only screen and (max-width: 1348px) {
-        width: 33.55rem;
-        height: 20rem;
+        width: 21.3rem;
+        height: 12.64rem;
         padding: 2rem 2rem 0;
     }
 
     @media only screen and (max-width: 734px) {
-        width: 23.48rem;
-        height: 14rem;
-        padding: 2rem 2rem 0;
+        margin: 0 auto;
     }
 `;
 
@@ -119,12 +153,22 @@ const StyledLink = styled(Link)`
     text-decoration: none;
     color: black;
     position: relative;
+    z-index: 2;
 
     h3 {
-        font-size: var(--font-sub-title);
+        font-size: 3.2rem;
         font-family: var(--font-default-eng);
         position: relative;
         width: fit-content;
+        z-index: 3;
+
+        @media only screen and (max-width: 1348px) {
+            font-size: 2.4rem;
+        }
+
+        @media only screen and (max-width: 734px) {
+            font-size: 1.9rem;
+        }
 
         &::after {
             content: '';
@@ -172,8 +216,8 @@ const SpriteContainer = styled.div`
 `;
 
 const TextWrap = styled.div`
-    margin: 3rem auto 4rem;
-    width: 75%;
+    margin: 2rem auto 4rem;
+    width: calc(36rem * 2 + 1.6rem);
     display: flex;
     align-items: center;
     opacity: 0;
@@ -183,12 +227,12 @@ const TextWrap = styled.div`
         word-break: keep-all;
         line-height: 1.4;
     }
-
     @media only screen and (max-width: 1348px) {
-        width: 100%;
+        width: calc(21.3rem * 2 + 1rem);
     }
 
     @media only screen and (max-width: 734px) {
+        width: 100%;
         margin: 0 auto 3rem;
         flex-direction: column;
         text-align: center;
@@ -199,7 +243,7 @@ const Tooltip = styled.div`
     position: absolute;
     top: -2.5rem;
     left: 50%;
-    width: 9.375rem;
+    width: 11.375rem;
     text-align: left;
     transform: translateX(-50%);
     background: var(--main-color-green);
@@ -218,10 +262,6 @@ const Tooltip = styled.div`
     ${SpriteContainer}:hover & {
         visibility: visible;
         opacity: 1;
-    }
-
-    @media only screen and (max-width: 1068px) {
-        width: 12rem;
     }
 `;
 
