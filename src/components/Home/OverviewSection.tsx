@@ -31,7 +31,7 @@ const Line = styled.div`
 
 const Title = styled.h2`
     font-size: var(--font-title);
-    font-family: 'Exo 2', sans-serif;
+    font-family: var(--font-default-eng);
     opacity: 0;
     z-index: 1;
     position: relative;
@@ -51,15 +51,16 @@ const LinkWrap = styled.ul`
 
     @media only screen and (max-width: 734px) {
         grid-template-columns: repeat(1, 1fr);
+        gap: 1.6rem 1.6rem;
     }
 `;
 
 const RoundButton = styled.div`
     position: absolute;
-    bottom: 54px;
-    right: 3px;
-    width: 4.9rem;
-    height: 4.9rem;
+    bottom: 0;
+    right: -3rem;
+    width: 4rem;
+    height: 4rem;
     background-color: #e6e6e6;
     border: 1px solid #ddd;
     border-radius: 50%;
@@ -77,34 +78,37 @@ const RoundButton = styled.div`
 `;
 
 const LinkBox = styled.li`
+    width: 41.94rem;
     height: 25rem;
+    padding: 3rem 3rem 0;
     position: relative;
-    background: #ffffff;
-    border-radius: 40px;
+    background: #f2f2f2 url('/home/overview_box_shape.webp') no-repeat center center;
+    background-size: cover;
+    border-radius: var(--default-radius);
     overflow: hidden;
     opacity: 0;
     transform: translateY(50px);
     transition: background-color 0.3s ease;
 
-    &:hover {
+    /* &:hover {
         background-color: ${(props) => props.color};
-    }
+    } */
 
     &:hover ${RoundButton} {
-        background-color: ${(props) => props.color};
+        /* background-color: ${(props) => props.color}; */
         transform: rotate(0deg);
     }
 
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 100px;
-        height: 100px;
-        background: #f2f2f2;
-        border-top-left-radius: 68%;
-        z-index: 1;
+    @media only screen and (max-width: 1348px) {
+        width: 33.55rem;
+        height: 20rem;
+        padding: 2rem 2rem 0;
+    }
+
+    @media only screen and (max-width: 734px) {
+        width: 23.48rem;
+        height: 14rem;
+        padding: 2rem 2rem 0;
     }
 `;
 
@@ -119,7 +123,6 @@ const StyledLink = styled(Link)`
     h3 {
         font-size: var(--font-sub-title);
         font-family: var(--font-default-eng);
-        margin: 3rem;
         position: relative;
         width: fit-content;
 
@@ -196,6 +199,8 @@ const Tooltip = styled.div`
     position: absolute;
     top: -2.5rem;
     left: 50%;
+    width: 9.375rem;
+    text-align: left;
     transform: translateX(-50%);
     background: var(--main-color-green);
     border-radius: var(--default-radius-small);
@@ -205,7 +210,6 @@ const Tooltip = styled.div`
     font-family: 'SUIT-Regular';
     font-size: 0.875rem;
     line-height: 1.3;
-    word-break: keep-all;
     visibility: hidden;
     opacity: 0;
     word-break: keep-all;
@@ -214,6 +218,10 @@ const Tooltip = styled.div`
     ${SpriteContainer}:hover & {
         visibility: visible;
         opacity: 1;
+    }
+
+    @media only screen and (max-width: 1068px) {
+        width: 12rem;
     }
 `;
 
