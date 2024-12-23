@@ -17,7 +17,7 @@ const OverviewContainer = styled.section`
 const TitleContainer = styled.div`
     position: relative;
     display: flex;
-    margin-bottom: 5rem;
+    margin-bottom: 0.5rem;
 `;
 
 const Line = styled.div`
@@ -147,7 +147,9 @@ const LinkBox = styled.li`
 `;
 
 const StyledLink = styled(Link)`
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 100%;
     height: 100%;
     text-decoration: none;
@@ -177,13 +179,25 @@ const StyledLink = styled(Link)`
             left: 0;
             width: 0;
             height: 2px;
-            background-color: black;
+            background-color: var(--font-color);
             transition: width 0.3s ease-out;
         }
     }
 
+    p {
+        font-size: var(--font-text);
+        line-height: 1.2;
+        opacity: 0;
+        padding-bottom: 2rem;
+        transition: opacity 0.3s ease-out;
+    }
+
     &:hover h3::after {
         width: 100%;
+    }
+
+    &:hover p {
+        opacity: 1;
     }
 `;
 
@@ -198,6 +212,8 @@ const SpriteContainer = styled.div`
     background-position: 0 0;
     background-size: calc(14.8125rem * 7) 100%;
     animation: sprite-frames 1.4s steps(7) infinite;
+    opacity: 0;
+    transform: translateY(10px);
 
     @keyframes sprite-frames {
         0% {
@@ -220,12 +236,12 @@ const TextWrap = styled.div`
     width: calc(36rem * 2 + 1.6rem);
     display: flex;
     align-items: center;
-    opacity: 0;
-    transform: translateY(30px);
 
     span {
         word-break: keep-all;
         line-height: 1.4;
+        opacity: 0;
+        transform: translateY(10px);
     }
     @media only screen and (max-width: 1348px) {
         width: calc(21.3rem * 2 + 1rem);
@@ -241,9 +257,9 @@ const TextWrap = styled.div`
 
 const Tooltip = styled.div`
     position: absolute;
-    top: -2.5rem;
+    top: -1.7rem;
     left: 50%;
-    width: 11.375rem;
+    width: 13.375rem;
     text-align: left;
     transform: translateX(-50%);
     background: var(--main-color-green);
@@ -303,7 +319,8 @@ const OverviewSection = () => {
     const titleRef = useRef<HTMLHeadingElement>(null);
     const projectRef = useRef<HTMLLIElement>(null);
     const aboutRef = useRef<HTMLLIElement>(null);
-    const textRef = useRef<HTMLDivElement>(null);
+    const textRef_1 = useRef<HTMLDivElement>(null);
+    const textRef_2 = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
         const timeline = gsap.timeline({
@@ -315,53 +332,61 @@ const OverviewSection = () => {
             },
         });
 
-        timeline.to(lineRef.current, {
-            width: '100%',
-            duration: 1,
-            ease: 'power2.out',
-        });
-
-        timeline.to(
-            titleRef.current,
-            {
-                opacity: 1,
-                duration: 0.8,
+        timeline
+            .to(lineRef.current, {
+                width: '100%',
+                duration: 1,
                 ease: 'power2.out',
-            },
-            '-=0.5'
-        );
-
-        timeline.to(
-            projectRef.current,
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power2.out',
-            },
-            '+=0.3'
-        );
-
-        timeline.to(
-            aboutRef.current,
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power2.out',
-            },
-            '-=0.5'
-        );
-        timeline.to(
-            textRef.current,
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power2.out',
-            },
-            '+=0.3'
-        );
+            })
+            .to(
+                titleRef.current,
+                {
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                },
+                '-=0.5'
+            )
+            .to(
+                textRef_1.current,
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                },
+                '+=0.3'
+            )
+            .to(
+                textRef_2.current,
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                },
+                '-=0.3'
+            )
+            .to(
+                projectRef.current,
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                },
+                '+=0.3'
+            )
+            .to(
+                aboutRef.current,
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                },
+                '-=0.3'
+            );
     }, []);
 
     return (
@@ -371,10 +396,23 @@ const OverviewSection = () => {
                 <Title ref={titleRef}>OVERVIEW</Title>
             </TitleContainer>
             <ContentWrap>
+                <TextWrap>
+                    <SpriteContainer ref={textRef_1}>
+                        <Circle />
+                        <Tooltip>제 포트폴리오가 궁금하신가요? 한번 둘러보세요!</Tooltip>
+                    </SpriteContainer>
+                    <span ref={textRef_2}>
+                        Project 페이지에는 개인 및 팀 프로젝트와 직무에서 진행한 프로젝트의 결과가 담겨 있습니다. 이
+                        과정에서 고민했던 점, 해결 방법, 관련 공부 기록, 그리고 구현한 기능들을 통해 저의 기술 스택과
+                        문제 해결 능력을 깊이 있게 확인하실 수 있습니다. About 페이지에서는 제 경험과 가치관, 그리고
+                        앞으로 프론트엔드 개발자로서 나아가고 싶은 방향을 간략히 소개하고 있습니다.
+                    </span>
+                </TextWrap>
                 <LinkWrap>
                     <LinkBox ref={projectRef} color="#f989b3">
                         <StyledLink to="/project">
                             <h3>Project</h3>
+                            <p>프로젝트 소개, 해결 방법, 관련 공부 기록</p>
                             <RoundButton>
                                 <img src="/src/assets/svg/arrow.svg" alt="Project 페이지로 이동" />
                             </RoundButton>
@@ -383,24 +421,13 @@ const OverviewSection = () => {
                     <LinkBox ref={aboutRef} color="#56dfb4">
                         <StyledLink to="/about">
                             <h3>About</h3>
+                            <p>나의 경험과 생각, 프론트엔드 개발자로서의 방향</p>
                             <RoundButton>
                                 <img src="/src/assets/svg/arrow.svg" alt="About 페이지로 이동" />
                             </RoundButton>
                         </StyledLink>
                     </LinkBox>
                 </LinkWrap>
-                <TextWrap ref={textRef}>
-                    <SpriteContainer>
-                        <Circle />
-                        <Tooltip>안녕하세요 제 프로젝트가 궁금하신가요?</Tooltip>
-                    </SpriteContainer>
-                    <span>
-                        Project 페이지에는 개인 및 팀 프로젝트와 직무에서 진행한 프로젝트의 결과가 담겨 있습니다. 이
-                        과정에서 고민했던 점, 해결 방법, 관련 공부 기록, 그리고 구현한 기능들을 통해 저의 기술 스택과
-                        문제 해결 능력을 깊이 있게 확인하실 수 있습니다. About 페이지에서는 제 경험과 가치관, 그리고
-                        앞으로 프론트엔드 개발자로서 나아가고 싶은 방향을 간략히 소개하고 있습니다.
-                    </span>
-                </TextWrap>
             </ContentWrap>
         </OverviewContainer>
     );

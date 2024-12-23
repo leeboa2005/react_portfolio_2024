@@ -187,9 +187,9 @@ const Tooltip = styled.div<{ $position: 'right' | 'left'; $isVisible: boolean }>
     visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
     opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
     transition: opacity 0.3s;
-    top: -4.5rem;
+    top: -3rem;
     line-height: 1.2;
-    ${({ $position }) => ($position === 'right' ? `left: calc(100% + 2.1rem);` : `right: calc(100% - 1.5rem);`)};
+    ${({ $position }) => ($position === 'right' ? `left: calc(100% + 2.5rem);` : `right: calc(100% - 1.5rem);`)};
 
     p {
         font-family: 'SUIT-Regular';
@@ -200,7 +200,7 @@ const Tooltip = styled.div<{ $position: 'right' | 'left'; $isVisible: boolean }>
     }
 
     @media only screen and (max-width: 1068px) {
-        top: -4rem;
+        top: -2rem;
         ${({ $position }) => ($position === 'right' ? `left: -8rem ;` : `right: -4.5rem;`)};
     }
 

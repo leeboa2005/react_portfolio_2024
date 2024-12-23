@@ -69,12 +69,14 @@ const GlobalStyle = createGlobalStyle`
         --default-width: 92%;
         --font-title: 4.4rem;
         --font-sub-title: 2.8rem;
+        --font-text: 1.2rem;
       
     }
 
     @media only screen and (max-width: 734px) {
         --font-title: 3.4rem;
         --font-sub-title: 2rem;
+        --font-text: 1rem;
     }
     
   }
