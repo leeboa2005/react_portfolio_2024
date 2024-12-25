@@ -57,7 +57,7 @@ const GlobalStyle = createGlobalStyle`
     --main-color-pink-hover: #f76a9c;
     --main-color-green: #56dfb4;
     --font-color: #000000;
-    --font-gray-color: #757575;
+    --font-gray-color: #666;
     --default-width: 88%;
     --default-radius: 0.75rem;
     --default-radius-small: 0.37rem;
@@ -77,6 +77,7 @@ const GlobalStyle = createGlobalStyle`
         --font-title: 3.4rem;
         --font-sub-title: 2rem;
         --font-text: 1rem;
+        --font-text-small : 0.7rem;
     }
     
   }

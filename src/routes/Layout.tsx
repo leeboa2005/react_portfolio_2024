@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Navigation from '../components/Common/Navigation';
 import GithubBtn from '../components/Common/GithubBtn';
+import Footer from '../components/Common/footer';
 
 const Layout: React.FC = () => {
     return (
@@ -9,6 +10,7 @@ const Layout: React.FC = () => {
             <Navigation />
             <GithubBtn />
             <Outlet />
+            <Footer />
         </>
     );
 };
