@@ -36,7 +36,7 @@ const NavigationLayer = styled.div<{ open: boolean }>`
     display: ${({ open }) => (open ? 'flex' : 'none')};
     flex-direction: row;
     justify-content: space-between;
-    z-index: 3;
+    z-index: 4;
     background-color: #56dfb4;
     transition: all 0.5s ease-in-out;
 `;
@@ -290,7 +290,12 @@ const Navigation: React.FC = () => {
     const playSound = () => {
         if (audioRef.current) {
             audioRef.current.currentTime = 0;
-            audioRef.current.play();
+            audioRef.current.play().catch((error) => {
+                console.log(
+                    '브라우저 정책으로 인해 자동 재생이 차단되었습니다. 클릭 후 호버하면 오디오 재생을 확인할 수 있습니다:',
+                    error
+                );
+            });
         }
     };
 
