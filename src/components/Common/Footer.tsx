@@ -173,8 +173,9 @@ const Footer: React.FC = () => {
         timeline
             .to(lineRef.current, {
                 width: '100%',
-                duration: 1.5,
+                duration: 1.6,
                 ease: 'power2.out',
+                delay: 0.9,
             })
 
             .to(containerRef.current, {
