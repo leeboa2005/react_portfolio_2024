@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import GlobalStyle from '../assets/styles/GlobalStyle';
 import GithubBtn from '../components/Common/GithubBtn';
