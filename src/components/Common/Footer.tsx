@@ -131,6 +131,10 @@ const MenuContainer = styled.nav`
     gap: 1rem;
     text-align: right;
     align-items: center;
+
+    @media only screen and (max-width: 734px) {
+        margin-top: 1rem;
+    }
 `;
 
 const FooterBottom = styled.div`

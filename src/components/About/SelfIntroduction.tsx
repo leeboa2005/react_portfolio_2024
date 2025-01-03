@@ -39,7 +39,7 @@ const TextBox = styled.dl`
 
     dd {
         font-size: var(--font-text);
-        line-height: 1.35;
+        line-height: 1.4;
         opacity: 0;
         transform: translateY(20px);
 

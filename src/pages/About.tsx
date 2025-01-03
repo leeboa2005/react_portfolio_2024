@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import GlobalStyle from '../assets/styles/GlobalStyle';
 import GithubBtn from '../components/Common/GithubBtn';
@@ -20,6 +21,10 @@ const AboutContainer = styled.div`
 `;
 
 const About: React.FC = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <AboutWrap>
             <GlobalStyle />

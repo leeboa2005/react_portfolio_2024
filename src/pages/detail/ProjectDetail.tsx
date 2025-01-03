@@ -25,11 +25,10 @@ const BackButton = styled.button`
     padding: 0;
     width: 42px;
     height: 42px;
-    background-image: url('/public/back.webp');
-    background-size: cover;
-    background-position: center;
+    background: #f4f4f8 url('/public/back.webp') center/cover no-repeat;
     cursor: pointer;
     opacity: 0.8;
+    transition: opacity 0.2s ease;
 
     &:hover {
         opacity: 1;

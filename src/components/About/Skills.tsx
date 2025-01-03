@@ -26,7 +26,7 @@ const MainTitle = styled.h2`
     font-weight: var(--font-weight-thin);
     margin-bottom: 3rem;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(1.25rem);
 `;
 
 const SkillCategory = styled.div<{ isFirst: boolean }>`
@@ -36,16 +36,17 @@ const SkillCategory = styled.div<{ isFirst: boolean }>`
     border-top: ${(props) => (props.isFirst ? 'none' : '1px solid #ccc')};
     padding-top: ${(props) => (props.isFirst ? '0' : '1rem')};
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(1.25rem);
 
     @media only screen and (max-width: 734px) {
         flex-direction: column;
+        border-top: none;
     }
 `;
 
 const Title = styled.h3`
     font-size: var(--font-text);
-    width: 30%;
+    width: 40%;
     margin-right: 2rem;
     line-height: 1.3;
     word-break: keep-all;
@@ -94,32 +95,34 @@ const Skills: React.FC = () => {
                 toggleActions: 'play none none none',
             },
         });
-
         tl.to(lineRef.current, {
             width: '100%',
-            duration: 1.6,
+            duration: 1.2,
+            delay: 0.8,
             ease: 'power2.out',
-        }).to(
+        })
+        .to(
             titleRef.current,
             {
                 opacity: 1,
                 y: 0,
-                duration: 0.8,
-                ease: 'power2.out',
+                duration: 0.6,
+                ease: 'power2.inOut',
             },
-            '-=0.5'
+            '-=0.4'
         );
 
-        categoryRefs.current.forEach((category, index) => {
+        categoryRefs.current.forEach((category) => {
             tl.to(
                 category,
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.8,
+                    duration: 0.5,
+                    delay: 0.8,
                     ease: 'power2.out',
                 },
-                `+=${index * 0.1}`
+                `-=0.3`
             );
         });
     }, []);

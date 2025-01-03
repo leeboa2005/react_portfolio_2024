@@ -44,7 +44,6 @@ const FilterButtons: React.FC<FilterButtonsProps> = ({
     selectedTechs,
     setSelectedTechs,
 }) => {
-    // 현재 탭의 사용 가능한 기술 필터 추출
     const availableTechs =
         activeTab && contentData[activeTab]
             ? Array.from(new Set(contentData[activeTab].flatMap((project) => project.techs)))
