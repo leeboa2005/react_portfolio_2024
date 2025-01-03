@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const IntroContainer = styled.div`
     width: var(--default-width);
-    margin: 6rem auto 2rem;
+    margin: 6rem auto 4rem;
     position: relative;
 `;
 
@@ -30,9 +30,13 @@ const ImageGrid = styled.div`
     gap: 1.2rem;
     width: 100%;
 
+    @media (max-width: 1348px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     @media (max-width: 734px) {
         grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem;
+        gap: 0.6rem;
     }
 `;
 
@@ -76,6 +80,27 @@ const ImageWrapper = styled.div<{ delay: number }>`
 
     &:nth-child(10n + 9) {
         grid-column: 4 / 5;
+    }
+
+    @media (max-width: 1348px) {
+        grid-column: auto !important;
+
+        &:nth-child(6n + 2) {
+            grid-column: 2 / 3;
+        }
+
+        &:nth-child(6n + 3) {
+            grid-column: 3 / 4;
+        }
+
+        &:nth-child(6n + 4),
+        &:nth-child(6n + 6) {
+            grid-column: 1 / 2;
+        }
+
+        &:nth-child(6n + 5) {
+            grid-column: 2 / 3;
+        }
     }
 
     @media (max-width: 734px) {

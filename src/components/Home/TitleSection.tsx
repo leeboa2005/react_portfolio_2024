@@ -192,7 +192,7 @@ const Tooltip = styled.div<{ $position: 'right' | 'left'; $isVisible: boolean }>
     ${({ $position }) => ($position === 'right' ? `left: calc(100% + 2.5rem);` : `right: calc(100% - 1.5rem);`)};
 
     p {
-        font-family: 'SUIT-Regular';
+        font-family: 'SUIT';
         font-size: 0.875rem;
         word-break: keep-all;
         letter-spacing: -0.02em;

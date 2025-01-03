@@ -38,7 +38,7 @@ const SocialContainer = styled.div`
 const SocialLink = styled.a`
     position: relative;
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: black;
     display: inline-block;
     padding: 2px 0;
@@ -80,7 +80,7 @@ const SocialLink = styled.a`
 const MenuLink = styled(Link)`
     position: relative;
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: black;
     display: inline-flex;
     align-items: center;

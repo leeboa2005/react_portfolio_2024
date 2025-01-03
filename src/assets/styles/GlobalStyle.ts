@@ -5,11 +5,26 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
   
   @font-face {
-    font-family: 'SUIT-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
-    font-weight: normal;
+    font-family: 'SUIT';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Light.woff2') format('woff2');
+    font-weight: 300;
     font-style: normal;
-  }
+}
+
+@font-face {
+    font-family: 'SUIT';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SUIT';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
 
   * {
     position: relative;
@@ -41,17 +56,17 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    --font-default: 'SUIT-Regular';
+    --font-default: 'SUIT';
     --font-default-eng: 'Exo 2', sans-serif;
     --font-title: 8.4rem;
     --font-sub-title: 4rem;
     --font-text-large: 1.7rem;
     --font-text: 1.3rem;
     --font-text-small: 0.9rem;
-    --font-weight-thin: 400;
-    --font-weight-default: 500;
-    --font-weight-bold: 600;
-    --background-color: #f2f2f2;
+    --font-weight-thin: 300;
+    --font-weight-default: 400;
+    --font-weight-bold: 700;
+    --background-color: #f4f4f8;
     --grey-color: #f5f5f7;
     --main-color-pink: #f989b3;
     --main-color-pink-hover: #f76a9c;

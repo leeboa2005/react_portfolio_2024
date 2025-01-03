@@ -267,7 +267,7 @@ const Tooltip = styled.div`
     padding: 0.5rem 0.8rem;
     min-width: 10rem;
     box-shadow: 0 0.06rem 0.31rem rgba(0, 0, 0, 0.1);
-    font-family: 'SUIT-Regular';
+    font-family: 'SUIT';
     font-size: 0.875rem;
     line-height: 1.3;
     visibility: hidden;
