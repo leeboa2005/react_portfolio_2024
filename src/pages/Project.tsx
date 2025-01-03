@@ -141,6 +141,8 @@ const Project: React.FC = () => {
     };
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+
         if (activeTab) {
             gsap.fromTo(contentRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 });
         }

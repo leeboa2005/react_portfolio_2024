@@ -100,8 +100,7 @@ const Skills: React.FC = () => {
             duration: 1.2,
             delay: 0.8,
             ease: 'power2.out',
-        })
-        .to(
+        }).to(
             titleRef.current,
             {
                 opacity: 1,
@@ -118,7 +117,7 @@ const Skills: React.FC = () => {
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.5,
+                    duration: 0.2,
                     delay: 0.8,
                     ease: 'power2.out',
                 },
