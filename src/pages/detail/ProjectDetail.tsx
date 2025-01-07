@@ -53,7 +53,7 @@ const MarkdownContainer = styled.div`
 
     strong {
         color: #10b27e;
-        font-weight: 500;
+        font-weight: var(--font-weight-semi-bold);
     }
 
     a {
@@ -77,6 +77,8 @@ const InfoText = styled.dl`
     margin: 1rem 0;
 
     dt {
+        width: 6rem;
+        word-break: keep-all;
         font-weight: var(--font-weight-bold);
     }
 `;

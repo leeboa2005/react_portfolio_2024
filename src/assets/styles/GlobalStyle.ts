@@ -20,6 +20,14 @@ const GlobalStyle = createGlobalStyle`
 
 @font-face {
     font-family: 'SUIT';
+    src: url('https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'SUIT';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
@@ -65,6 +73,7 @@ const GlobalStyle = createGlobalStyle`
     --font-text-small: 0.9rem;
     --font-weight-thin: 300;
     --font-weight-default: 400;
+    --font-weight-semi-bold: 500;
     --font-weight-bold: 700;
     --background-color: #f4f4f8;
     --grey-color: #f5f5f7;
@@ -91,6 +100,7 @@ const GlobalStyle = createGlobalStyle`
     @media only screen and (max-width: 734px) {
         --font-title: 3.4rem;
         --font-sub-title: 2rem;
+        --font-text-large: 1.3rem;
         --font-text: 1rem;
         --font-text-small : 0.7rem;
     }
