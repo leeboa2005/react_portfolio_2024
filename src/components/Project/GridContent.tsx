@@ -13,6 +13,12 @@ const GridContainer = styled.div`
     grid-template-columns: repeat(2, 1fr);
     gap: 3.6rem 1.6rem;
     margin-bottom: 3.2rem;
+
+    @media only screen and (max-width: 734px) {
+        width: 100%;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 3.6rem 0;
+    }
 `;
 
 const GridItem = styled.div`

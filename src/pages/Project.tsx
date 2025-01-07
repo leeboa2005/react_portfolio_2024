@@ -12,9 +12,16 @@ const Wrap = styled.div`
     min-height: 100vh;
 `;
 
-const IntroContainer = styled.h1`
+const IntroContainer = styled.div`
     padding: 7rem 0 4.2rem 0;
     display: flex;
+
+    @media only screen and (max-width: 734px) {
+        padding: 7rem 0 2.2rem 0;
+    }
+`;
+
+const Title = styled.h1`
     font-size: var(--font-title);
     font-family: var(--font-default-eng);
 `;
@@ -152,7 +159,7 @@ const Project: React.FC = () => {
         <Wrap>
             <TabContainer>
                 <IntroContainer>
-                    MY PROJECT
+                    <Title>MY PROJECT</Title>
                     <ImageWrapper>
                         <AnimatedImage src="/home/main_hat.webp" alt=" 이미지" />
                     </ImageWrapper>

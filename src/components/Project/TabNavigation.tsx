@@ -11,6 +11,15 @@ const TabList = styled.div`
 
     & > label:not(:last-child) {
         border-right: 1px solid #111;
+
+        @media only screen and (max-width: 380px) {
+            border-right: none;
+        }
+    }
+
+    @media only screen and (max-width: 380px) {
+        flex-direction: column;
+        border: none;
     }
 `;
 
@@ -28,6 +37,11 @@ const TabButton = styled.label<{ $isChecked: boolean }>`
     & > span {
         flex-grow: 1;
     }
+
+    @media only screen and (max-width: 734px) {
+        padding: 1rem 0.6rem;
+        border-bottom: 1px solid #ccc;
+    }
 `;
 
 const CheckboxInput = styled.input`
@@ -42,6 +56,12 @@ const CustomCheckbox = styled.div<{ $isChecked: boolean }>`
     border: 1px solid ${(props) => (props.$isChecked ? '#111' : 'var(--font-gray-color)')};
     background-color: ${(props) => (props.$isChecked ? '#111' : 'transparent')};
     transition: all 0.2s ease;
+    cursor: pointer;
+
+    @media only screen and (max-width: 734px) {
+        width: 1rem;
+        height: 1rem;
+    }
 `;
 
 interface TabNavigationProps {
