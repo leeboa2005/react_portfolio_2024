@@ -38,12 +38,12 @@ const NavigationLayer = styled.div<{ open: boolean }>`
     justify-content: space-between;
     z-index: 4;
     background-color: #56dfb4;
+    overflow: hidden;
     transition: all 0.5s ease-in-out;
 `;
 
 const ContentContainer = styled.div`
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
     padding: 6rem 5% 3rem 5%;
@@ -56,6 +56,8 @@ const ContentContainer = styled.div`
 
     @media only screen and (max-width: 734px) {
         padding: 6rem 2.5% 3rem 2.5%;
+        justify-content: center;
+        align-items: center;
     }
 `;
 
@@ -64,6 +66,7 @@ const NavigationSection = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     width: 65%;
+    height: 100%;
 `;
 
 const ContactSection = styled.div`
@@ -71,6 +74,11 @@ const ContactSection = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
+    height: 100%;
+
+    @media only screen and (max-width: 734px) {
+        display: none;
+    }
 `;
 
 const NavigationContainer = styled.div`
@@ -121,9 +129,9 @@ const HamburgerButton = styled.button<{ open: boolean }>`
 
 const AnimatedSvg = styled.img`
     position: absolute;
-    width: 18vw;
+    width: 17.5rem;
     top: 50%;
-    left: -15px;
+    left: -0.9375rem;
     transform: translateY(-50%);
     opacity: 0;
     transition: all 0.2s cubic-bezier(0.7, 0, 0.3, 1);
@@ -140,6 +148,14 @@ const AnimatedSvg = styled.img`
             opacity: 1;
         }
     }
+
+    @media only screen and (max-width: 1348px) {
+        width: 13.5rem;
+    }
+
+    @media only screen and (max-width: 734px) {
+        width: 11.5rem;
+    }
 `;
 
 const NavLinks = styled.div`
@@ -148,6 +164,10 @@ const NavLinks = styled.div`
     align-items: flex-start;
     opacity: 1;
     transition: all 0.5s ease-in-out;
+
+    @media only screen and (max-width: 734px) {
+        align-items: center;
+    }
 `;
 
 const NavLink = styled(Link)`
@@ -208,8 +228,8 @@ const ContactLink = styled(Link)`
 const ContactInfo = styled.div`
     text-align: right;
     color: #0d0f0f;
-    width: 20.12rem;
-    height: 12.5rem;
+    width: 25.625rem;
+    height: 14.5rem;
     border: 0.0625rem solid #0d0f0f;
     padding: 1.25rem;
     border-radius: var(--default-radius);

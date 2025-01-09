@@ -85,6 +85,15 @@ const contentData = {
             techs: ['Next.js', 'TypeScript'],
             link: `/project/personal/0103`,
         },
+        {
+            id: '0104',
+            title: 'PORTFOLIO',
+            description: '리엑트와 타입스크립트로 만든 2024 포트폴리오',
+            image: '/project/personal_04.gif',
+            staticImage: '/project/personal_04.webp',
+            techs: ['Next.js', 'TypeScript'],
+            link: `/project/personal/0104`,
+        },
     ],
     team: [
         {
