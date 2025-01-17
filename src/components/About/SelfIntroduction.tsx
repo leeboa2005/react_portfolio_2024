@@ -32,7 +32,7 @@ const TextBox = styled.dl`
     dt {
         font-size: 1rem;
         font-weight: var(--font-weight-thin);
-        margin-bottom: 3rem;
+        margin-bottom: 5rem;
         opacity: 0;
         transform: translateY(20px);
     }

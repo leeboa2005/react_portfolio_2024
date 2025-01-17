@@ -5,6 +5,7 @@ import GithubBtn from '../components/Common/GithubBtn';
 import Intro from '../components/About/Intro';
 import SelfIntroduction from '../components/About/SelfIntroduction';
 import Skills from '../components/About/Skills';
+import Contact from '../components/About/Contact';
 
 const AboutWrap = styled.section`
     width: 100%;
@@ -33,6 +34,7 @@ const About: React.FC = () => {
                 <Intro />
                 <SelfIntroduction />
                 <Skills />
+                <Contact />
             </AboutContainer>
         </AboutWrap>
     );
