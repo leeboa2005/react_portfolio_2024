@@ -11,6 +11,11 @@ const SkillsWrap = styled.div`
     padding: 2rem 0;
     position: relative;
     overflow: hidden;
+
+    @media (max-width: 734px) {
+        width: 100%;
+        padding: 2rem 1rem;
+    }
 `;
 
 const Line = styled.div`
@@ -25,17 +30,29 @@ const Line = styled.div`
 const MainTitle = styled.h2`
     font-size: 1rem;
     font-weight: var(--font-weight-thin);
-    margin-bottom: 5rem;
+    margin-bottom: 4rem;
     opacity: 0;
     transform: translateY(1.25rem);
+
+    @media (max-width: 734px) {
+        margin-bottom: 3rem;
+        opacity: 1;
+        transform: translateY(0);
+    }
 `;
 
 const CardsSection = styled.section`
     position: relative;
-    height: 100vh;
+    height: 80vh;
     width: 100%;
     overflow: hidden;
     opacity: 0;
+
+    @media (max-width: 734px) {
+        height: auto;
+        overflow: visible;
+        opacity: 1;
+    }
 `;
 
 const CardsContainer = styled.div`
@@ -45,11 +62,18 @@ const CardsContainer = styled.div`
     height: 100%;
     top: 0;
     left: 0;
+
+    @media (max-width: 734px) {
+        position: relative;
+        flex-direction: column;
+        height: auto;
+        transform: none !important;
+    }
 `;
 
 const ProcessCard = styled.div`
     flex: 0 0 35rem;
-    height: 60%;
+    height: 90%;
     border-radius: var(--default-radius);
     padding: 2rem;
     background: #f0f0f0;
@@ -78,6 +102,19 @@ const ProcessCard = styled.div`
     &:first-child::after {
         width: 100%;
     }
+
+    @media (max-width: 734px) {
+        flex: none;
+        width: 100%;
+        height: auto;
+        min-height: 300px;
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+
+        &::after {
+            width: 0%;
+        }
+    }
 `;
 
 const CardContent = styled.div`
@@ -93,11 +130,19 @@ const CardHeader = styled.div`
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 3rem;
+
+    @media (max-width: 734px) {
+        margin-bottom: 2rem;
+    }
 `;
 
 const CardTitle = styled.h3`
     font-size: 2.5rem;
     font-weight: bold;
+
+    @media (max-width: 734px) {
+        font-size: 1.75rem;
+    }
 `;
 
 const Number = styled.div`
@@ -109,6 +154,12 @@ const Number = styled.div`
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
+
+    @media (max-width: 734px) {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.25rem;
+    }
 `;
 
 const SkillsList = styled.ul`
@@ -124,6 +175,11 @@ const SkillItem = styled.li`
 
     &:last-child {
         border-bottom: none;
+    }
+
+    @media (max-width: 734px) {
+        font-size: 1rem;
+        padding: 0.875rem 0;
     }
 `;
 
@@ -155,7 +211,7 @@ const Skills: React.FC = () => {
                 ease: 'power2.inOut',
             });
 
-        if (containerRef.current && sectionRef.current) {
+        if (containerRef.current && sectionRef.current && window.innerWidth > 734) {
             const totalWidth = containerRef.current.scrollWidth;
             const sectionWidth = sectionRef.current.offsetWidth;
 

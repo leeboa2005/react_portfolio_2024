@@ -10,69 +10,88 @@ const ContactContainer = styled.div`
     flex-direction: column;
     max-width: var(--default-width);
     margin: 0 auto;
-    padding: 2rem;
     gap: 2rem;
-    align-items: flex-start;
+    align-items: center;
     position: relative;
+    overflow: hidden;
+    margin-bottom: 6rem;
 
     @media (max-width: 768px) {
         padding: 1rem;
     }
 `;
 
-const Line = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: black;
+const ContactInfo = styled.a`
+    font-family: var(--font-default-eng);
+    font-size: var(--font-sub-title);
+    letter-spacing: -0.09rem;
+    width: 100%;
+    height: 21rem;
+    border: 1px solid black;
+    border-radius: 7rem;
+    position: relative;
+    transition: border-radius 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
-const Title = styled.div`
-    font-size: 1rem;
-    font-weight: var(--font-weight-thin);
-    margin-bottom: 3rem;
-    opacity: 0;
-    transform: translateY(20px);
+const ImageContainer = styled.div`
+    width: 240px;
+    height: 135px;
+    overflow: hidden;
+    margin-bottom: 1.3rem;
+`;
+
+const Image = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 `;
 
 const Contact: React.FC = () => {
-    const lineRef = useRef<HTMLDivElement>(null);
-    const titleRef = useRef<HTMLDivElement>(null);
+    const contactInfoRef = useRef<HTMLAnchorElement>(null);
 
     useEffect(() => {
         const timeline = gsap.timeline({
             scrollTrigger: {
-                trigger: lineRef.current,
+                trigger: contactInfoRef.current,
                 start: 'top 90%',
-                end: 'top 60%',
-                toggleActions: 'play none none none',
+                end: 'bottom 10%',
+                toggleActions: 'play none reverse none',
             },
         });
 
         timeline
-            .to(lineRef.current, {
-                width: '100%',
-                duration: 1.2,
-                ease: 'power2.out',
-            })
             .to(
-                titleRef.current,
+                contactInfoRef.current,
                 {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.8,
-                    ease: 'power2.out',
+                    borderRadius: '0%',
+                    duration: 1,
+                    ease: 'power2.inOut',
                 },
                 '-=0.5'
+            )
+            .to(
+                contactInfoRef.current,
+                {
+                    borderRadius: '7rem',
+                    duration: 1,
+                    ease: 'power2.inOut',
+                },
+                '+=1'
             );
     }, []);
 
     return (
         <ContactContainer>
-            <Line ref={lineRef} />
-            <Title ref={titleRef}>CONTACT</Title>
+            <ContactInfo ref={contactInfoRef} href="mailto:leeboa2003@naver.com">
+                <ImageContainer>
+                    <Image src="/about/letter.gif" alt="Letter" />
+                </ImageContainer>
+                Connect with me
+            </ContactInfo>
         </ContactContainer>
     );
 };
