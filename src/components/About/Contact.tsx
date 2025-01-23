@@ -90,7 +90,7 @@ const Contact: React.FC = () => {
                 <ImageContainer>
                     <Image src="/about/letter.gif" alt="Letter" />
                 </ImageContainer>
-                Connect with me
+                Connect with Me
             </ContactInfo>
         </ContactContainer>
     );
