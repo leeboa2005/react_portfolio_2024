@@ -44,8 +44,8 @@ const ImageWrapper = styled.div<{ delay: number }>`
     position: relative;
     width: 100%;
     aspect-ratio: 259 / 172;
-    border-radius: max(0.8rem, 8px);
-    overflow: hidden;
+    border-radius: var(--default-radius);
+    overflow: hidden !important;
     opacity: 0;
     transform: scale(0.95);
     transition: all 0.5s ease-out;
@@ -134,6 +134,7 @@ const Video = styled.video`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: var(--default-radius);
     opacity: 0;
     transition: 0.45s opacity cubic-bezier(0.55, 0, 0.1, 1);
 

@@ -81,6 +81,15 @@ const InfoText = styled.dl`
         word-break: keep-all;
         font-weight: var(--font-weight-bold);
     }
+
+    @media only screen and (max-width: 734px) {
+        dt {
+            width: 20%;
+        }
+        dd {
+            width: 70%;
+        }
+    }
 `;
 
 const LoadingContainer = styled.div`

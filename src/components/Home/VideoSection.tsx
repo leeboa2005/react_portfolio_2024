@@ -39,6 +39,11 @@ const VideoSection: React.FC = () => {
             wrapperEl.style.height = `${newHeight}px`;
         };
 
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (!isMobile) {
+            videoEl.play();
+        }
+
         const trigger = ScrollTrigger.create({
             trigger: wrapperEl,
             start: 'top center',
@@ -90,7 +95,7 @@ const VideoSection: React.FC = () => {
 
     return (
         <VideoWrapper ref={videoRef}>
-            <video ref={videoElementRef} src="/home/main_video_2.mp4" muted autoPlay loop></video>
+            <video ref={videoElementRef} src="/home/main_video_2.mp4" muted loop playsInline></video>
         </VideoWrapper>
     );
 };
