@@ -414,7 +414,7 @@ const OverviewSection = () => {
                             <h3>Project</h3>
                             <p>프로젝트 소개, 해결 방법, 관련 공부 기록</p>
                             <RoundButton>
-                                <img src="/src/assets/svg/arrow.svg" alt="Project 페이지로 이동" />
+                                <img src="/assets/svg/arrow.svg" alt="Project 페이지로 이동" />
                             </RoundButton>
                         </StyledLink>
                     </LinkBox>
@@ -423,7 +423,7 @@ const OverviewSection = () => {
                             <h3>About</h3>
                             <p>나의 경험과 생각, 프론트엔드 개발자로서의 방향</p>
                             <RoundButton>
-                                <img src="/src/assets/svg/arrow.svg" alt="About 페이지로 이동" />
+                                <img src="/assets/svg/arrow.svg" alt="About 페이지로 이동" />
                             </RoundButton>
                         </StyledLink>
                     </LinkBox>

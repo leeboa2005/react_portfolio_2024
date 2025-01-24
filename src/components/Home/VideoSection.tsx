@@ -90,7 +90,7 @@ const VideoSection: React.FC = () => {
 
     return (
         <VideoWrapper ref={videoRef}>
-            <video ref={videoElementRef} src="/public/home/main_video_2.mp4" muted autoPlay loop></video>
+            <video ref={videoElementRef} src="/home/main_video_2.mp4" muted autoPlay loop></video>
         </VideoWrapper>
     );
 };

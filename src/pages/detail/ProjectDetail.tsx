@@ -25,7 +25,7 @@ const BackButton = styled.button`
     padding: 0;
     width: 42px;
     height: 42px;
-    background: #f4f4f8 url('/public/back.webp') center/cover no-repeat;
+    background: #f4f4f8 url('/back.webp') center/cover no-repeat;
     cursor: pointer;
     opacity: 0.8;
     transition: opacity 0.2s ease;
@@ -154,7 +154,7 @@ const ProjectDetail: React.FC = () => {
     if (loading) {
         return (
             <LoadingContainer>
-                <img src="/src/assets/svg/loading.svg" alt="로딩 중" />
+                <img src="/assets/svg/loading.svg" alt="로딩 중" />
             </LoadingContainer>
         );
     }

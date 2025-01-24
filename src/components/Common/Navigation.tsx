@@ -336,7 +336,7 @@ const Navigation: React.FC = () => {
             <LogoLink to="/" onMouseOver={playSound} onMouseOut={stopSound}>
                 <img src="/title_logo.webp" alt="사이트 로고" />
             </LogoLink>
-            <audio ref={audioRef} src="/src/assets/audio/hover_sound.mp3" preload="auto"></audio>
+            <audio ref={audioRef} src="/assets/audio/hover_sound.mp3" preload="auto"></audio>
             <NavigationLayer open={isOpen}>
                 <ContentContainer>
                     <NavigationSection>
@@ -344,27 +344,19 @@ const Navigation: React.FC = () => {
                             <NavLinks>
                                 <NavLink to="/" className="nav-link">
                                     HOME
-                                    <AnimatedSvg
-                                        src="/src/assets/svg/straight.svg"
-                                        className="draw"
-                                        alt="밑줄 호버효과"
-                                    />
+                                    <AnimatedSvg src="/assets/svg/straight.svg" className="draw" alt="밑줄 호버효과" />
                                 </NavLink>
                                 <NavLink to="/project" className="nav-link">
                                     PROJECT
                                     <AnimatedSvg
-                                        src="/src/assets/svg/circle.svg"
+                                        src="/assets/svg/circle.svg"
                                         className="draw"
                                         alt="동그라미 호버효과"
                                     />
                                 </NavLink>
                                 <NavLink to="/about" className="nav-link">
                                     ABOUT
-                                    <AnimatedSvg
-                                        src="/src/assets/svg/wave.svg"
-                                        className="draw"
-                                        alt="웨이브 호버효과"
-                                    />
+                                    <AnimatedSvg src="/assets/svg/wave.svg" className="draw" alt="웨이브 호버효과" />
                                 </NavLink>
                             </NavLinks>
                         </NavigationContainer>
