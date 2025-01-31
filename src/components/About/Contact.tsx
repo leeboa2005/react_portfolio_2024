@@ -28,7 +28,7 @@ const ContactInfo = styled.a`
     width: 100%;
     height: 21rem;
     border: 1px solid black;
-    border-radius: 7rem;
+    border-radius: 2rem;
     position: relative;
     transition: border-radius 0.5s ease;
     display: flex;
@@ -76,7 +76,7 @@ const Contact: React.FC = () => {
             .to(
                 contactInfoRef.current,
                 {
-                    borderRadius: '7rem',
+                    borderRadius: '2rem',
                     duration: 1,
                     ease: 'power2.inOut',
                 },
@@ -90,7 +90,7 @@ const Contact: React.FC = () => {
                 <ImageContainer>
                     <Image src="/about/letter.gif" alt="Letter" />
                 </ImageContainer>
-                Connect with Me
+                Connect with Me <br />
             </ContactInfo>
         </ContactContainer>
     );
