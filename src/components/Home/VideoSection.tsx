@@ -39,10 +39,16 @@ const VideoSection: React.FC = () => {
             wrapperEl.style.height = `${newHeight}px`;
         };
 
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        if (!isMobile) {
-            videoEl.play();
-        }
+        const playVideo = () => {
+            if (videoEl.muted && videoEl.paused) {
+                videoEl.play().catch((err) => {
+                    console.error('Video autoplay failed:', err);
+                });
+            }
+        };
+
+        videoEl.muted = true;
+        videoEl.playsInline = true;
 
         const trigger = ScrollTrigger.create({
             trigger: wrapperEl,
@@ -84,11 +90,13 @@ const VideoSection: React.FC = () => {
         });
 
         videoEl.addEventListener('loadedmetadata', adjustVideoSize);
+        videoEl.addEventListener('canplay', playVideo);
         window.addEventListener('resize', adjustVideoSize);
 
         return () => {
             trigger.kill();
             videoEl.removeEventListener('loadedmetadata', adjustVideoSize);
+            videoEl.removeEventListener('canplay', playVideo);
             window.removeEventListener('resize', adjustVideoSize);
         };
     }, []);
