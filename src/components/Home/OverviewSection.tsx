@@ -39,6 +39,10 @@ const Title = styled.h2`
 
 const ContentWrap = styled.div`
     padding-bottom: 6.5rem;
+
+    @media only screen and (max-width: 734px) {
+        padding-bottom: 2rem;
+    }
 `;
 
 const LinkWrap = styled.ul`
@@ -249,7 +253,7 @@ const TextWrap = styled.div`
 
     @media only screen and (max-width: 734px) {
         width: 100%;
-        margin: 0 auto 3rem;
+        margin: 0 auto 2rem;
         flex-direction: column;
         text-align: center;
     }
@@ -323,26 +327,31 @@ const OverviewSection = () => {
     const textRef_2 = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
+        const isMobile = window.innerWidth <= 734;
+
         const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: lineRef.current,
-                start: 'top center',
+                start: isMobile ? 'top 80%' : 'top center',
                 end: 'bottom center',
                 toggleActions: 'play none none none',
             },
         });
 
+        const duration = isMobile ? 0.6 : 0.8;
+        const delay = isMobile ? 0.2 : 0.3;
+
         timeline
             .to(lineRef.current, {
                 width: '100%',
-                duration: 1,
+                duration: isMobile ? 0.8 : 1,
                 ease: 'power2.out',
             })
             .to(
                 titleRef.current,
                 {
                     opacity: 1,
-                    duration: 0.8,
+                    duration: duration,
                     ease: 'power2.out',
                 },
                 '-=0.5'
@@ -352,17 +361,17 @@ const OverviewSection = () => {
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.8,
+                    duration: duration,
                     ease: 'power2.out',
                 },
-                '+=0.3'
+                `+=${delay}`
             )
             .to(
                 textRef_2.current,
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.8,
+                    duration: duration,
                     ease: 'power2.out',
                 },
                 '-=0.3'
@@ -372,17 +381,17 @@ const OverviewSection = () => {
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.8,
+                    duration: duration,
                     ease: 'power2.out',
                 },
-                '+=0.3'
+                `+=${delay}`
             )
             .to(
                 aboutRef.current,
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.8,
+                    duration: duration,
                     ease: 'power2.out',
                 },
                 '-=0.3'
