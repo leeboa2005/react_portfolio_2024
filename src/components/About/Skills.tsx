@@ -47,11 +47,13 @@ const CardsSection = styled.section`
     width: 100%;
     overflow: hidden;
     opacity: 0;
+    transform: translateY(20px);
 
     @media (max-width: 734px) {
         height: auto;
         overflow: visible;
         opacity: 1;
+        transform: none;
     }
 `;
 
@@ -191,25 +193,41 @@ const Skills: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
-        const sequentialTl = gsap.timeline();
+        const sequentialTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: lineRef.current,
+                start: 'top 90%',
+                end: 'bottom top',
+                toggleActions: 'play none none none',
+            },
+        });
 
         sequentialTl
             .to(lineRef.current, {
                 width: '100%',
-                duration: 1.2,
+                duration: 1.6,
                 ease: 'power2.out',
             })
-            .to(titleRef.current, {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: 'power2.inOut',
-            })
-            .to(sectionRef.current, {
-                opacity: 1,
-                duration: 0.6,
-                ease: 'power2.inOut',
-            });
+            .to(
+                titleRef.current,
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                },
+                '-=0.8'
+            )
+            .to(
+                sectionRef.current,
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                },
+                '-=0.4'
+            );
 
         if (containerRef.current && sectionRef.current && window.innerWidth > 734) {
             const totalWidth = containerRef.current.scrollWidth;
