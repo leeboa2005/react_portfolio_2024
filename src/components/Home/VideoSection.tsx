@@ -32,6 +32,8 @@ const VideoSection: React.FC = () => {
         if (!videoEl || !wrapperEl) return;
 
         const adjustVideoSize = () => {
+            if (!videoEl.videoWidth || !videoEl.videoHeight) return;
+
             const naturalAspectRatio = videoEl.videoWidth / videoEl.videoHeight;
             const containerWidth = window.innerWidth * 0.9;
             const newHeight = containerWidth / naturalAspectRatio;
@@ -40,15 +42,16 @@ const VideoSection: React.FC = () => {
         };
 
         const playVideo = () => {
-            if (videoEl.muted && videoEl.paused) {
-                videoEl.play().catch((err) => {
-                    console.error('Video autoplay failed:', err);
-                });
-            }
+            videoEl.play().catch((err) => console.warn('Video autoplay blocked by browser:', err));
         };
 
         videoEl.muted = true;
         videoEl.playsInline = true;
+        videoEl.autoplay = true;
+
+        videoEl.addEventListener('loadedmetadata', adjustVideoSize);
+        videoEl.addEventListener('canplay', playVideo);
+        window.addEventListener('resize', adjustVideoSize);
 
         const trigger = ScrollTrigger.create({
             trigger: wrapperEl,
@@ -89,10 +92,6 @@ const VideoSection: React.FC = () => {
             },
         });
 
-        videoEl.addEventListener('loadedmetadata', adjustVideoSize);
-        videoEl.addEventListener('canplay', playVideo);
-        window.addEventListener('resize', adjustVideoSize);
-
         return () => {
             trigger.kill();
             videoEl.removeEventListener('loadedmetadata', adjustVideoSize);
@@ -103,7 +102,7 @@ const VideoSection: React.FC = () => {
 
     return (
         <VideoWrapper ref={videoRef}>
-            <video ref={videoElementRef} src="/home/main_video_2.mp4" muted loop playsInline></video>
+            <video ref={videoElementRef} src="/home/main_video_2.mp4" muted loop playsInline autoPlay></video>
         </VideoWrapper>
     );
 };
