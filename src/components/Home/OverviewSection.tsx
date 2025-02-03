@@ -332,19 +332,19 @@ const OverviewSection = () => {
         const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: lineRef.current,
-                start: isMobile ? 'top 80%' : 'top center',
+                start: isMobile ? 'top 90%' : 'top center',
                 end: 'bottom center',
                 toggleActions: 'play none none none',
             },
         });
 
-        const duration = isMobile ? 0.6 : 0.8;
-        const delay = isMobile ? 0.2 : 0.3;
+        const duration = isMobile ? 0.5 : 0.8;
+        const delay = isMobile ? 0.1 : 0.3;
 
         timeline
             .to(lineRef.current, {
                 width: '100%',
-                duration: isMobile ? 0.8 : 1,
+                duration: isMobile ? 0.6 : 1,
                 ease: 'power2.out',
             })
             .to(

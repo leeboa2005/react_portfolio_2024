@@ -20,6 +20,10 @@ const ContentWrap = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    @media only screen and (max-width: 734px) {
+        overflow: hidden;
+    }
 `;
 
 const Home: React.FC = () => {

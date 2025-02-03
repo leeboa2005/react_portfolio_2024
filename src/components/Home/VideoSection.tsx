@@ -19,6 +19,10 @@ const VideoWrapper = styled.div`
         height: 100%;
         object-fit: cover;
     }
+
+    @media only screen and (max-width: 734px) {
+        margin: 4rem auto 5rem;
+    }
 `;
 
 const VideoSection: React.FC = () => {
@@ -53,9 +57,10 @@ const VideoSection: React.FC = () => {
         videoEl.addEventListener('canplay', playVideo);
         window.addEventListener('resize', adjustVideoSize);
 
+        const isMobile = window.innerWidth <= 734;
         const trigger = ScrollTrigger.create({
             trigger: wrapperEl,
-            start: 'top center',
+            start: isMobile ? 'top 90%' : 'top center',
             end: 'bottom center',
             scrub: 1.3,
             onUpdate: (self) => {

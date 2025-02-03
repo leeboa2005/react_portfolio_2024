@@ -41,7 +41,7 @@ const GitHubButton = styled.a`
     }
 
     &:hover {
-        background-color: #f76a9c;
+        background-color: var(--main-color-pink-hover);
     }
 
     span {
@@ -58,17 +58,15 @@ const GithubBtn: React.FC = () => {
 
         const chars = buttonRef.current.querySelectorAll('span');
 
-        // GSAP 애니메이션 설정
         const tl = gsap.timeline({ paused: true });
 
         tl.to(chars, {
-            duration: 1, // 지속 시간
-            rotationY: 360, // Y축 회전
-            ease: 'power1.inOut', // 효과를 위한 ease 설정
-            stagger: 0.07, // 순차적으로 애니메이션 적용
+            duration: 1,
+            rotationY: 360,
+            ease: 'power1.inOut',
+            stagger: 0.07,
         });
 
-        // 버튼에 호버 이벤트 리스너 추가
         const handleMouseEnter = () => tl.play();
         const handleMouseLeave = () => tl.reverse();
 
@@ -78,7 +76,6 @@ const GithubBtn: React.FC = () => {
             buttonElement.addEventListener('mouseleave', handleMouseLeave);
         }
 
-        // 컴포넌트 언마운트 시 이벤트 리스너 제거
         return () => {
             if (buttonElement) {
                 buttonElement.removeEventListener('mouseenter', handleMouseEnter);

@@ -27,6 +27,7 @@ const Container = styled.div`
     align-items: flex-start;
     flex-wrap: wrap;
     opacity: 0;
+    transform: translateY(2rem);
 `;
 
 const SocialContainer = styled.div`
@@ -168,7 +169,7 @@ const Footer: React.FC = () => {
         const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: footerRef.current,
-                start: 'top 90%',
+                start: 'top 100%',
                 end: 'bottom bottom',
                 toggleActions: 'play none none none',
             },
@@ -184,6 +185,7 @@ const Footer: React.FC = () => {
 
             .to(containerRef.current, {
                 opacity: 1,
+                y: 0,
                 duration: 0.6,
             })
 
