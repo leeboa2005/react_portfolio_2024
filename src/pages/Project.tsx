@@ -146,6 +146,8 @@ const contentData = {
     ],
 };
 
+const techFilters = ['React', 'Next.js', 'TypeScript', 'JavaScript'];
+
 const Project: React.FC = () => {
     const [activeTab, setActiveTab] = useState('personal');
     const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
@@ -181,12 +183,17 @@ const Project: React.FC = () => {
                 <FilterButtons
                     activeTab={activeTab}
                     contentData={contentData}
-                    techFilters={['React', 'Next.js', 'TypeScript', 'JavaScript']}
+                    techFilters={techFilters}
                     selectedTechs={selectedTechs}
                     setSelectedTechs={setSelectedTechs}
                 />
                 <TabContent ref={contentRef}>
-                    <GridContent activeTab={activeTab} contentData={contentData} selectedTechs={selectedTechs} />
+                    <GridContent
+                        activeTab={activeTab}
+                        contentData={contentData}
+                        selectedTechs={selectedTechs}
+                        techFilters={techFilters}
+                    />
                 </TabContent>
             </TabContainer>
         </Wrap>

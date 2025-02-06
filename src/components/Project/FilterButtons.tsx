@@ -8,6 +8,7 @@ const FilterList = styled.div`
 `;
 
 const FilterButton = styled.button<{ $isSelected: boolean }>`
+    font-family: var(--font-default-eng);
     padding: 0.5rem 0.8rem;
     background-color: ${(props) => (props.$isSelected ? '#f5f5f5' : 'transparent')};
     color: ${(props) => (props.$isSelected ? '#111' : 'var(--font-gray-color)')};

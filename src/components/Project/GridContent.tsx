@@ -72,18 +72,45 @@ interface GridContentProps {
         }[];
     };
     selectedTechs: string[];
+    techFilters: string[];
 }
 
-const GridContent: React.FC<GridContentProps> = ({ activeTab, contentData, selectedTechs }) => {
+const GridContent: React.FC<GridContentProps> = ({ activeTab, contentData, selectedTechs, techFilters }) => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const location = useLocation();
-
     const filteredContent =
         contentData[activeTab]?.filter((item) => {
             if (selectedTechs.length === 0) return true;
-            return item.techs.some((tech) =>
-                selectedTechs.some((selectedTech) => selectedTech.toLowerCase() === tech.toLowerCase())
+
+            const availableTechs = Array.from(new Set(contentData[activeTab].flatMap((project) => project.techs))).map(
+                (tech) => tech.toLowerCase().trim()
             );
+
+            const normalizedSelectedTechs = selectedTechs.map((tech) => tech.toLowerCase().trim());
+
+            const availableFilters = techFilters
+                .filter((tech) => availableTechs.includes(tech.toLowerCase().trim()))
+                .map((tech) => tech.toLowerCase().trim());
+
+            const allFiltersSelected =
+                availableFilters.length === normalizedSelectedTechs.length &&
+                availableFilters.every((filter) => normalizedSelectedTechs.includes(filter));
+
+            if (allFiltersSelected) {
+                return true;
+            }
+
+            const normalizedItemTechs = item.techs.map((tech) => tech.toLowerCase().trim());
+
+            const matchesOr = normalizedSelectedTechs.some((selectedTech) =>
+                normalizedItemTechs.includes(selectedTech)
+            );
+
+            const matchesAnd =
+                selectedTechs.length > 1 &&
+                normalizedSelectedTechs.every((selectedTech) => normalizedItemTechs.includes(selectedTech));
+
+            return matchesOr && (selectedTechs.length === 1 || matchesAnd);
         }) || [];
 
     return (

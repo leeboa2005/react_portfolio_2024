@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import GlobalStyle from '../assets/styles/GlobalStyle';
-import GithubBtn from '../components/Common/GithubBtn';
 import TitleSection from '../components/Home/TitleSection';
 import VideoSection from '../components/Home/VideoSection';
 import OverviewSection from '../components/Home/OverviewSection';
@@ -20,10 +19,6 @@ const ContentWrap = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    @media only screen and (max-width: 734px) {
-        overflow: hidden;
-    }
 `;
 
 const Home: React.FC = () => {
@@ -31,7 +26,6 @@ const Home: React.FC = () => {
         <>
             <GlobalStyle />
             <HomeWrap>
-                <GithubBtn />
                 <ContentWrap>
                     <TitleSection />
                     <VideoSection />
