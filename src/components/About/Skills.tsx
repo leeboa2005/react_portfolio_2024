@@ -1,15 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
-
-interface StyledCardProps {
-    $isTablet?: boolean;
-    $currentSlide?: number;
-    $isFilled?: boolean;
-}
 
 const SkillsWrap = styled.div`
     width: var(--default-width);
@@ -55,8 +49,9 @@ const CardsSection = styled.section`
     opacity: 0;
     transform: translateY(20px);
 
-    @media (max-width: 1024px) {
-        height: 500px;
+    @media (max-width: 734px) {
+        height: auto;
+        overflow: visible;
         opacity: 1;
         transform: none;
     }
@@ -69,48 +64,16 @@ const CardsContainer = styled.div`
     height: 100%;
     top: 0;
     left: 0;
-    transition: transform 0.3s ease;
-`;
 
-const NavigationButtons = styled.div`
-    display: none;
-    justify-content: space-between;
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-    padding: 0 1rem;
-
-    @media (max-width: 1024px) {
-        display: flex;
+    @media (max-width: 734px) {
+        position: relative;
+        flex-direction: column;
+        height: auto;
+        transform: none !important;
     }
 `;
 
-const NavButton = styled.button`
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.3s ease;
-
-    &:hover {
-        background: rgba(0, 0, 0, 0.7);
-    }
-
-    &:disabled {
-        background: rgba(0, 0, 0, 0.2);
-        cursor: not-allowed;
-    }
-`;
-
-const ProcessCard = styled.div<StyledCardProps>`
+const ProcessCard = styled.div`
     flex: 0 0 35rem;
     height: 90%;
     border-radius: var(--default-radius);
@@ -134,18 +97,25 @@ const ProcessCard = styled.div<StyledCardProps>`
         transition: width 0.7s ease-in-out;
     }
 
-    @media (max-width: 1024px) {
-        flex: 0 0 calc(50% - 1rem);
-        height: 450px;
+    &.fill::after {
+        width: var(--fill-percentage, 0%);
+    }
 
-        &::after {
-            width: ${(props) => (props.$isFilled ? '100%' : '0%')};
-        }
+    &:first-child::after {
+        width: 100%;
     }
 
     @media (max-width: 734px) {
-        flex: 0 0 calc(100% - 2rem);
-        height: 350px;
+        flex: none;
+        width: 100%;
+        height: auto;
+        min-height: 300px;
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+
+        &::after {
+            width: 0%;
+        }
     }
 `;
 
@@ -221,50 +191,6 @@ const Skills: React.FC = () => {
     const titleRef = useRef<HTMLHeadingElement>(null);
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
     const sectionRef = useRef<HTMLElement>(null);
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [isTablet, setIsTablet] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
-    const [filledCards, setFilledCards] = useState<boolean[]>([]);
-
-    useEffect(() => {
-        let prevWidth = window.innerWidth;
-        const breakpoints = [734, 1024];
-
-        const handleResize = () => {
-            const currentWidth = window.innerWidth;
-            const crossedBreakpoint = breakpoints.some(
-                (point) => (prevWidth <= point && currentWidth > point) || (prevWidth > point && currentWidth <= point)
-            );
-
-            if (crossedBreakpoint) {
-                window.location.reload();
-            }
-
-            prevWidth = currentWidth;
-            setIsTablet(currentWidth <= 1024);
-            setIsMobile(currentWidth <= 734);
-        };
-
-        handleResize();
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    useEffect(() => {
-        if (isTablet) {
-            const initialFilledState = new Array(skillCategories.length).fill(false);
-            if (isMobile) {
-                initialFilledState[0] = true;
-            } else {
-                initialFilledState[0] = true;
-                initialFilledState[1] = true;
-            }
-            setFilledCards(initialFilledState);
-        }
-    }, [isTablet, isMobile]);
 
     useEffect(() => {
         const sequentialTl = gsap.timeline({
@@ -303,7 +229,7 @@ const Skills: React.FC = () => {
                 '-=0.4'
             );
 
-        if (containerRef.current && sectionRef.current && window.innerWidth > 1024) {
+        if (containerRef.current && sectionRef.current && window.innerWidth > 734) {
             const totalWidth = containerRef.current.scrollWidth;
             const sectionWidth = sectionRef.current.offsetWidth;
 
@@ -338,6 +264,13 @@ const Skills: React.FC = () => {
                         } else {
                             card.style.setProperty('--fill-percentage', `0%`);
                         }
+
+                        if (index > 0) {
+                            const previousCard = cardsRef.current[index - 1];
+                            if (previousCard && progress >= cardStartProgress) {
+                                previousCard.style.setProperty('--fill-percentage', `100%`);
+                            }
+                        }
                     });
                 },
             });
@@ -347,59 +280,6 @@ const Skills: React.FC = () => {
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };
     }, []);
-
-    const handleNext = () => {
-        const slidesPerView = isMobile ? 1 : 2;
-        const maxSlide = Math.ceil(skillCategories.length / slidesPerView) - 1;
-
-        if (currentSlide < maxSlide) {
-            setCurrentSlide((prev) => prev + 1);
-            const slideIndex = currentSlide + 1;
-
-            setFilledCards((prev) => {
-                const newState = [...prev];
-                if (isMobile) {
-                    newState[slideIndex] = true;
-                } else {
-                    const startIndex = slideIndex * 2;
-                    newState[startIndex] = true;
-                    if (startIndex + 1 < skillCategories.length) {
-                        newState[startIndex + 1] = true;
-                    }
-                }
-                return newState;
-            });
-
-            if (containerRef.current) {
-                containerRef.current.style.transform = `translateX(-${(currentSlide + 1) * 100}%)`;
-            }
-        }
-    };
-
-    const handlePrev = () => {
-        if (currentSlide > 0) {
-            setCurrentSlide((prev) => prev - 1);
-            const slideIndex = currentSlide - 1;
-
-            setFilledCards((prev) => {
-                const newState = [...prev];
-                if (isMobile) {
-                    newState[currentSlide] = false;
-                } else {
-                    const startIndex = (slideIndex + 1) * 2;
-                    newState[startIndex] = false;
-                    if (startIndex + 1 < skillCategories.length) {
-                        newState[startIndex + 1] = false;
-                    }
-                }
-                return newState;
-            });
-
-            if (containerRef.current) {
-                containerRef.current.style.transform = `translateX(-${slideIndex * 100}%)`;
-            }
-        }
-    };
 
     const skillCategories = [
         {
@@ -425,28 +305,9 @@ const Skills: React.FC = () => {
             <Line ref={lineRef} />
             <MainTitle ref={titleRef}>나의 기술들</MainTitle>
             <CardsSection ref={sectionRef}>
-                {isTablet && (
-                    <NavigationButtons>
-                        <NavButton onClick={handlePrev} disabled={currentSlide === 0}>
-                            ←
-                        </NavButton>
-                        <NavButton
-                            onClick={handleNext}
-                            disabled={currentSlide === Math.ceil(skillCategories.length / (isMobile ? 1 : 2)) - 1}
-                        >
-                            →
-                        </NavButton>
-                    </NavigationButtons>
-                )}
                 <CardsContainer ref={containerRef}>
                     {skillCategories.map((category, index) => (
-                        <ProcessCard
-                            key={index}
-                            ref={(el) => (cardsRef.current[index] = el)}
-                            $isTablet={isTablet}
-                            $currentSlide={currentSlide}
-                            $isFilled={filledCards[index]}
-                        >
+                        <ProcessCard key={index} ref={(el) => (cardsRef.current[index] = el)}>
                             <CardContent>
                                 <CardHeader>
                                     <CardTitle>{category.title}</CardTitle>
