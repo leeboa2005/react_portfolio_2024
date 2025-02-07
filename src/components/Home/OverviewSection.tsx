@@ -41,7 +41,7 @@ const ContentWrap = styled.div`
     padding-bottom: 6.5rem;
 
     @media only screen and (max-width: 734px) {
-        padding-bottom: 3rem;
+        padding-bottom: 3cap;
     }
 `;
 
@@ -328,23 +328,24 @@ const OverviewSection = () => {
 
     useEffect(() => {
         const isMobile = window.innerWidth <= 734;
+        const isTablet = window.innerWidth > 734 && window.innerWidth <= 1348;
 
         const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: lineRef.current,
-                start: isMobile ? 'top 90%' : 'top center',
+                start: isMobile ? 'top 90%' : isTablet ? 'top 85%' : 'top center',
                 end: 'bottom center',
                 toggleActions: 'play none none none',
             },
         });
 
-        const duration = isMobile ? 0.5 : 0.8;
-        const delay = isMobile ? 0.1 : 0.3;
+        const duration = isMobile || isTablet ? 0.5 : 0.8;
+        const delay = isMobile || isTablet ? 0.1 : 0.3;
 
         timeline
             .to(lineRef.current, {
                 width: '100%',
-                duration: isMobile ? 0.6 : 1,
+                duration: isMobile || isTablet ? 0.6 : 1,
                 ease: 'power2.out',
             })
             .to(
@@ -396,6 +397,8 @@ const OverviewSection = () => {
                 },
                 '-=0.3'
             );
+
+        ScrollTrigger.refresh();
     }, []);
 
     return (

@@ -88,7 +88,7 @@ const NavigationContainer = styled.div`
 const HamburgerButton = styled.button<{ open: boolean }>`
     position: absolute;
     top: 2rem;
-    left: 6%;
+    left: 9%;
     z-index: 202;
     width: 2.5rem;
     height: 2.5rem;
@@ -102,12 +102,12 @@ const HamburgerButton = styled.button<{ open: boolean }>`
     padding: 0;
 
     @media only screen and (max-width: 1348px) {
-        left: 5%;
+        left: 4%;
     }
 
-    @media only screen and (max-width: 734px) {
+    /* @media only screen and (max-width: 734px) {
         left: 2.5%;
-    }
+    } */
 
     div {
         position: absolute;
