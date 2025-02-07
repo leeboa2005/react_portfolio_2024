@@ -41,7 +41,7 @@ const ContentWrap = styled.div`
     padding-bottom: 6.5rem;
 
     @media only screen and (max-width: 734px) {
-        padding-bottom: 2rem;
+        padding-bottom: 3rem;
     }
 `;
 

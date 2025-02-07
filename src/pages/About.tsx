@@ -11,7 +11,6 @@ const AboutWrap = styled.section`
     width: 100%;
     height: auto;
     position: relative;
-    overflow-x: hidden;
 `;
 
 const AboutContainer = styled.div`
