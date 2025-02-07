@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 const GitHubButton = styled.a`
     position: absolute;
     top: 2rem;
-    right: 9%;
+    right: 6%;
     padding: 0.7rem 1rem;
     background-color: #f989b3;
     color: #000;
