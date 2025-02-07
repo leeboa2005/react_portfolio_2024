@@ -13,7 +13,7 @@ const HomeWrap = styled.section`
 const ContentWrap = styled.section`
     width: 100%;
     min-height: 100vh;
-    margin-top: 4vw;
+    padding-top: 4vw;
     position: relative;
     display: flex;
     flex-direction: column;

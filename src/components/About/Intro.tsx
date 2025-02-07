@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 const IntroContainer = styled.div`
     width: var(--default-width);
-    margin: 6rem auto 4rem;
+    padding: 6rem 0 4rem;
+    margin: 0 auto;
     position: relative;
 `;
 
