@@ -40,7 +40,7 @@ const MarkdownContainer = styled.div`
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 20px;
-    font-size: 16px;
+    font-size: var(--font-text);
     line-height: 1.5;
 
     h2,
@@ -58,13 +58,15 @@ const MarkdownContainer = styled.div`
 
     a {
         border: none;
+        display: inline-block;
         border-radius: var(--default-radius-small);
-        padding: 5px 10px;
+        padding: 0.3rem 0.7rem;
+        margin-bottom: 0.3rem;
         font-size: var(--font-text-small);
         cursor: pointer;
         background-color: #3ec6a0;
         color: white;
-        margin-right: 0.5rem;
+        margin-right: 0.3rem;
         &:hover {
             background-color: #10b27e;
         }
@@ -80,6 +82,11 @@ const InfoText = styled.dl`
         width: 6rem;
         word-break: keep-all;
         font-weight: var(--font-weight-bold);
+    }
+
+    &:nth-last-of-type(2),
+    &:last-of-type {
+        margin: 1rem 0 calc(1rem - 0.3rem) 0;
     }
 
     @media only screen and (max-width: 734px) {
