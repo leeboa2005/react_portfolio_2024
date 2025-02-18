@@ -7,7 +7,7 @@ import Layout from './Layout';
 
 export default function Router() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/">
             <Routes>
                 <Route element={<Layout />}>
                     <Route path="/" element={<Home />} />
