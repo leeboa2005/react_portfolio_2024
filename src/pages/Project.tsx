@@ -143,10 +143,19 @@ const contentData = {
             techs: ['JavaScript'],
             link: `/project/work/0302`,
         },
+        {
+            id: '0303',
+            title: 'SUGARCOACH',
+            description: '슈가코치 앱 일부 기능 제작',
+            image: '/project/work_03.gif',
+            staticImage: '/project/work_03.webp',
+            techs: ['React Native'],
+            link: `/project/work/0303`,
+        },
     ],
 };
 
-const techFilters = ['React', 'Next.js', 'TypeScript', 'JavaScript'];
+const techFilters = ['React', 'Next.js', 'TypeScript', 'JavaScript', 'React Native'];
 
 const Project: React.FC = () => {
     const [activeTab, setActiveTab] = useState('personal');
@@ -177,7 +186,7 @@ const Project: React.FC = () => {
                 </IntroContainer>
                 <IntroSubContainer>
                     다양한 웹 애플리케이션을 제작하기 위해
-                    <br /> React, Next.js, TypeScript, JavaScript으로 만든 프로젝트입니다.
+                    <br /> React, Next.js, TypeScript, JavaScript, React Native로 만든 프로젝트입니다.
                 </IntroSubContainer>
                 <TabNavigation activeTab={activeTab} handleTabChange={handleTabChange} />
                 <FilterButtons

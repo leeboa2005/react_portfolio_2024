@@ -126,7 +126,7 @@ const GridContent: React.FC<GridContentProps> = ({ activeTab, contentData, selec
                             <Link to={item.link} state={{ from: location.pathname }}>
                                 <ProjectImageContainer>
                                     <StaticImage src={item.staticImage} alt={`${item.title} 이미지`} />
-                                    {activeTab === 'personal' && (
+                                    {item.image.endsWith('.gif') && (
                                         <GifImage
                                             src={item.image}
                                             alt={`${item.title} GIF`}
