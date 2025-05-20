@@ -1,4 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+'use client';
+
+import type React from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,6 +12,11 @@ const SelfIntroWrap = styled.div`
     width: var(--default-width);
     margin: 0 auto;
     position: relative;
+
+    @media (max-width: 1024px) {
+        width: 100%;
+        padding: 0 1rem;
+    }
 `;
 
 const Line = styled.div`
@@ -35,6 +43,10 @@ const TextBox = styled.dl`
         margin-bottom: 4rem;
         opacity: 0;
         transform: translateY(20px);
+
+        @media (max-width: 1024px) {
+            margin-bottom: 2rem;
+        }
     }
 
     dd {
@@ -51,16 +63,21 @@ const TextBox = styled.dl`
 
 const SelfIntroduction: React.FC = () => {
     const lineRef = useRef<HTMLDivElement>(null);
-    const dtRef = useRef<HTMLDListElement>(null);
-    const ddRef = useRef<HTMLDListElement>(null);
+    const dtRef = useRef<HTMLElement>(null);
+    const ddRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
+        let animationExecuted = false;
+
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: lineRef.current,
                 start: 'top 90%',
                 end: 'bottom top',
                 toggleActions: 'play none none none',
+                onEnter: () => {
+                    animationExecuted = true;
+                },
             },
         });
 
@@ -85,6 +102,33 @@ const SelfIntroduction: React.FC = () => {
                 duration: 0.8,
                 ease: 'power2.out',
             });
+
+        const handleResize = () => {
+            if (window.innerWidth <= 1024) {
+                const triggerElement = lineRef.current;
+                if (triggerElement) {
+                    const rect = triggerElement.getBoundingClientRect();
+                    const isVisible = rect.top < window.innerHeight * 0.9;
+
+                    if (isVisible && !animationExecuted) {
+                        gsap.set(lineRef.current, { width: '100%' });
+                        gsap.set(dtRef.current, { opacity: 1, y: 0 });
+                        gsap.set(ddRef.current, { opacity: 1, y: 0 });
+                        animationExecuted = true;
+                    }
+                }
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('scroll', handleResize);
+
+        setTimeout(handleResize, 100);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('scroll', handleResize);
+        };
     }, []);
 
     return (
@@ -92,8 +136,8 @@ const SelfIntroduction: React.FC = () => {
             <Line ref={lineRef} />
             <Content>
                 <TextBox>
-                    <dt ref={dtRef}> 작은 시작, 큰 연결 </dt>
-                    <dd ref={ddRef}>
+                    <dt ref={dtRef as React.RefObject<HTMLElement>}> 작은 시작, 큰 연결 </dt>
+                    <dd ref={ddRef as React.RefObject<HTMLElement>}>
                         <p>
                             프론트엔드 개발자로서, 작은 디테일이 사용자 경험을 더욱 풍부하게 만들고 자연스러운 소통을
                             이끌어낸다고 믿습니다. 화면의 섬세한 요소와 직관적인 상호작용을 통해, 더 많은 사람들이
