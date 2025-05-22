@@ -67,68 +67,133 @@ const SelfIntroduction: React.FC = () => {
     const ddRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
-        let animationExecuted = false;
+        const introAnimationDuration = 2500;
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: lineRef.current,
-                start: 'top 90%',
-                end: 'bottom top',
-                toggleActions: 'play none none none',
-                onEnter: () => {
-                    animationExecuted = true;
+        const isMobile = () => window.innerWidth <= 1024;
+
+        if (isMobile()) {
+            // 모바일/태블릿
+            const timer = setTimeout(() => {
+                const tl = gsap.timeline();
+
+                tl.to(lineRef.current, {
+                    width: '100%',
+                    duration: 1.2,
+                    ease: 'power2.out',
+                })
+                    .to(
+                        dtRef.current,
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: 'power2.out',
+                        },
+                        '-=0.4'
+                    )
+                    .to(
+                        ddRef.current,
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: 'power2.out',
+                        },
+                        '-=0.2'
+                    );
+            }, introAnimationDuration);
+
+            return () => clearTimeout(timer);
+        } else {
+            // 데스크탑
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: lineRef.current,
+                    start: 'top 90%',
+                    end: 'bottom top',
+                    toggleActions: 'play none none none',
                 },
-            },
-        });
+            });
 
-        tl.to(lineRef.current, {
-            width: '100%',
-            duration: 1.6,
-            ease: 'power2.out',
-        })
-            .to(
-                dtRef.current,
-                {
+            tl.to(lineRef.current, {
+                width: '100%',
+                duration: 1.6,
+                ease: 'power2.out',
+            })
+                .to(
+                    dtRef.current,
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: 'power2.out',
+                    },
+                    '-=0.5'
+                )
+                .to(ddRef.current, {
                     opacity: 1,
                     y: 0,
                     duration: 0.8,
                     ease: 'power2.out',
-                },
-                '-=0.5'
-            )
-            .to(ddRef.current, {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power2.out',
-            });
+                });
 
-        const handleResize = () => {
-            if (window.innerWidth <= 1024) {
-                const triggerElement = lineRef.current;
-                if (triggerElement) {
-                    const rect = triggerElement.getBoundingClientRect();
-                    const isVisible = rect.top < window.innerHeight * 0.9;
+            // 리사이즈 이벤트 처리
+            const handleResize = () => {
+                if (isMobile()) {
+                    // ScrollTrigger 제거
+                    ScrollTrigger.getAll().forEach((trigger) => {
+                        if (trigger.trigger === lineRef.current) {
+                            trigger.kill();
+                        }
+                    });
 
-                    if (isVisible && !animationExecuted) {
-                        gsap.set(lineRef.current, { width: '100%' });
-                        gsap.set(dtRef.current, { opacity: 1, y: 0 });
-                        gsap.set(ddRef.current, { opacity: 1, y: 0 });
-                        animationExecuted = true;
-                    }
+                    // 모바일
+                    const timer = setTimeout(() => {
+                        const mobileTl = gsap.timeline();
+
+                        mobileTl
+                            .to(lineRef.current, {
+                                width: '100%',
+                                duration: 1.2,
+                                ease: 'power2.out',
+                            })
+                            .to(
+                                dtRef.current,
+                                {
+                                    opacity: 1,
+                                    y: 0,
+                                    duration: 0.6,
+                                    ease: 'power2.out',
+                                },
+                                '-=0.4'
+                            )
+                            .to(
+                                ddRef.current,
+                                {
+                                    opacity: 1,
+                                    y: 0,
+                                    duration: 0.6,
+                                    ease: 'power2.out',
+                                },
+                                '-=0.2'
+                            );
+                    }, 500);
+
+                    return () => clearTimeout(timer);
                 }
-            }
-        };
+            };
 
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('scroll', handleResize);
+            window.addEventListener('resize', handleResize);
 
-        setTimeout(handleResize, 100);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            window.removeEventListener('scroll', handleResize);
-        };
+            return () => {
+                window.removeEventListener('resize', handleResize);
+                ScrollTrigger.getAll().forEach((trigger) => {
+                    if (trigger.trigger === lineRef.current) {
+                        trigger.kill();
+                    }
+                });
+            };
+        }
     }, []);
 
     return (

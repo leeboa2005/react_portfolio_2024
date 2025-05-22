@@ -6,7 +6,12 @@ import styled from 'styled-components';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// 아이콘 대체 컴포넌트
+interface SkillCategory {
+    title: string;
+    skills: string[];
+}
+
+// 슬라이더 아이콘 컴포넌트
 const ChevronLeft = () => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -275,6 +280,7 @@ const NavButton = styled.button`
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    color: black;
 
     &:disabled {
         opacity: 0.5;
@@ -298,12 +304,6 @@ const SliderContainer = styled.div`
     transition: transform 0.5s ease;
 `;
 
-// 타입 정의
-interface SkillCategory {
-    title: string;
-    skills: string[];
-}
-
 const Skills: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const lineRef = useRef<HTMLDivElement>(null);
@@ -314,7 +314,7 @@ const Skills: React.FC = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
     const [isTablet, setIsTablet] = useState(false);
-    const [activeCards, setActiveCards] = useState<number[]>([0]); // 첫 번째 카드는 기본적으로 활성화
+    const [activeCards, setActiveCards] = useState<number[]>([0]);
     const [visibleCards, setVisibleCards] = useState(1);
 
     useEffect(() => {
