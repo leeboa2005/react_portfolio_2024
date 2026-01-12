@@ -152,6 +152,15 @@ const contentData = {
             techs: ['React Native'],
             link: `/project/work/0303`,
         },
+          {
+            id: '0304',
+            title: 'SNAPCOMPANY',
+            description: '마케터용 B2B 관리자 페이지의 대시보드, 위젯, 설정 화면 등 주요 기능 페이지 제작',
+            image: '/project/work_04.webp',
+            staticImage: '/project/work_04.webp',
+            techs: ['Vue.js'],
+            link: `/project/work/0304`,
+        },
     ],
 };
 
