@@ -488,7 +488,7 @@ const Skills: React.FC = () => {
     const skillCategories: SkillCategory[] = [
         {
             title: '개발 기술',
-            skills: ['JavaScript', 'TypeScript', 'React', 'Next.js'],
+            skills: ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Vue.js'],
         },
         {
             title: '스타일링 및 마크업',
@@ -499,7 +499,7 @@ const Skills: React.FC = () => {
             skills: ['Git', 'Svn'],
         },
         {
-            title: '서비스형 백엔드 및 배포',
+            title: '백엔드 서비스 및 배포',
             skills: ['Firebase', 'Supabase', 'Vercel'],
         },
     ];
